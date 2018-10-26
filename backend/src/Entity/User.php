@@ -7,12 +7,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="account")
  */
 class User implements UserInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -38,11 +39,6 @@ class User implements UserInterface
     private $surname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $token;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $city;
@@ -53,14 +49,9 @@ class User implements UserInterface
     private $age;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $sex;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $role;
+    private $password;
 
     public function getId(): ?int
     {
@@ -86,7 +77,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -113,7 +104,7 @@ class User implements UserInterface
      */
     public function getPassword()
     {
-        // not needed for apps that do not check user passwords
+        return $this->password;
     }
 
     /**
@@ -121,7 +112,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // not needed for apps that do not check user passwords
+        return;
     }
 
     /**
@@ -157,18 +148,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getToken(): ?string
-    {
-        return $this->token;
-    }
-
-    public function setToken(?string $token): self
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
     public function getCity(): ?string
     {
         return $this->city;
@@ -189,30 +168,6 @@ class User implements UserInterface
     public function setAge(int $age): self
     {
         $this->age = $age;
-
-        return $this;
-    }
-
-    public function getSex(): ?int
-    {
-        return $this->sex;
-    }
-
-    public function setSex(int $sex): self
-    {
-        $this->sex = $sex;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }
