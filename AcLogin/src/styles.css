@@ -1,0 +1,23 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.width-100 {
+  width: 100%;
+}
+
+.padding-bottom-10px {
+  padding-bottom: 10px;
+}
+
+.mat-list > .mat-list-item > .mat-list-item-content {
+  padding: 0 !important;
+}
+
+/* will be changed -- only for test */
+.text-warning {
+  color: yellow;
+}
+
+.text-error {
+  color: red;
+}
+/* end */

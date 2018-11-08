@@ -1,0 +1,23 @@
+.login-form {
+  &-wrapper {
+    padding: 25px;
+
+    h1, p {
+      margin: 0;
+    }
+  }
+
+  &-submit {
+    text-align: right;
+  }
+
+  &-redirect{
+    color: blue;
+    cursor: pointer;
+
+    &-wrapper {
+      font-size: 12px;
+    }
+  }
+}
+

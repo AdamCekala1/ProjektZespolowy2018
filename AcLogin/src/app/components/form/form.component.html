@@ -1,0 +1,58 @@
+<div *ngIf="form"
+     class="login-form-wrapper">
+
+
+  <h1 class="padding-bottom-10px">
+    {{config.title}}
+  </h1>
+
+
+  <form [formGroup]="form">
+    <ng-container *ngFor="let control of (config?.controls | dictionaryToArray)">
+      <mat-form-field class="width-100">
+        <input matInput
+               [type]="control.type"
+               [placeholder]="control.placeholder"
+               (input)="clearControlErrors(control.key)"
+               [formControlName]="control.key">
+        <mat-error *ngIf="form.get(control.key).invalid">
+          <ng-container *ngIf="errors?.controls[control.key] as error">
+            {{error.value}}
+          </ng-container>
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+  </form>
+
+
+  <p *ngIf="config.redirectSection && (canDisplayViews() | async)[config.redirectSection.goTo]"
+     class="login-form-redirect-wrapper padding-bottom-10px">
+    {{config.redirectSection.question}}
+    <a class="login-form-redirect"
+       (click)="changeView(config.redirectSection.goTo)">
+      {{config.redirectSection.actionText}}
+    </a>
+  </p>
+
+
+  <mat-list>
+    <mat-list-item *ngFor="let underFormError of errors?.underForm">
+      <p [ngClass]="underFormError.type === errorType.WARNING ? 'text-warning' : 'text-error'">
+        {{underFormError.type}} :
+      </p>
+      {{underFormError.value}}
+    </mat-list-item>
+  </mat-list>
+
+
+  <div class="login-form-submit">
+    <button mat-stroked-button
+            color="primary"
+            [disabled]="form.invalid"
+            (click)="submit()">
+      {{config.actionButtonTitle}}
+    </button>
+  </div>
+
+
+</div>
