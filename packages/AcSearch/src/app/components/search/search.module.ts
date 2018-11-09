@@ -8,8 +8,15 @@ import { SearchSubmitComponent } from './search-submit/search-submit.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  declarations: [SearchComponent, SearchTextComponent, SearchDatesComponent, SearchSelectComponent, SearchSubmitComponent]
+  declarations: [
+    SearchComponent,
+    SearchTextComponent,
+    SearchDatesComponent,
+    SearchSelectComponent,
+    SearchSubmitComponent,
+  ],
+  exports: [SearchComponent]
 })
 export class SearchModule { }
