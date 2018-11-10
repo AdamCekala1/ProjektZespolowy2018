@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-search-select',
   templateUrl: './search-select.component.html',
-  styleUrls: ['./search-select.component.css']
+  styleUrls: ['./search-select.component.scss']
 })
 export class SearchSelectComponent implements OnInit {
-
+  textSelect: string = 'genre';
   constructor() { }
 
   ngOnInit() {

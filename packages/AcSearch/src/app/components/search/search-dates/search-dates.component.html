@@ -1,3 +1,10 @@
-<p>
-  search-dates works!
-</p>
+<!-- TODO: touchUi dla mobilek -->
+<mat-form-field (click)="datepicker.open()">
+  <input matInput
+         [matDatepicker]="datepicker"
+         placeholder="Select date"
+         disabled>
+  <mat-datepicker-toggle matSuffix
+                         [for]="datepicker"></mat-datepicker-toggle>
+  <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+</mat-form-field>

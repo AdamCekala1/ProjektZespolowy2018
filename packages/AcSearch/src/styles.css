@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.display-flex {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: space-around;
+}
+
+.child-center > * {
+  text-align: center;
+}
+
+.fill-max-box {
+  height: 100%;
+  width: 100%;
+}
+
+.child-width-150p > * {
+  width: 150px;
+}
+
+.grand-child-fill-max-box > * > * {
+  height: 100%;
+  width: 100%;
+}
