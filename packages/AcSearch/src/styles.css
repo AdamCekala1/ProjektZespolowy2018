@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.width-100 {
+  width: 100%;
+}
+
 .display-flex {
   display: flex !important;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   align-content: space-around;
 }
@@ -19,11 +23,39 @@
   width: 100%;
 }
 
-.child-width-150p > * {
-  width: 150px;
+.pointer {
+  cursor: pointer;
 }
 
-.grand-child-fill-max-box > * > * {
-  height: 100%;
-  width: 100%;
+.ac-input {
+  display: inline-block;
+  width: calc(100% - 20px);
+  height: 25px;
+  padding: 7px 10px;
+  margin: 0;
+  /*background-color: #fff;*/
+  font-size: 14px;
+  line-height: 24px;
+  color: #1c2b39;
+  border: 1px solid #bcd5f5;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.ac-label {
+  display: block;
+  padding: 0 0 2px 1px;
+  line-height: 13px;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.no-border-input {
+  font-size: 14px;
+  line-height: 24px;
+  outline: none;
+  border: none;
 }

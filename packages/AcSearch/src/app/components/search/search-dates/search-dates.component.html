@@ -1,10 +1,10 @@
 <!-- TODO: touchUi dla mobilek -->
-<mat-form-field (click)="datepicker.open()">
-  <input matInput
+<label class="ac-label">Data początkowa</label>
+<div class="pointer ac-input"
+     (click)="datepicker.open()">
+  <input class="pointer no-border-input width-100"
+         (click)="datepicker.open()"
          [matDatepicker]="datepicker"
-         placeholder="Select date"
          disabled>
-  <mat-datepicker-toggle matSuffix
-                         [for]="datepicker"></mat-datepicker-toggle>
   <mat-datepicker #datepicker disabled="false"></mat-datepicker>
-</mat-form-field>
+</div>

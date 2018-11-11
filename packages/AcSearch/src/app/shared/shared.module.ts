@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatIconModule,
   MatInputModule,
   MatNativeDateModule, MatSelectModule
 } from '@angular/material';
@@ -17,6 +17,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatIconModule,
   ],
   exports: [
     MatInputModule,
@@ -25,6 +26,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatIconModule,
   ],
   declarations: []
 })
