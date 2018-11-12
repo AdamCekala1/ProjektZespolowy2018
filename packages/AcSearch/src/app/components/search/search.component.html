@@ -1,13 +1,17 @@
-<mat-card class="search-wrapper display-flex child-center">
-  <app-search-text></app-search-text>
+<mat-card [formGroup]="form"
+          class="search-wrapper display-flex child-center">
+  <app-search-text [formControlName]="searchFormName.TEXT"></app-search-text>
 
   <!-- some main select, other selects or options will be in 'extra container'-->
-  <app-search-select></app-search-select>
+  <app-search-select *ngIf="getMainSelectConfig() as mainSelectConfig"
+                     [config]="mainSelectConfig"
+                     [formControlName]="searchFormName.TYPE"></app-search-select>
 
   <!-- on select end date we have to set also "end date" but after select higher date remove 'end date'-->
-  <app-search-dates></app-search-dates>
+  <app-search-dates [formControlName]="searchFormName.BEGIN_DATE"></app-search-dates>
   <!-- on select end date we have to set min date of "start date"-->
-  <app-search-dates></app-search-dates>
+  <app-search-dates [formControlName]="searchFormName.END_DATE"></app-search-dates>
   <!-- add icon-->
-  <app-search-submit></app-search-submit>
+  <app-search-submit [isDisabled]="isSubmitDisabled()"
+                     (onSubmit)="submit()"></app-search-submit>
 </mat-card>

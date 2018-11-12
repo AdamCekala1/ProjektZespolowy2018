@@ -1,10 +1,6 @@
-<label class="ac-label">Select {{textSelect}}</label>
-<div class="ac-input pointer">
-  <select class="no-border-input fill-max-box"
-          [(value)]="selected">
-    <option>None</option>
-    <option value="option1">Option 1</option>
-    <option value="option2">Option 2</option>
-    <option value="option3">Option 3</option>
-  </select>
+<label class="ac-label">{{config?.title}}</label>
+<div class="pointer">
+  <app-select [values]="['x', 'y', 'x']"
+              [config]="config?.selectOption"
+              (onSelect)="selectValue($event)"></app-select>
 </div>

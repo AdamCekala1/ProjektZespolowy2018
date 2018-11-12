@@ -7,6 +7,8 @@ import {
   MatInputModule,
   MatNativeDateModule, MatSelectModule
 } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from './select/select.module';
 
 @NgModule({
   imports: [
@@ -18,8 +20,13 @@ import {
     MatNativeDateModule,
     MatSelectModule,
     MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SelectModule,
   ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
@@ -27,7 +34,7 @@ import {
     MatNativeDateModule,
     MatSelectModule,
     MatIconModule,
+    SelectModule,
   ],
-  declarations: []
 })
 export class SharedModule { }

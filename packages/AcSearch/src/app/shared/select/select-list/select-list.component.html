@@ -1,0 +1,20 @@
+<ul *ngIf="values.length"
+    [@listAnimation]="values.length + 1"
+    class="select-list">
+  <li class="select-list-element text-left display-on-mobile"
+      (click)="closeDropdown()">
+    <i class="fa fa-angle-double-left"
+       aria-hidden="true"></i>
+    {{mobileBackText}}
+  </li>
+  <li *ngIf="config?.noOption?.canBeNull"
+      class="select-list-element"
+      (click)="selectValue('')">
+    {{config.noOption.text}}
+  </li>
+  <li *ngFor="let value of values"
+      class="select-list-element"
+      (click)="selectValue(value)">
+    {{value}}
+  </li>
+</ul>

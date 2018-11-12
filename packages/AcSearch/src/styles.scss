@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~font-awesome/css/font-awesome.css';
+
+$mobile: 900px;
 
 .width-100 {
   width: 100%;
@@ -58,4 +61,16 @@
   line-height: 24px;
   outline: none;
   border: none;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.display-on-mobile {
+  display: none;
+
+  @media screen and (max-width: $mobile) {
+    display: block;
+  }
 }

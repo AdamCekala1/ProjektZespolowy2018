@@ -1,5 +1,7 @@
 <button mat-raised-button
         color="warn"
-        class="fill-max-box">
+        class="fill-max-box"
+        [disabled]="isDisabled"
+        (click)="submit()">
   Search
 </button>

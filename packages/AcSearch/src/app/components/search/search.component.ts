@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { get } from 'lodash';
+import { compact, get, map } from 'lodash';
 
-import { CONSTANTS } from './search.constants';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { SearchFormName } from './search-form-names.enum';
+import { ISearchConfig } from '../../shared/interfaces/search.interface';
+import { ISelectConfig } from '../../shared/select/select.interface';
 
 @Component({
   selector: 'app-search',
@@ -9,19 +12,33 @@ import { CONSTANTS } from './search.constants';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  @Input('config') set setConfig(config: any) {
-    const numberOfElements: number = CONSTANTS.NUMBER_OF_ELEMENTS.MIN_GENERAL + get(config, 'inputs.selects.lenght', 0);
-
-    this.numbersOfElementsPerLine = CONSTANTS.NUMBER_OF_ELEMENTS.MAX_PER_LINE < numberOfElements
-      ? CONSTANTS.NUMBER_OF_ELEMENTS.MAX_PER_LINE
-      : numberOfElements;
+  @Input('config') set setConfig(config: ISearchConfig) {
     this.config = config;
   }
-  config;
-  private numbersOfElementsPerLine: number = 3;
-  constructor() { }
+  config: ISearchConfig;
+  form: FormGroup;
+  readonly searchFormName = SearchFormName;
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      [SearchFormName.TEXT]: '',
+      [SearchFormName.TYPE]: '',
+      [SearchFormName.BEGIN_DATE]: '',
+      [SearchFormName.END_DATE]: '',
+    });
   }
 
+  isSubmitDisabled(): boolean {
+    return !(this.form.valid && compact(map(this.form.value, (value: string) => value)).length);
+  }
+
+  getMainSelectConfig(): ISelectConfig {
+    return get(this.config, 'inputs.selects.mainSelect', null);
+  }
+
+  submit() {
+    console.log(this.form.value);
+  }
 }
