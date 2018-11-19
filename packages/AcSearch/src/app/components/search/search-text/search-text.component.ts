@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ControlValueAccessorWrapper } from '../../../shared/class/control-value-accessor-wrapper.class';
 
@@ -12,13 +12,19 @@ import { ControlValueAccessorWrapper } from '../../../shared/class/control-value
     multi: true,
   }],
 })
-export class SearchTextComponent extends ControlValueAccessorWrapper implements OnInit, ControlValueAccessor {
+export class SearchTextComponent extends ControlValueAccessorWrapper implements ControlValueAccessor {
+  actualValue: string = '';
 
   constructor() {
     super();
   }
 
-  ngOnInit() {
+  writeValue(value: string) {
+    this.actualValue = value;
   }
 
+  selectValue(value: string) {
+    this.onChange(value);
+    this.writeValue(value);
+  }
 }

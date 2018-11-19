@@ -1,3 +1,4 @@
 <label class="ac-label">Szuakna ankieta</label>
 <input class="ac-input"
-       value="Sushi">
+       [value]="actualValue"
+       (change)="selectValue($event.target.value)">

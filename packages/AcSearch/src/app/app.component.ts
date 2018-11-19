@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ISearchConfig } from './shared/interfaces/search.interface';
+import { SearchFormName } from './components/search/search-form-names.enum';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +9,23 @@ import { ISearchConfig } from './shared/interfaces/search.interface';
 })
 export class AppComponent {
   config: ISearchConfig = {
+    otherSelects: [],
     inputs: {
-      selects: {
-        mainSelect: {
-          title: 'Select type',
-          selectOption: {
-            noOption: {
-              canBeNull: true,
-              text: 'Clear selection',
-            },
-          },
+      [SearchFormName.TEXT]: {
+        value: 'Ankieta o ziemniakiach',
+        isRequired: false,
+        regex: '',
+        title: 'xddd',
+      },
+      [SearchFormName.TYPE]: {
+        title: 'Select type',
+        value: '',
+        isRequired: false,
+        selectOption: {
+          canBeNull: true,
+          text: 'Clear selection',
         },
-        otherSelects: [],
+        values: [],
       }
     }
   };

@@ -7,10 +7,10 @@
        aria-hidden="true"></i>
     {{mobileBackText}}
   </li>
-  <li *ngIf="config?.noOption?.canBeNull"
+  <li *ngIf="config?.canBeNull"
       class="select-list-element"
       (click)="selectValue('')">
-    {{config.noOption.text}}
+    {{config.text}}
   </li>
   <li *ngFor="let value of values"
       class="select-list-element"

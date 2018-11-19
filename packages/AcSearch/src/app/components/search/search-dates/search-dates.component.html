@@ -1,10 +1,17 @@
 <!-- TODO: touchUi dla mobilek -->
 <label class="ac-label">Data początkowa</label>
-<div class="pointer ac-input"
-     (click)="datepicker.open()">
-  <input class="pointer no-border-input width-100"
-         (click)="datepicker.open()"
+<div class="pointer ac-input">
+  <div class="date-display"
+       (click)="datepicker.open()">
+    <span class="center-element">
+      {{actualDate}}
+    </span>
+  </div>
+  <input class="pointer no-border-input width-100 hide-date-input"
          [matDatepicker]="datepicker"
+         (dateChange)="setDateFromDatePicker($event)"
          disabled>
-  <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+  <mat-datepicker #datepicker
+                  disabled="false"></mat-datepicker>
 </div>
+

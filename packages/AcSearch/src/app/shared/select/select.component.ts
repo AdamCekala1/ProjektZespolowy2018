@@ -15,7 +15,7 @@ import { ISelectConfig } from './select.interface';
 })
 export class SelectComponent extends ControlValueAccessorWrapper implements ControlValueAccessor {
   @Input() values: string[] = [];
-  @Input() config: ISelectConfig = {};
+  @Input() config: ISelectConfig;
   @Output() onSelect: EventEmitter<string> = new EventEmitter();
   actualValue: string;
   isDisplayed: boolean = false;

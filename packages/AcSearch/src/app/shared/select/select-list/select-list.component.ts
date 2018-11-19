@@ -31,7 +31,7 @@ import { ISelectConfig } from '../select.interface';
 export class SelectListComponent {
   @Input() mobileBackText: string = 'Back to page';
   @Input() values: string[] = [];
-  @Input() config: ISelectConfig = {};
+  @Input() config: ISelectConfig;
   @Output() onSelect: EventEmitter<string> = new EventEmitter();
   @Output() onMobileClose: EventEmitter<boolean> = new EventEmitter();
 

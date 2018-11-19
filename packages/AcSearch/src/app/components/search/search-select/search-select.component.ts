@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ControlValueAccessorWrapper } from '../../../shared/class/control-value-accessor-wrapper.class';
 import { ISearchMainSelect } from '../../../shared/interfaces/search.interface';
+import { ISelectConfig } from '../../../shared/select/select.interface';
 
 @Component({
   selector: 'app-search-select',
@@ -14,7 +15,12 @@ import { ISearchMainSelect } from '../../../shared/interfaces/search.interface';
   }],
 })
 export class SearchSelectComponent extends ControlValueAccessorWrapper implements ControlValueAccessor {
-  @Input() config: ISearchMainSelect;
+  @Input('config') set setConfig (config: ISearchMainSelect) {
+    this.config = config;
+    this.selectOption = config.selectOption;
+  }
+  selectOption: ISelectConfig;
+  config: ISearchMainSelect;
   textSelect: string = 'genre';
   actualValue: string;
 
