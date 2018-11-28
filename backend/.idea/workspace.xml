@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54f5735a-9ffa-426d-851e-19836d568d41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Form/Register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/EntityBase.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Api/TokenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/AccountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/AccountController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,21 +44,22 @@
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.63" value="3" />
           <entry key="project.open.time.67" value="1" />
+          <entry key="project.open.time.76" value="1" />
           <entry key="project.open.time.99" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="console" value="1" />
           <entry key="dist" value="1" />
-          <entry key="env" value="4" />
+          <entry key="env" value="5" />
           <entry key="gitignore" value="4" />
           <entry key="ini" value="2" />
           <entry key="json" value="2" />
           <entry key="lock" value="2" />
           <entry key="pem" value="1" />
-          <entry key="php" value="72" />
+          <entry key="php" value="84" />
           <entry key="sql" value="1" />
           <entry key="xml" value="1" />
           <entry key="yaml" value="26" />
@@ -73,10 +67,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key=".env file" value="4" />
+          <entry key=".env file" value="5" />
           <entry key="Ini" value="2" />
           <entry key="JSON" value="2" />
-          <entry key="PHP" value="73" />
+          <entry key="PHP" value="85" />
           <entry key="PLAIN_TEXT" value="8" />
           <entry key="Scratch" value="1" />
           <entry key="XML" value="1" />
@@ -89,23 +83,23 @@
           <entry key="env" value="19" />
           <entry key="gitignore" value="21" />
           <entry key="json" value="1" />
-          <entry key="php" value="1509" />
+          <entry key="php" value="2707" />
           <entry key="txt" value="70" />
-          <entry key="yaml" value="163" />
+          <entry key="yaml" value="164" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="5" />
           <entry key="JSON" value="1" />
-          <entry key="PHP" value="1509" />
+          <entry key="PHP" value="2707" />
           <entry key="PLAIN_TEXT" value="112" />
-          <entry key="YAML" value="163" />
+          <entry key="YAML" value="164" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.new.class">
         <counts>
-          <entry key="PHP Class.type" value="3" />
+          <entry key="PHP Class.type" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -115,11 +109,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Api/AccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1061">
-              <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-              <folding>
-                <element signature="e#38#58#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -128,43 +119,79 @@
         <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/HttpKernel.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
-              <caret line="168" selection-start-line="168" selection-end-line="168" />
+              <caret line="151" selection-start-line="151" selection-end-line="151" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/services.yaml">
+        <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/Kernel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-125">
-              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+            <state relative-caret-position="116">
+              <caret line="189" selection-start-line="189" selection-end-line="189" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+        <entry file="file://$PROJECT_DIR$/vendor/symfony/debug/ErrorHandler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+            <state relative-caret-position="116">
+              <caret line="510" selection-start-line="510" selection-end-line="510" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml">
+        <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/EntityManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            <state relative-caret-position="343">
+              <caret line="253" column="24" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
+        <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+            <state relative-caret-position="-138">
+              <caret line="1300" column="20" selection-start-line="1300" selection-start-column="20" selection-end-line="1300" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/doctrine/persistence/lib/Doctrine/Common/Persistence/ManagerRegistry.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="35" column="48" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/EntityBase.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="308" column="50" selection-start-line="308" selection-start-column="50" selection-end-line="308" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -181,13 +208,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response203.txt" root0="SKIP_INSPECTION" />
+    <setting file="dummy://restClient/response85.html" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Migrations/Version20181025184614.php" />
-        <option value="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/AccountController.php" />
         <option value="$PROJECT_DIR$/config/routes/annotations.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
@@ -198,7 +224,6 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/Form/Register.php" />
         <option value="$PROJECT_DIR$/config/packages/validator.yaml" />
-        <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/config/packages/framework.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/Api/TokenController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Api/Account.php" />
@@ -206,6 +231,9 @@
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Security/JwtTokenAuthenticator.php" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
+        <option value="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" />
+        <option value="$PROJECT_DIR$/src/Entity/EntityBase.php" />
+        <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Controller/Api/AccountController.php" />
       </list>
     </option>
@@ -324,12 +352,6 @@
             <path>
               <item name="backend" type="b2602c69:ProjectViewProjectNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -337,6 +359,12 @@
               <item name="backend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Entity" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backend" type="b2602c69:ProjectViewProjectNode" />
@@ -367,6 +395,171 @@
     <option name="REQUEST_HISTORY">
       <list>
         <RestClientRequest>
+          <option name="httpMethod" value="PUT" />
+          <option name="urlBase" value="http://127.0.0.1:8000" />
+          <option name="urlPath" value="api/account/about/1" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDM0MzI2MzEsImV4cCI6MTU0MzQ2ODYzMSwidXNlcm5hbWUiOiJhbGFkZGluIn0.LErD0VLrqarXQcvNWURsiwiFPmbafPIw6Ff4Av5NIMGbHJmi2m44fqdwYkDPP3o8LHG34qOI5f9eS-1fqjVUx0OQkgjfsqmfoMUH2XgRzjhkABkH9MOvQftt6jjZ_OFb038us-Y_aztGnOFfDwMQanAI8VsLeu0pQCVlQrPYcT7MmI6uP3z8tGWGzy2EzPVGwapK1x2dKo_qVajIWK6qCAUbeEw8we6s2-1vFOzVJBPHTst3reG1KE43pTmzfAwXrLVq9Uua9_LOsp0Aqm1oPaHl9O6SqoQTzH3bm_CAdzZ22rMVTDI4mWlXAU6TfmqeSYIhPc24q2JPcgDE4YU4K6m5eXoYpuzMFjD_gY-Dnu-zpwsuGh7raPzR2ibLf13ZF8AH09jVjnUh5scOkODQYnHKl46ktRZF8gQWp9ZdlnBqlCf-DepawzGVIArXlzNmAxhgdQW_Tldp43kMX7SzohLjqPyArKR6Oq1qHAoS8VkWifGwBlQlGfxSOLvuKVdQttS5yNJUsn5AiJ9OsZAET2G2ko9PYrxdFqSNT1Oww-FtShWSuEuUa3RFnX4O0khphe1ec0h9H5OaLvVh9Vy7iUjtMT5sx1OX4ZAt892d7bZWgDsntnvvxfe2--kqejXwru2Gjx8P9CMH_r6VMiXDCphWN4Gapv_dBhed6RH8f2w" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;name&quot; : &quot;andrzej&quot; , &quot;surname&quot; : &quot;ogorek&quot;,&quot;email&quot; : &quot;aladin&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;21&quot;,&quot;city&quot;:&quot;soot&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="PUT" />
+          <option name="urlBase" value="http://127.0.0.1:8000" />
+          <option name="urlPath" value="api/account/about/2" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDM0MzI2MzEsImV4cCI6MTU0MzQ2ODYzMSwidXNlcm5hbWUiOiJhbGFkZGluIn0.LErD0VLrqarXQcvNWURsiwiFPmbafPIw6Ff4Av5NIMGbHJmi2m44fqdwYkDPP3o8LHG34qOI5f9eS-1fqjVUx0OQkgjfsqmfoMUH2XgRzjhkABkH9MOvQftt6jjZ_OFb038us-Y_aztGnOFfDwMQanAI8VsLeu0pQCVlQrPYcT7MmI6uP3z8tGWGzy2EzPVGwapK1x2dKo_qVajIWK6qCAUbeEw8we6s2-1vFOzVJBPHTst3reG1KE43pTmzfAwXrLVq9Uua9_LOsp0Aqm1oPaHl9O6SqoQTzH3bm_CAdzZ22rMVTDI4mWlXAU6TfmqeSYIhPc24q2JPcgDE4YU4K6m5eXoYpuzMFjD_gY-Dnu-zpwsuGh7raPzR2ibLf13ZF8AH09jVjnUh5scOkODQYnHKl46ktRZF8gQWp9ZdlnBqlCf-DepawzGVIArXlzNmAxhgdQW_Tldp43kMX7SzohLjqPyArKR6Oq1qHAoS8VkWifGwBlQlGfxSOLvuKVdQttS5yNJUsn5AiJ9OsZAET2G2ko9PYrxdFqSNT1Oww-FtShWSuEuUa3RFnX4O0khphe1ec0h9H5OaLvVh9Vy7iUjtMT5sx1OX4ZAt892d7bZWgDsntnvvxfe2--kqejXwru2Gjx8P9CMH_r6VMiXDCphWN4Gapv_dBhed6RH8f2w" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;name&quot; : &quot;andrzej&quot; , &quot;surname&quot; : &quot;ogorek&quot;,&quot;email&quot; : &quot;aladin&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;21&quot;,&quot;city&quot;:&quot;soot&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="PUT" />
+          <option name="urlBase" value="http://127.0.0.1:8000" />
+          <option name="urlPath" value="api/account/about/2" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDM0MzI2MzEsImV4cCI6MTU0MzQ2ODYzMSwidXNlcm5hbWUiOiJhbGFkZGluIn0.LErD0VLrqarXQcvNWURsiwiFPmbafPIw6Ff4Av5NIMGbHJmi2m44fqdwYkDPP3o8LHG34qOI5f9eS-1fqjVUx0OQkgjfsqmfoMUH2XgRzjhkABkH9MOvQftt6jjZ_OFb038us-Y_aztGnOFfDwMQanAI8VsLeu0pQCVlQrPYcT7MmI6uP3z8tGWGzy2EzPVGwapK1x2dKo_qVajIWK6qCAUbeEw8we6s2-1vFOzVJBPHTst3reG1KE43pTmzfAwXrLVq9Uua9_LOsp0Aqm1oPaHl9O6SqoQTzH3bm_CAdzZ22rMVTDI4mWlXAU6TfmqeSYIhPc24q2JPcgDE4YU4K6m5eXoYpuzMFjD_gY-Dnu-zpwsuGh7raPzR2ibLf13ZF8AH09jVjnUh5scOkODQYnHKl46ktRZF8gQWp9ZdlnBqlCf-DepawzGVIArXlzNmAxhgdQW_Tldp43kMX7SzohLjqPyArKR6Oq1qHAoS8VkWifGwBlQlGfxSOLvuKVdQttS5yNJUsn5AiJ9OsZAET2G2ko9PYrxdFqSNT1Oww-FtShWSuEuUa3RFnX4O0khphe1ec0h9H5OaLvVh9Vy7iUjtMT5sx1OX4ZAt892d7bZWgDsntnvvxfe2--kqejXwru2Gjx8P9CMH_r6VMiXDCphWN4Gapv_dBhed6RH8f2w" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;name&quot; : &quot;jurek&quot; , &quot;surname&quot; : &quot;ogorek&quot;,&quot;email&quot; : &quot;smerf@wp.pl&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;21&quot;,&quot;city&quot;:&quot;soot&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="PUT" />
+          <option name="urlBase" value="http://127.0.0.1:8000" />
+          <option name="urlPath" value="api/account/about/1" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDM0MzI2MzEsImV4cCI6MTU0MzQ2ODYzMSwidXNlcm5hbWUiOiJhbGFkZGluIn0.LErD0VLrqarXQcvNWURsiwiFPmbafPIw6Ff4Av5NIMGbHJmi2m44fqdwYkDPP3o8LHG34qOI5f9eS-1fqjVUx0OQkgjfsqmfoMUH2XgRzjhkABkH9MOvQftt6jjZ_OFb038us-Y_aztGnOFfDwMQanAI8VsLeu0pQCVlQrPYcT7MmI6uP3z8tGWGzy2EzPVGwapK1x2dKo_qVajIWK6qCAUbeEw8we6s2-1vFOzVJBPHTst3reG1KE43pTmzfAwXrLVq9Uua9_LOsp0Aqm1oPaHl9O6SqoQTzH3bm_CAdzZ22rMVTDI4mWlXAU6TfmqeSYIhPc24q2JPcgDE4YU4K6m5eXoYpuzMFjD_gY-Dnu-zpwsuGh7raPzR2ibLf13ZF8AH09jVjnUh5scOkODQYnHKl46ktRZF8gQWp9ZdlnBqlCf-DepawzGVIArXlzNmAxhgdQW_Tldp43kMX7SzohLjqPyArKR6Oq1qHAoS8VkWifGwBlQlGfxSOLvuKVdQttS5yNJUsn5AiJ9OsZAET2G2ko9PYrxdFqSNT1Oww-FtShWSuEuUa3RFnX4O0khphe1ec0h9H5OaLvVh9Vy7iUjtMT5sx1OX4ZAt892d7bZWgDsntnvvxfe2--kqejXwru2Gjx8P9CMH_r6VMiXDCphWN4Gapv_dBhed6RH8f2w" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;name&quot; : &quot;jurek&quot; , &quot;surname&quot; : &quot;ogorek&quot;,&quot;email&quot; : &quot;smerf@wp.pl&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;21&quot;,&quot;city&quot;:&quot;soot&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://127.0.0.1:8000" />
+          <option name="urlPath" value="api/account/about/1" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDM0MzI2MzEsImV4cCI6MTU0MzQ2ODYzMSwidXNlcm5hbWUiOiJhbGFkZGluIn0.LErD0VLrqarXQcvNWURsiwiFPmbafPIw6Ff4Av5NIMGbHJmi2m44fqdwYkDPP3o8LHG34qOI5f9eS-1fqjVUx0OQkgjfsqmfoMUH2XgRzjhkABkH9MOvQftt6jjZ_OFb038us-Y_aztGnOFfDwMQanAI8VsLeu0pQCVlQrPYcT7MmI6uP3z8tGWGzy2EzPVGwapK1x2dKo_qVajIWK6qCAUbeEw8we6s2-1vFOzVJBPHTst3reG1KE43pTmzfAwXrLVq9Uua9_LOsp0Aqm1oPaHl9O6SqoQTzH3bm_CAdzZ22rMVTDI4mWlXAU6TfmqeSYIhPc24q2JPcgDE4YU4K6m5eXoYpuzMFjD_gY-Dnu-zpwsuGh7raPzR2ibLf13ZF8AH09jVjnUh5scOkODQYnHKl46ktRZF8gQWp9ZdlnBqlCf-DepawzGVIArXlzNmAxhgdQW_Tldp43kMX7SzohLjqPyArKR6Oq1qHAoS8VkWifGwBlQlGfxSOLvuKVdQttS5yNJUsn5AiJ9OsZAET2G2ko9PYrxdFqSNT1Oww-FtShWSuEuUa3RFnX4O0khphe1ec0h9H5OaLvVh9Vy7iUjtMT5sx1OX4ZAt892d7bZWgDsntnvvxfe2--kqejXwru2Gjx8P9CMH_r6VMiXDCphWN4Gapv_dBhed6RH8f2w" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;name&quot; : &quot;jurek&quot; , &quot;surname&quot; : &quot;&quot;,&quot;email&quot; : &quot;papa@wp.pl&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;41&quot;,&quot;city&quot;:&quot;wawa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
           <option name="httpMethod" value="GET" />
           <option name="urlBase" value="http://127.0.0.1:8000" />
           <option name="urlPath" value="api/account/about" />
@@ -382,7 +575,7 @@
               </KeyValuePair>
               <KeyValuePair>
                 <option name="key" value="Authorization" />
-                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDMzNTY3NjAsImV4cCI6MTU0MzM2MDM2MCwidXNlcm5hbWUiOiJhbGFkZGluIn0.jjfR56_7zRYg4ihf_GHXhknbBZh1_G4k6uINRRNzCkSC1xfzZyTbHZm3wtKtL-PsxOr8--cQbeiFJQ1rLx2J-rYexgjcbjOqTl0r5DaZl4QmN1tujhqfnaBmrylw8PKPk0fNfOMI3BPC7bE_r9dI1a4H5LTrIHR9yor2PZgsZ4zT7TqhjfkLJ7mNGRfj9wydhky3fCWPAR1x5c-JXi50pp116FyjHK79iTjE2V86-u3gwJOoCInfSbV_mCSR1gw3_tMIEctDnJrsx0VjpdBkaMBDmk9Tqby5Pjf_wi99lB2J0re_qSsbIsaYI4wBHIAbJMiViDsJkH8Ue22bVHjYuUszkfozLkKzais8u6rHo7Pivat35lZqzzhze1qcAitvlK0lPvV1fJu2Qf4B0SCfhH1z90OxkYGzHbBggh4AtBBqQWF1nZxE2PjASRhqXv2BxX-Jd-cfY3k_JFfG1etp6SiCY7N4PVbE-zzQ-wXsrrzivL0hCn8lVijkQ8w6824HwrZYxO_0G9IBuBgP1SzlDToJX7EQxdZA9eJnmYvTBclXuPHTGLA6WGj9-F0dVqgLdixRVDzcU_WzVImE7wwl0jKVQgcYzsvzwZ7DsGADNDugOJbsxi7FCH_o7b_hZDUrtBZGPHxYVejLJgPwgradhOpT4oMOezmvSgLRW3LIs_k" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDM0MzI2MzEsImV4cCI6MTU0MzQ2ODYzMSwidXNlcm5hbWUiOiJhbGFkZGluIn0.LErD0VLrqarXQcvNWURsiwiFPmbafPIw6Ff4Av5NIMGbHJmi2m44fqdwYkDPP3o8LHG34qOI5f9eS-1fqjVUx0OQkgjfsqmfoMUH2XgRzjhkABkH9MOvQftt6jjZ_OFb038us-Y_aztGnOFfDwMQanAI8VsLeu0pQCVlQrPYcT7MmI6uP3z8tGWGzy2EzPVGwapK1x2dKo_qVajIWK6qCAUbeEw8we6s2-1vFOzVJBPHTst3reG1KE43pTmzfAwXrLVq9Uua9_LOsp0Aqm1oPaHl9O6SqoQTzH3bm_CAdzZ22rMVTDI4mWlXAU6TfmqeSYIhPc24q2JPcgDE4YU4K6m5eXoYpuzMFjD_gY-Dnu-zpwsuGh7raPzR2ibLf13ZF8AH09jVjnUh5scOkODQYnHKl46ktRZF8gQWp9ZdlnBqlCf-DepawzGVIArXlzNmAxhgdQW_Tldp43kMX7SzohLjqPyArKR6Oq1qHAoS8VkWifGwBlQlGfxSOLvuKVdQttS5yNJUsn5AiJ9OsZAET2G2ko9PYrxdFqSNT1Oww-FtShWSuEuUa3RFnX4O0khphe1ec0h9H5OaLvVh9Vy7iUjtMT5sx1OX4ZAt892d7bZWgDsntnvvxfe2--kqejXwru2Gjx8P9CMH_r6VMiXDCphWN4Gapv_dBhed6RH8f2w" />
               </KeyValuePair>
             </list>
           </option>
@@ -416,6 +609,72 @@
               <KeyValuePair>
                 <option name="key" value="Authorization" />
                 <option name="value" value="Basic YWxhZGRpbjpvcGVuc2VzYW1l" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;name&quot; : &quot;jurek&quot; , &quot;surname&quot; : &quot;&quot;,&quot;email&quot; : &quot;papa@wp.pl&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;41&quot;,&quot;city&quot;:&quot;wawa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000" />
+          <option name="urlPath" value="api/token" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Basic YWxhZGRpbjpvcGVuc2VzYW1l" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;name&quot; : &quot;jurek&quot; , &quot;surname&quot; : &quot;&quot;,&quot;email&quot; : &quot;papa@wp.pl&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;41&quot;,&quot;city&quot;:&quot;wawa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://127.0.0.1:8000" />
+          <option name="urlPath" value="api/account/about" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDMzNTY3NjAsImV4cCI6MTU0MzM2MDM2MCwidXNlcm5hbWUiOiJhbGFkZGluIn0.jjfR56_7zRYg4ihf_GHXhknbBZh1_G4k6uINRRNzCkSC1xfzZyTbHZm3wtKtL-PsxOr8--cQbeiFJQ1rLx2J-rYexgjcbjOqTl0r5DaZl4QmN1tujhqfnaBmrylw8PKPk0fNfOMI3BPC7bE_r9dI1a4H5LTrIHR9yor2PZgsZ4zT7TqhjfkLJ7mNGRfj9wydhky3fCWPAR1x5c-JXi50pp116FyjHK79iTjE2V86-u3gwJOoCInfSbV_mCSR1gw3_tMIEctDnJrsx0VjpdBkaMBDmk9Tqby5Pjf_wi99lB2J0re_qSsbIsaYI4wBHIAbJMiViDsJkH8Ue22bVHjYuUszkfozLkKzais8u6rHo7Pivat35lZqzzhze1qcAitvlK0lPvV1fJu2Qf4B0SCfhH1z90OxkYGzHbBggh4AtBBqQWF1nZxE2PjASRhqXv2BxX-Jd-cfY3k_JFfG1etp6SiCY7N4PVbE-zzQ-wXsrrzivL0hCn8lVijkQ8w6824HwrZYxO_0G9IBuBgP1SzlDToJX7EQxdZA9eJnmYvTBclXuPHTGLA6WGj9-F0dVqgLdixRVDzcU_WzVImE7wwl0jKVQgcYzsvzwZ7DsGADNDugOJbsxi7FCH_o7b_hZDUrtBZGPHxYVejLJgPwgradhOpT4oMOezmvSgLRW3LIs_k" />
               </KeyValuePair>
             </list>
           </option>
@@ -1557,23 +1816,24 @@
       <workItem from="1540582550585" duration="5892000" />
       <workItem from="1542740646725" duration="123000" />
       <workItem from="1543342871127" duration="13756000" />
+      <workItem from="1543432416276" duration="4988000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33490000" />
+    <option name="totallyTimeSpent" value="38478000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28092578" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2857143" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952693" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49880287" visible="true" weight="0.4812398" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49880287" weight="0.4812398" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -1605,18 +1865,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Controller/Api/AccountController.php</url>
-          <line>56</line>
+          <line>64</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Controller/Api/AccountController.php</url>
-          <line>72</line>
-          <option name="timeStamp" value="16" />
+          <line>40</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Controller/Api/AccountController.php</url>
-          <line>33</line>
-          <option name="timeStamp" value="28" />
+          <line>53</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/Api/AccountController.php</url>
+          <line>80</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/Api/AccountController.php</url>
+          <line>104</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/Api/AccountController.php</url>
+          <line>95</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/Api/AccountController.php</url>
+          <line>97</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1638,17 +1918,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181026192509.php" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/5d1e853e-9d6c-47c5-98be-a33443940252/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Id.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181025184614.php" />
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181026202946.php" />
     <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/Persisters/Entity/BasicEntityPersister.php">
@@ -1658,24 +1927,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/EntityManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="459" selection-start-line="459" selection-end-line="459" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="157" selection-start-line="157" selection-end-line="157" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="920" selection-start-line="920" selection-end-line="920" />
         </state>
       </provider>
     </entry>
@@ -1733,44 +1988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#7#22#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="308" column="43" selection-start-line="308" selection-start-column="43" selection-end-line="308" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/debug/ErrorHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="510" selection-start-line="510" selection-end-line="510" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="189" selection-start-line="189" selection-end-line="189" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="51" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-foundation/Request.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="936" column="43" lean-forward="true" selection-start-line="936" selection-start-column="43" selection-end-line="936" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1816,26 +2033,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/Register.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
-          <folding>
-            <element signature="e#29#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-          <folding>
-            <element signature="e#30#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/validator.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -1843,13 +2040,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Api/Account.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Api/Account.php" />
     <entry file="file://$PROJECT_DIR$/config/packages/framework.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1927,10 +2118,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml">
+    <entry file="file://$PROJECT_DIR$/src/Security/JwtTokenAuthenticator.php" />
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        <state relative-caret-position="120">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1941,44 +2133,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-125">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
+        <state relative-caret-position="630">
           <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Security/JwtTokenAuthenticator.php">
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-foundation/Request.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1016">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        <state relative-caret-position="138">
+          <caret line="926" column="43" selection-start-line="926" selection-start-column="43" selection-end-line="926" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="15" column="51" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/lexik/jwt-authentication-bundle/Encoder/JWTEncoderInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/Register.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding>
-            <element signature="e#33#53#0#PHP" expanded="true" />
+            <element signature="e#29#69#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="308" column="50" selection-start-line="308" selection-start-column="50" selection-end-line="308" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/EntityBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/persistence/lib/Doctrine/Common/Persistence/ManagerRegistry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="35" column="48" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/EntityManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="253" column="24" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-138">
+          <caret line="1300" column="20" selection-start-line="1300" selection-start-column="20" selection-end-line="1300" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/debug/ErrorHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="510" selection-start-line="510" selection-end-line="510" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="189" selection-start-line="189" selection-end-line="189" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/HttpKernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
-          <caret line="168" selection-start-line="168" selection-end-line="168" />
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Api/AccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1061">
-          <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-          <folding>
-            <element signature="e#38#58#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="90">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
         </state>
       </provider>
     </entry>

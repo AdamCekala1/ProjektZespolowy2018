@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a13ec89e366cc4d8759b415c6db633dd",
+    "content-hash": "5730dc2bd67ccbdcaeb229a35deb8f70",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3752,16 +3752,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v4.1.6",
+            "version": "v4.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "2704442b2b85429b95659fdce1696cb8f009385f"
+                "reference": "7206a1cafd65cb7e0e72587f72cdb631be985feb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/2704442b2b85429b95659fdce1696cb8f009385f",
-                "reference": "2704442b2b85429b95659fdce1696cb8f009385f",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/7206a1cafd65cb7e0e72587f72cdb631be985feb",
+                "reference": "7206a1cafd65cb7e0e72587f72cdb631be985feb",
                 "shasum": ""
             },
             "require": {
@@ -3828,7 +3828,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T12:40:59+00:00"
+            "time": "2018-11-11T19:51:29+00:00"
         },
         {
             "name": "symfony/serializer-pack",
