@@ -15,6 +15,32 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ac-login": [
+        "dist/ac-login"
+      ],
+      "ac-login/*": [
+        "dist/ac-login/*"
+      ],
+      "test-library": [
+        "dist/test-library"
+      ],
+      "test-library/*": [
+        "dist/test-library/*"
+      ],
+      "ac-search": [
+        "dist/ac-search"
+      ],
+      "ac-search/*": [
+        "dist/ac-search/*"
+      ],
+      "ac-search-result": [
+        "dist/ac-search-result"
+      ],
+      "ac-search-result/*": [
+        "dist/ac-search-result/*"
+      ]
+    }
   }
 }
