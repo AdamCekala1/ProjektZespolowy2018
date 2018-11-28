@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as moment from 'moment';
 
 import { ControlValueAccessorWrapper } from '../../../shared/class/control-value-accessor-wrapper.class';
+import { CONSTANTS } from '../search.constants';
 
 @Component({
   selector: 'app-search-dates',
@@ -15,6 +16,22 @@ import { ControlValueAccessorWrapper } from '../../../shared/class/control-value
   }],
 })
 export class SearchDatesComponent extends ControlValueAccessorWrapper implements ControlValueAccessor {
+  @Input() displayIcon: boolean = true;
+  @Input() placeholder: string = '';
+  @Input('maxDate') set setMaxDate(value: string) {
+    this.maxDate = moment(value, CONSTANTS.DATE_FORMAT.DISPLAY).toDate();
+  }
+  @Input('minDate') set setMinDate(value: string) {
+    const momentMinDate: moment.Moment = moment(value, CONSTANTS.DATE_FORMAT.DISPLAY);
+
+    if(this.actualDate && momentMinDate.isAfter(moment(this.actualDate, CONSTANTS.DATE_FORMAT.DISPLAY))) {
+      this.setDate('');
+    }
+
+    this.minDate = momentMinDate.toDate();
+  }
+  maxDate: Date;
+  minDate: Date;
   actualDate: string = '';
 
   constructor() {
@@ -26,7 +43,7 @@ export class SearchDatesComponent extends ControlValueAccessorWrapper implements
   }
 
   setDateFromDatePicker(value: any) {
-    this.setDate(moment(value.value).format('DD/MM/YYYY'));
+    this.setDate(moment(value.value).format(CONSTANTS.DATE_FORMAT.DISPLAY));
   }
 
   private setDate(value: string) {

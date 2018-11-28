@@ -3,4 +3,8 @@ export class CONSTANTS {
     MAX_PER_LINE: 5,
     MIN_GENERAL: 3,
   };
+
+  public static DATE_FORMAT = {
+    DISPLAY: 'DD/MM/YYYY',
+  };
 }

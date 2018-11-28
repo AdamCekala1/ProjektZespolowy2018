@@ -1,4 +1,4 @@
-<mat-card [formGroup]="form"
+<div [formGroup]="form"
           class="search-wrapper display-flex child-center">
   <app-search-text [formControlName]="searchFormName.TEXT"></app-search-text>
 
@@ -7,11 +7,16 @@
                      [config]="config.inputs[searchFormName.TYPE]"
                      [formControlName]="searchFormName.TYPE"></app-search-select>
 
-  <!-- on select end date we have to set also "end date" but after select higher date remove 'end date'-->
-  <app-search-dates [formControlName]="searchFormName.BEGIN_DATE"></app-search-dates>
-  <!-- on select end date we have to set min date of "start date"-->
-  <app-search-dates [formControlName]="searchFormName.END_DATE"></app-search-dates>
-  <!-- add icon-->
-  <app-search-submit [isDisabled]="isSubmitDisabled()"
+  <div class="display-flex child-center ac-search-dates">
+    <!-- on select end date we have to set also "end date" but after select higher date remove 'end date'-->
+    <app-search-dates [formControlName]="searchFormName.BEGIN_DATE"
+                      [placeholder]="'Data początkowa'"></app-search-dates>
+    <!-- on select end date we have to set min date of "start date"-->
+    <app-search-dates [formControlName]="searchFormName.END_DATE"
+                      [displayIcon]="false"
+                      [minDate]="form.get(searchFormName.BEGIN_DATE).value"
+                      [placeholder]="'Data końcowa'"></app-search-dates>
+  </div >
+  <app-search-submit class="submit-button width-50px" [isDisabled]="isSubmitDisabled()"
                      (onSubmit)="submit()"></app-search-submit>
-</mat-card>
+</div>
