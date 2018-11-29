@@ -10,8 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="account")
  */
-class User extends EntityBase implements UserInterface
+class User implements UserInterface, EntityBase
 {
+    public const ROLE_USER ='ROLE_USER';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

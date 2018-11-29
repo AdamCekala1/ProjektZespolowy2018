@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
-abstract class EntityBase
+interface EntityBase
 {
+    public function getId(): ?int;
 }
