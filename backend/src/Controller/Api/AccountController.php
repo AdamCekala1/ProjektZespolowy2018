@@ -20,12 +20,6 @@ class AccountController extends BaseController
      */
     public function getToken(Request $request)
     {
-        $x = ['Najbardziej popularne owoce w Polsce' => [
-            'Jakie owoce lubisz najbardziej' => ['truskawki', 'Pomarańcze', 'Pomidory'],
-            'Jak czesto jesz owocce' => ['czesto', 'rzadko', 'wcale', 'wole slodycze'],
-            'Gdzie kupujesz owoce' => ['w osiedlowym sklepie', 'biedronce', 'wcale', 'wole slodycze'],
-        ]];
-        $y = json_encode($x);
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
             'email' => $request->getUser(),
         ]);
