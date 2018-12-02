@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnswerRepository")
@@ -13,17 +14,20 @@ class Answer
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Type("int")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Serializer\Type("string")
      */
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\question", inversedBy="answers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\question", inversedBy="answers", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Type("ArrayCollection<App\Entity\Question>")
      */
     private $question;
 

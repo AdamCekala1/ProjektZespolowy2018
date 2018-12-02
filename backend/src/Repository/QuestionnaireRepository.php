@@ -19,22 +19,25 @@ class QuestionnaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Questionnaire::class);
     }
 
-//    /**
-//     * @return Questionnaire[] Returns an array of Questionnaire objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Questionnaire[] Returns an array of Questionnaire objects
+     */
+
+    public function findByDate(string $start, string $end)
     {
+        $starter = new \DateTime($start);
+        $ending = new \DateTime($end);
         return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('q.createdAt >= :start')
+            ->andWhere('q.createdAt <= :end')
+            ->setParameter('start', $starter)
+            ->setParameter('end', $ending)
             ->orderBy('q.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Questionnaire

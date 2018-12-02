@@ -6,30 +6,97 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use JMS\Serializer\Annotation as Serializer;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionnaireRepository")
  */
 class Questionnaire implements EntityBase
 {
-    use TimestampableEntity;
+//    use TimestampableEntity;
 
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Type("int")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Serializer\Type("string")
      */
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="questionnaire", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="questionnaire",cascade={"persist"})
+     * @Serializer\Type("ArrayCollection<App\Entity\Question>")
      */
     private $question;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     * @Serializer\Type("DateTime")
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     * @Serializer\Type("DateTime")
+     */
+    protected $updatedAt;
+
+    /**
+     * Sets createdAt.
+     *
+     * @param  \DateTime $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Returns createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Sets updatedAt.
+     *
+     * @param  \DateTime $updatedAt
+     * @return $this
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Returns updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
 
     public function __construct()
     {

@@ -49,11 +49,13 @@ class AccountController extends BaseController
     }
 
     /**
-     * @Route("api/account/about/{user}", name="about" )
+     * @Route("api/account/about", name="about" )
      * @Method("GET, PUT")
      */
-    public function getDataUser(User $user, Request $request): Response
+    public function getDataUser(Request $request): Response
     {
+        $user = $this->getUserEntity($request);
+
         if ($request->getMethod() == 'PUT') {
             return $this->processForm($request, Register::class, $user);
         }

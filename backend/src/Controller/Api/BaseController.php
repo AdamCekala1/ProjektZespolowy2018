@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 abstract class BaseController extends AbstractController
 {
@@ -20,6 +23,7 @@ abstract class BaseController extends AbstractController
     protected $entityManager;
     protected $decodedData;
     protected $passwordEncoder;
+    protected $serial;
 
     public function __construct(JWTEncoderInterface $JWTEncoder, SerializerInterface $serializer, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -27,20 +31,15 @@ abstract class BaseController extends AbstractController
         $this->serializer = $serializer;
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->serial = \JMS\Serializer\SerializerBuilder::create()->build();
     }
 
-    protected function getUserName(Request $request): string
+    protected function getUserEntity(Request $request): User
     {
         $token = str_replace('Bearer ', '', $request->headers->get('Authorization'));
-        return $this->JWTEncoder->decode($token)['username'];
-    }
+        $userName = $this->JWTEncoder->decode($token)['username'];
+        return $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $userName]);
 
-    protected function checkPermission(Request $request, int $id): bool
-    {
-        $userName = $this->getUserName($request);
-        $entity = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $userName]);
-
-        //$entity->getId() !== $id ?:return new Response('Nie można edytować cudzego konta');;
     }
 
     final protected function processForm(Request $request, string $formClass, EntityBase $entity): Response
