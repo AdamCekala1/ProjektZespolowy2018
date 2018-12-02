@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\EntityBase;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use JMS\Serializer\SerializerBuilder;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,9 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 abstract class BaseController extends AbstractController
 {
@@ -31,7 +29,7 @@ abstract class BaseController extends AbstractController
         $this->serializer = $serializer;
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
-        $this->serial = \JMS\Serializer\SerializerBuilder::create()->build();
+        $this->serial = SerializerBuilder::create()->build();
     }
 
     protected function getUserEntity(Request $request): User

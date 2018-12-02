@@ -20,13 +20,14 @@ class AccountController extends BaseController
      */
     public function getToken(Request $request)
     {
+        $data = json_decode($request->getContent(), true);
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
-            'email' => $request->getUser(),
+            'email' => $data['login'],
         ]);
         if (!$user) {
             throw $this->createNotFoundException('Nie ma takiego użytkownika');
         }
-        $isValid = $this->passwordEncoder->isPasswordValid($user, $request->getPassword());
+        $isValid = $this->passwordEncoder->isPasswordValid($user, $data['password']);
         if (!$isValid) {
             throw new BadCredentialsException('Podano złe hasło');
         }
