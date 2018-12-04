@@ -3,6 +3,13 @@
 @import '~font-awesome/css/font-awesome.css';
 
 // GLOBAL
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 .width-100 {
   width: 100%;
 }
@@ -54,6 +61,7 @@ $mobile: 900px;
 }
 
 .ac-input {
+  background: #fff;
   position: relative;
   display: inline-block;
   width: calc(100% - 20px);
@@ -72,6 +80,7 @@ $mobile: 900px;
 }
 
 .ac-label {
+  color: #fff;
   display: block;
   padding: 0 0 2px 1px;
   line-height: 13px;
@@ -94,19 +103,9 @@ $mobile: 900px;
 .display-on-mobile {
   display: none;
 
-@media screen and (max-width: $mobile) {
-  display: block;
-}
-}
-
-.ac-search-dates {
-  min-width: 300px;
-
-*:first-child {
-.ac-input {
-  border-right: none;
-}
-}
+  @media screen and (max-width: $mobile) {
+    display: block;
+  }
 }
 
 .center-element {

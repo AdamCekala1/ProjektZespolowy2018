@@ -64,4 +64,4 @@ export const configMock = {
       actionText: 'Zaloguj się!',
     }
   }
-}
+};

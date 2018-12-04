@@ -1,3 +1,6 @@
-<p>
-  result works!
-</p>
+<div *ngFor="let element of elements"
+     class="ac-result-elements-wrapper">
+  <div class="ac-result-element-wrapper">
+    <ac-result-element [element]="element"></ac-result-element>
+  </div>
+</div>

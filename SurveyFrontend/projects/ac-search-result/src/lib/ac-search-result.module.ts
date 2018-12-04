@@ -22,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
   exports: [
     AcSearchResultComponent,
     SearchModule,
+    ResultModule,
   ],
   bootstrap: [AcSearchResultComponent]
 })

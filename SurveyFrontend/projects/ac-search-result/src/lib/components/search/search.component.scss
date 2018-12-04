@@ -1,3 +1,11 @@
+.display-flex {
+  flex-wrap: wrap;
+
+  @media (min-width: 700px) {
+    flex-wrap: nowrap;
+  }
+}
+
 .display-flex > * {
   margin: 5px;
   width: 100%;
@@ -5,11 +13,11 @@
   position: relative;
 
   @media (min-width: 700px) {
-    width: 120px;
+    width: 100px;
   }
 
   @media (min-width: 900px) {
-    width: 150px;
+    width: 130px;
   }
 }
 
@@ -22,6 +30,16 @@
   width: 100%;
 
   @media (min-width: 700px) {
-    width: 50px;
+    width: 65px;
+  }
+}
+
+.ac-search-dates {
+  min-width: 250px;
+
+  *:first-child {
+    .ac-input {
+      border-right: none;
+    }
   }
 }

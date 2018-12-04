@@ -1,3 +1,39 @@
-<p>
-  result-element works!
-</p>
+<mat-card class="ac-result-wrapper">
+  <div *ngIf="element.extraInformations?.length"
+       class="ac-result-informations-small">
+    <p *ngFor="let information of element.extraInformations"
+       class="ac-result-information">{{information.name + information.value}}</p>
+  </div>
+  <div *ngIf="element.alertText"
+       class="ac-result-alert">
+    {{element.alertText}}
+  </div>
+  <div class="ac-result">
+    <div *ngIf="element.img"
+         class="ac-result-image">
+      <img src="{{element.img}}" alt="image" />
+    </div>
+    <div class="ac-result-description">
+      <h2 class="ac-result-description-title">{{element.mainSection.title}}</h2>
+      <p *ngIf="element.mainSection.subtitle"
+         class="ac-result-description-subtitle">{{element.mainSection.subtitle}}</p>
+      <p class="ac-result-description-text">{{element.mainSection.description}}</p>
+    </div>
+    <div *ngIf="element.extraInformations?.length"
+         class="ac-result-informations">
+      <p *ngFor="let information of element.extraInformations"
+         class="ac-result-information">{{information.name + information.value}}</p>
+    </div>
+    <div class="ac-result-action">
+      <div *ngIf="element.action.description"
+           class="ac-result-action-description">
+        {{element.action.description}}
+      </div>
+      <button mat-stroked-button
+              class="ac-result-action-button"
+              color="primary">
+        {{element.action.buttonName}}
+      </button>
+    </div>
+  </div>
+</mat-card>

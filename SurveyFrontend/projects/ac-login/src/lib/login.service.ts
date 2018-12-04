@@ -7,11 +7,9 @@ import { ViewType } from './shared/enums/view-type.enum';
 import { IDictionary } from './shared/interfaces/utils.interface';
 import { IConfigControl, IConfigGlobal, IIsAvaibleView } from './shared/interfaces/config.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoginService {
-  private activeView: BehaviorSubject<ViewType> = new BehaviorSubject(ViewType.LOGIN);
+  private activeView: BehaviorSubject<ViewType> = new BehaviorSubject(null);
   private canBeActivated: BehaviorSubject<IIsAvaibleView> = new BehaviorSubject({login: false, register: false});
 
   getActiveView(): BehaviorSubject<ViewType> {
@@ -22,6 +20,10 @@ export class LoginService {
     if(this.getCanActivateViewValue()[value]) {
       this.getActiveView().next(value);
     }
+  }
+
+  hideModal() {
+    this.getActiveView().next(null);
   }
 
   displayRegister() {
