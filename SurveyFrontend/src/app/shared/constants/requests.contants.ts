@@ -5,4 +5,8 @@ export class RequestsContants {
     LOGIN: 'account/security/token',
     REGISTER: 'account/security/register',
   };
+
+  static SURVEYS = {
+    LIST: 'api/questionnaire/list'
+  };
 }

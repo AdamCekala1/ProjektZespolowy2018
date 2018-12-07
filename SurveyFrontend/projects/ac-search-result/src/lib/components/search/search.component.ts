@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { get } from 'lodash';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -8,6 +8,7 @@ import {
   ISearchConfigInputs,
 } from '../../shared/interfaces/search.interface';
 import { AcSearchResultService } from '../../ac-search-result.service';
+import { IDictionary } from '../../../../../ac-login/src/lib/shared/interfaces/utils.interface';
 
 @Component({
   selector: 'ac-search',
@@ -20,6 +21,7 @@ export class SearchComponent implements OnInit {
 
     this.createForm(config.inputs);
   }
+  @Output() onSubmit: EventEmitter<IDictionary<string>> = new EventEmitter();
   config: ISearchConfig;
   form: FormGroup;
   readonly searchFormName = SearchFormName;
@@ -45,11 +47,13 @@ export class SearchComponent implements OnInit {
 
   submit() {
     console.log(this.form.value);
+
+    this.onSubmit.emit(this.form.value);
   }
 
   private createForm(config: ISearchConfigInputs) {
     this.form = this.formBuilder.group({
-      [SearchFormName.TEXT]: 'xxx',
+      [SearchFormName.TEXT]: '',
       [SearchFormName.TYPE]: '',
       [SearchFormName.BEGIN_DATE]: '',
       [SearchFormName.END_DATE]: '',
