@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements EntityBase
+class Questionnaire implements EntityBase, Editable
 {
 //    use TimestampableEntity;
 
@@ -51,6 +51,12 @@ class Questionnaire implements EntityBase
      * @Serializer\Type("DateTime")
      */
     protected $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="questionnaires")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
 
     /**
      * Sets createdAt.
@@ -149,5 +155,28 @@ class Questionnaire implements EntityBase
         }
 
         return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function dontShowOwner(): self
+    {
+        $this->owner = null;
+        return $this;
+    }
+
+    public function getQuestionnaire(): Questionnaire
+    {
+       return $this;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -57,6 +59,16 @@ class User implements UserInterface, EntityBase
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Questionnaire", mappedBy="owner")
+     */
+    private $questionnaires;
+
+    public function __construct()
+    {
+        $this->questionnaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -181,6 +193,37 @@ class User implements UserInterface, EntityBase
     public function setAge(int $age): self
     {
         $this->age = $age;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Questionnaire[]
+     */
+    public function getQuestionnaires(): Collection
+    {
+        return $this->questionnaires;
+    }
+
+    public function addQuestionnaire(Questionnaire $questionnaire): self
+    {
+        if (!$this->questionnaires->contains($questionnaire)) {
+            $this->questionnaires[] = $questionnaire;
+            $questionnaire->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionnaire(Questionnaire $questionnaire): self
+    {
+        if ($this->questionnaires->contains($questionnaire)) {
+            $this->questionnaires->removeElement($questionnaire);
+            // set the owning side to null (unless already changed)
+            if ($questionnaire->getOwner() === $this) {
+                $questionnaire->setOwner(null);
+            }
+        }
+
         return $this;
     }
 }

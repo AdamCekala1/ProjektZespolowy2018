@@ -92,10 +92,10 @@ class Question
         return $this;
     }
 
-//    public function getQuestionnaire(): ?Questionnaire
-//    {
-//        return $this->questionnaire;
-//    }
+    public function getQuestionnaire(): ?Questionnaire
+    {
+        return $this->questionnaire;
+    }
 
     public function setQuestionnaire(?Questionnaire $questionnaire): self
     {

@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnswerRepository")
  */
-class Answer
+class Answer implements Editable
 {
     /**
      * @ORM\Id()
@@ -26,7 +26,7 @@ class Answer
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\question", inversedBy="answers", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false , referencedColumnName="id", onDelete="CASCADE")
      * @Serializer\Type("ArrayCollection<App\Entity\Question>")
      */
     private $question;
@@ -58,5 +58,10 @@ class Answer
         $this->question = $question;
 
         return $this;
+    }
+
+    public function getQuestionnaire(): Questionnaire
+    {
+        return $this->question->getQuestionnaire();
     }
 }

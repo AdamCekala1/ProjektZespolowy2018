@@ -8,6 +8,7 @@ use App\Entity\Question;
 use App\Entity\Questionnaire as Entity;
 use App\Entity\Questionnaire;
 use App\Form\Questionnaire as Form;
+use App\Service\EditQuestionnaire;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,22 +32,36 @@ class QuestionnaireController extends BaseController
                 $answer->setQuestion($item);
             }
         }
+        $questionnaire->setOwner($this->getUserEntity());
         $this->entityManager->persist($questionnaire);
         $this->entityManager->flush();
         return new JsonResponse('Udalo się dodać ankietę');
     }
 
     /**
-     * @Route("api/questionnaire/edit/{quesionnaire}", name="questionnaire_edit")
-     * @Method("POST, GET")
+     * @Route("api/questionnaire/edit", name="questionnaire_edit")
+     * @Method("GET")
      */
-    public function editQuestionnaire(int $quesionnaire, Request $request): Response
+    public function editQuestionnaire(Request $request): Response
     {
-        return new Response('udalo sie edytowac');
+        try{
+            foreach(json_decode($request->getContent() ,true) as $item){
+                $entity = $this->entityManager->getRepository(EditQuestionnaire::ITEM_TYPE[$item['item']])->find($item['id']);
+                if($entity->getQuestionnaire()->getOwner() !== $this->getUserEntity($request)) return new JsonResponse('Nie można edytować cudzej ankiety');
+                if(!$item['item']) $entity->setTitle($item['change']);
+                else $entity->setContent($item['change']);
+                $this->entityManager->persist($entity);
+                $this->entityManager->flush();
+            }
+        }catch (\Throwable $exception)
+        {
+            return new JsonResponse('Wystąpił błąd podczas zapisu');
+        }
+        return new JsonResponse('Edytowanie przebiegło pomyślnie');
     }
 
     /**
-     * @Route("api/questionnaire/list", name="questionnaire_edit")
+     * @Route("api/questionnaire/list", name="questionnaire_list")
      * @Method("GET, POST")
      */
     public function listQuestionnaire(Request $request): Response
@@ -57,7 +72,31 @@ class QuestionnaireController extends BaseController
             $collection = $this->entityManager->getRepository(Questionnaire::class)->findByDate($data['start'], $data['end']);
         }
         else $collection = $this->entityManager->getRepository(Questionnaire::class)->findAll();
-        return new Response($this->serial->serialize($collection, 'json'));
+        return new JsonResponse($this->serial->serialize($collection, 'json'));
+    }
+
+    /**
+     * @Route("api/questionnaire/{questionnaire}/delete", name="questionnaire_delete")
+     * @Method("DELETE")
+     */
+    public function deleteQuestionnaire(Questionnaire $questionnaire, Request $request)
+    {
+        if($this->getUserEntity($request) !== $questionnaire->getOwner()) return new JsonResponse('Nie można usuwać cudzej ankiety');
+        $this->entityManager->remove($questionnaire);
+        $this->entityManager->flush();
+        return new JsonResponse('Udało się usunąć ankiete');
+    }
+
+    /**
+     * @Route("questionnaire/{questionnaire}/get", name="questionnaire_get")
+     * @Method("GET")
+     */
+    public function getQuestionnaire(int $questionnaire)
+    {
+        $collection = $this->entityManager->getRepository(Questionnaire::class)->find($questionnaire);
+        if(!$collection) return new JsonResponse('Niema takiej ankiety');
+        $collection->dontShowOwner();
+        return new JsonResponse($this->serial->serialize($collection, 'json'));
     }
 
     protected function getTransaction(EntityBase $entityBase, string $form): EntityBase

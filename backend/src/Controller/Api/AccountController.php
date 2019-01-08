@@ -46,7 +46,7 @@ class AccountController extends BaseController
     {
         $this->processForm($request, Register::class, new User());
 
-        return new Response('Konto zostało założone pomyślnie', 201);
+        return new JsonResponse('Konto zostało założone pomyślnie', 201);
     }
 
     /**
@@ -60,8 +60,8 @@ class AccountController extends BaseController
         if ($request->getMethod() == 'PUT') {
             return $this->processForm($request, Register::class, $user);
         }
-
-        return new Response($this->serializer->serialize($user, 'json'));
+        $x = $this->serial->serialize($user, 'json');
+        return new JsonResponse($this->serial->serialize($user, 'json'));
     }
 
     protected function getTransaction(EntityBase $entityBase, string $form): EntityBase
