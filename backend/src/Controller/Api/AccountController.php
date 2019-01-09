@@ -60,7 +60,6 @@ class AccountController extends BaseController
         if ($request->getMethod() == 'PUT') {
             return $this->processForm($request, Register::class, $user);
         }
-        $x = $this->serial->serialize($user, 'json');
         return new JsonResponse($this->serial->serialize($user, 'json'));
     }
 

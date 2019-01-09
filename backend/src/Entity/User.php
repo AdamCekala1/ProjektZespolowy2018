@@ -65,9 +65,15 @@ class User implements UserInterface, EntityBase
      */
     private $questionnaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Response", mappedBy="owner", orphanRemoval=true)
+     */
+    private $responses;
+
     public function __construct()
     {
         $this->questionnaires = new ArrayCollection();
+        $this->responses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,6 +227,37 @@ class User implements UserInterface, EntityBase
             // set the owning side to null (unless already changed)
             if ($questionnaire->getOwner() === $this) {
                 $questionnaire->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Response[]
+     */
+    public function getResponses(): Collection
+    {
+        return $this->responses;
+    }
+
+    public function addResponse(Response $response): self
+    {
+        if (!$this->responses->contains($response)) {
+            $this->responses[] = $response;
+            $response->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(Response $response): self
+    {
+        if ($this->responses->contains($response)) {
+            $this->responses->removeElement($response);
+            // set the owning side to null (unless already changed)
+            if ($response->getOwner() === $this) {
+                $response->setOwner(null);
             }
         }
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -30,6 +32,16 @@ class Answer implements Editable
      * @Serializer\Type("ArrayCollection<App\Entity\Question>")
      */
     private $question;
+
+//    /**
+//     * @ORM\OneToMany(targetEntity="App\Entity\Response", mappedBy="answer", orphanRemoval=true)
+//     */
+//    private $responses;
+//
+//    public function __construct()
+//    {
+//        $this->responses = new ArrayCollection();
+//    }
 
     public function getId(): ?int
     {
@@ -64,4 +76,35 @@ class Answer implements Editable
     {
         return $this->question->getQuestionnaire();
     }
+
+//    /**
+//     * @return Collection|Response[]
+//     */
+//    public function getResponses(): Collection
+//    {
+//        return $this->responses;
+//    }
+//
+//    public function addResponse(Response $response): self
+//    {
+//        if (!$this->responses->contains($response)) {
+//            $this->responses[] = $response;
+//            $response->setAnswer($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeResponse(Response $response): self
+//    {
+//        if ($this->responses->contains($response)) {
+//            $this->responses->removeElement($response);
+//            // set the owning side to null (unless already changed)
+//            if ($response->getAnswer() === $this) {
+//                $response->setAnswer(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 }
