@@ -5,6 +5,9 @@ namespace App\Controller\Api;
 use App\Entity\EntityBase;
 use App\Entity\User;
 use App\Form\Register;
+use App\Repository\QuestionnaireRepository;
+use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,5 +81,55 @@ class AccountController extends BaseController
         $user
             ->setPassword($this->passwordEncoder->encodePassword($user, $this->decodedData['password']));
         return $user;
+    }
+
+    /**
+     * @Route("api/admin/account/list", name="list_users" )
+     * @Method("GET") // TODO dodac do dokumentacji
+     * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
+     */
+    public function getListUsers(UserRepository $userRepository)
+    {
+        $users = [];
+        foreach ($userRepository->findAll() as $user) {
+            $user->clearResponse();
+            $user->clearQuestionnaire();
+            $users[] = $user;
+        }
+        return new JsonResponse($this->serial->serialize($users, 'json'));
+    }
+
+    /**
+     * @Route("api/admin/accept/{questionnaire}", name="questionnaire_accept" )
+     * @Method("POST") // TODO dodac
+     * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
+     */
+    public function acceptQuestionnaire(int $questionnaire, QuestionnaireRepository $questionnaireRepository)
+    {
+        try {
+            $entity = $questionnaireRepository->find($questionnaire);
+            $entity->setAccept(true);
+            $this->entityManager->persist($entity);
+            $this->entityManager->flush();
+
+        } catch (\Throwable $exception) {
+            return new JsonResponse('Wystąpiły turbulencje z zapisem');
+        }
+        return new JsonResponse('Zaakcpetowanie ankiety powiodło się');
+    }
+
+    /**
+     * @Route("api/admin/questionnaire/list-all", name="questionnaire_list_all_admin" )
+     * @Method("GET") // TODO dla admina do zaacpektowania
+     * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
+     */
+    public function listAllQuestionnaire(QuestionnaireRepository $questionnaireRepository)
+    {
+        $array = [];
+        foreach ($questionnaireRepository->findAll() as $questionnaire) {
+            $questionnaire->clearOwner();
+            $array[] = $questionnaire;
+        }
+        return new JsonResponse($this->serial->serialize($array, 'json'));
     }
 }

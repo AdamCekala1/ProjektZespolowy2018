@@ -61,8 +61,18 @@ class QuestionnaireController extends BaseController
     }
 
     /**
-     * @Route("api/questionnaire/list", name="questionnaire_list")
-     * @Method("GET, POST")
+     * @Route("api/questionnaire/list-user", name="questionnaire_list_all")
+     * @Method("GET") // TODO dla usera - dodano
+     */
+    public function userListQuestionnaire(Request $request): Response
+    {
+        $collection = $this->entityManager->getRepository(Questionnaire::class)->findBy(['owner' => $this->getUserEntity($request)->getId(), 'accept' => true]);
+        return new JsonResponse($this->serial->serialize($collection, 'json'));
+    }
+
+    /**
+     * @Route("questionnaire/list-all", name="questionnaire_list")
+     * @Method("GET") // TODO na strone głowna - dodano
      */
     public function listQuestionnaire(Request $request): Response
     {
@@ -70,8 +80,9 @@ class QuestionnaireController extends BaseController
         {
             $data = json_decode($request->getContent(), true);
             $collection = $this->entityManager->getRepository(Questionnaire::class)->findByDate($data['start'], $data['end']);
+            return new JsonResponse($this->serial->serialize($collection, 'json'));
         }
-        else $collection = $this->entityManager->getRepository(Questionnaire::class)->findAll();
+        $collection = $this->entityManager->getRepository(Questionnaire::class)->findBy(['accept' => true]);
         return new JsonResponse($this->serial->serialize($collection, 'json'));
     }
 

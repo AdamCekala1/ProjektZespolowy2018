@@ -220,6 +220,16 @@ class User implements UserInterface, EntityBase
         return $this;
     }
 
+    public function clearResponse()
+    {
+        $this->responses = '';
+    }
+
+    public function clearQuestionnaire(): void
+    {
+        $this->questionnaires = '';
+    }
+
     public function removeQuestionnaire(Questionnaire $questionnaire): self
     {
         if ($this->questionnaires->contains($questionnaire)) {

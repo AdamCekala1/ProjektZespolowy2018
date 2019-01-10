@@ -59,6 +59,12 @@ class Questionnaire implements EntityBase, Editable
     private $owner;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Serializer\Type("boolean")
+     */
+    private $accept;
+
+    /**
      * Sets createdAt.
      *
      * @param  \DateTime $createdAt
@@ -107,6 +113,7 @@ class Questionnaire implements EntityBase, Editable
     public function __construct()
     {
         $this->question = new ArrayCollection();
+        $this->accept = false;
     }
 
     public function getId(): ?int
@@ -119,6 +126,11 @@ class Questionnaire implements EntityBase, Editable
         return $this->title;
     }
 
+    public function clearOwner(): void
+    {
+        $this->owner->clearQuestionnaire();
+        $this->owner->clearResponse();
+    }
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -178,5 +190,16 @@ class Questionnaire implements EntityBase, Editable
     public function getQuestionnaire(): Questionnaire
     {
        return $this;
+    }
+
+    public function getAccept(): bool
+    {
+        return $this->accept;
+    }
+
+    public function setAccept($accept): self
+    {
+        $this->accept = $accept;
+        return $this;
     }
 }
