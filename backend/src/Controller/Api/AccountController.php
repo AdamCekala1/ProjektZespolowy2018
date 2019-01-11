@@ -63,7 +63,7 @@ class AccountController extends BaseController
         if ($request->getMethod() == 'PUT') {
             return $this->processForm($request, Register::class, $user);
         }
-        return new JsonResponse($this->serial->serialize($user, 'json'));
+        return new Response($this->serial->serialize($user, 'json'));
     }
 
     protected function getTransaction(EntityBase $entityBase, string $form): EntityBase
@@ -96,7 +96,7 @@ class AccountController extends BaseController
             $user->clearQuestionnaire();
             $users[] = $user;
         }
-        return new JsonResponse($this->serial->serialize($users, 'json'));
+        return new Response($this->serial->serialize($users, 'json'));
     }
 
     /**
@@ -130,6 +130,6 @@ class AccountController extends BaseController
             $questionnaire->clearOwner();
             $array[] = $questionnaire;
         }
-        return new JsonResponse($this->serial->serialize($array, 'json'));
+        return new Response($this->serial->serialize($array, 'json'));
     }
 }

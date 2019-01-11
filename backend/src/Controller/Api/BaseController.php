@@ -31,8 +31,8 @@ abstract class BaseController extends AbstractController
         $this->JWTEncoder = $JWTEncoder;
         $this->serializer = $serializer;
         $this->entityManager = $entityManager;
-        $this->passwordEncoder = $passwordEncoder;
         $this->serial = SerializerBuilder::create()->setSerializationVisitor('json', $visitor)->build();
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     protected function getUserEntity(Request $request): User

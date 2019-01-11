@@ -46,7 +46,7 @@ class ResponseController extends BaseController
     public function getResponse(int $questionnaire)
     {
        $result = $this->sumResponses($this->getResponses($questionnaire));
-       return new JsonResponse($this->serial->serialize($result,'json'));
+       return new Response($this->serial->serialize($result,'json'));
     }
 
     private function getAnswer(int $id): Answer

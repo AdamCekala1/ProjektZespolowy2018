@@ -69,7 +69,7 @@ class QuestionnaireController extends BaseController
     public function userListQuestionnaire(Request $request): Response
     {
         $collection = $this->entityManager->getRepository(Questionnaire::class)->findBy(['owner' => $this->getUserEntity($request)->getId(), 'accept' => true]);
-        return new JsonResponse($this->serial->serialize($collection, 'json'));
+        return new Response($this->serial->serialize($collection, 'json'));
     }
 
     /**
@@ -85,7 +85,7 @@ class QuestionnaireController extends BaseController
             return new JsonResponse($this->serial->serialize($collection, 'json'));
         }
         $collection = $this->entityManager->getRepository(Questionnaire::class)->findBy(['accept' => true]);
-        return new JsonResponse($this->serial->serialize($collection, 'json'));
+        return new Response($this->serial->serialize($collection, 'json'));
     }
 
     /**
@@ -109,7 +109,7 @@ class QuestionnaireController extends BaseController
         $collection = $this->entityManager->getRepository(Questionnaire::class)->find($questionnaire);
         if(!$collection) return new JsonResponse('Nie ma takiej ankiety');
         $collection->dontShowOwner();
-        return new JsonResponse($this->serial->serialize($collection, 'json'));
+        return new Response($this->serial->serialize($collection, 'json'));
     }
 
     protected function getTransaction(EntityBase $entityBase, string $form): EntityBase
