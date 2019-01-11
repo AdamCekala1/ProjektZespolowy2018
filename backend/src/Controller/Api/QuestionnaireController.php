@@ -32,7 +32,9 @@ class QuestionnaireController extends BaseController
                 $answer->setQuestion($item);
             }
         }
-        $questionnaire->setOwner($this->getUserEntity());
+        $questionnaire
+            ->setOwner($this->getUserEntity($request))
+            ->setAccept(false);
         $this->entityManager->persist($questionnaire);
         $this->entityManager->flush();
         return new JsonResponse('Udalo się dodać ankietę');
@@ -105,7 +107,7 @@ class QuestionnaireController extends BaseController
     public function getQuestionnaire(int $questionnaire)
     {
         $collection = $this->entityManager->getRepository(Questionnaire::class)->find($questionnaire);
-        if(!$collection) return new JsonResponse('Niema takiej ankiety');
+        if(!$collection) return new JsonResponse('Nie ma takiej ankiety');
         $collection->dontShowOwner();
         return new JsonResponse($this->serial->serialize($collection, 'json'));
     }

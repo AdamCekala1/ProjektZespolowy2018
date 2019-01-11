@@ -6,6 +6,7 @@ use App\Entity\EntityBase;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\Visitor\Factory\JsonSerializationVisitorFactory;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,11 +26,13 @@ abstract class BaseController extends AbstractController
 
     public function __construct(JWTEncoderInterface $JWTEncoder, SerializerInterface $serializer, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $visitor = new JsonSerializationVisitorFactory();
+        $visitor->setOptions(256)->getVisitor();
         $this->JWTEncoder = $JWTEncoder;
         $this->serializer = $serializer;
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
-        $this->serial = SerializerBuilder::create()->build();
+        $this->serial = SerializerBuilder::create()->setSerializationVisitor('json', $visitor)->build();
     }
 
     protected function getUserEntity(Request $request): User
