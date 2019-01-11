@@ -57,7 +57,7 @@ abstract class BaseController extends AbstractController
             $this->entityManager->commit();
         } catch (\Throwable $exception) {
             $this->entityManager->rollback();
-            return new JsonResponse('Nie udało się zapisać danych');
+            return new JsonResponse(['message' =>'Nie udało się zapisać danych']);
         }
         return new Response('Dane zmodyfikowano pomyślnie', 201);
     }

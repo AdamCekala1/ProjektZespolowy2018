@@ -23,21 +23,27 @@ class QuestionnaireController extends BaseController
      */
     public function newQuestionnaire(Request $request): Response
     {
-        $questionnaire = $this->serial->deserialize($request->getContent(), Questionnaire::class, 'json');
-        foreach($questionnaire->getQuestion() as $item)
-        {
-            $item->setQuestionnaire($questionnaire);
-            foreach($item->getAnswers() as $answer)
+        try{
+            $questionnaire = $this->serial->deserialize($request->getContent(), Questionnaire::class, 'json');
+            foreach($questionnaire->getQuestion() as $item)
             {
-                $answer->setQuestion($item);
+                $item->setQuestionnaire($questionnaire);
+                foreach($item->getAnswers() as $answer)
+                {
+                    $answer->setQuestion($item);
+                }
             }
+            $questionnaire
+                ->setOwner($this->getUserEntity($request))
+                ->setAccept(false);
+            $this->entityManager->persist($questionnaire);
+            $this->entityManager->flush();
+        }catch (\Throwable $exception)
+        {
+            return new JsonResponse(['message' => $exception->getMessage()]);
         }
-        $questionnaire
-            ->setOwner($this->getUserEntity($request))
-            ->setAccept(false);
-        $this->entityManager->persist($questionnaire);
-        $this->entityManager->flush();
-        return new JsonResponse('Udalo się dodać ankietę');
+
+        return new JsonResponse(['message' =>'Udalo się dodać ankietę']);
     }
 
     /**
@@ -57,9 +63,9 @@ class QuestionnaireController extends BaseController
             }
         }catch (\Throwable $exception)
         {
-            return new JsonResponse('Wystąpił błąd podczas zapisu');
+            return new JsonResponse(['message' => $exception->getMessage()]);
         }
-        return new JsonResponse('Edytowanie przebiegło pomyślnie');
+        return new JsonResponse(['message' =>'Edytowanie przebiegło pomyślnie']);
     }
 
     /**
@@ -82,7 +88,7 @@ class QuestionnaireController extends BaseController
         {
             $data = json_decode($request->getContent(), true);
             $collection = $this->entityManager->getRepository(Questionnaire::class)->findByDate($data['start'], $data['end']);
-            return new JsonResponse($this->serial->serialize($collection, 'json'));
+            return new Response($this->serial->serialize($collection, 'json'));
         }
         $collection = $this->entityManager->getRepository(Questionnaire::class)->findBy(['accept' => true]);
         return new Response($this->serial->serialize($collection, 'json'));
@@ -97,7 +103,7 @@ class QuestionnaireController extends BaseController
         if($this->getUserEntity($request) !== $questionnaire->getOwner()) return new JsonResponse('Nie można usuwać cudzej ankiety');
         $this->entityManager->remove($questionnaire);
         $this->entityManager->flush();
-        return new JsonResponse('Udało się usunąć ankiete');
+        return new JsonResponse(['message' =>'Udało się usunąć ankiete']);
     }
 
     /**
@@ -107,7 +113,7 @@ class QuestionnaireController extends BaseController
     public function getQuestionnaire(int $questionnaire)
     {
         $collection = $this->entityManager->getRepository(Questionnaire::class)->find($questionnaire);
-        if(!$collection) return new JsonResponse('Nie ma takiej ankiety');
+        if(!$collection) return new JsonResponse(['message' =>'Nie ma takiej ankiety']);
         $collection->dontShowOwner();
         return new Response($this->serial->serialize($collection, 'json'));
     }

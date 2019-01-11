@@ -49,7 +49,7 @@ class AccountController extends BaseController
     {
         $this->processForm($request, Register::class, new User());
 
-        return new JsonResponse('Konto zostało założone pomyślnie', 201);
+        return new JsonResponse(['message' => 'Konto zostało założone pomyślnie'], 201);
     }
 
     /**
@@ -113,9 +113,9 @@ class AccountController extends BaseController
             $this->entityManager->flush();
 
         } catch (\Throwable $exception) {
-            return new JsonResponse('Wystąpiły turbulencje z zapisem');
+            return new JsonResponse(['message' =>'Wystąpiły turbulencje z zapisem']);
         }
-        return new JsonResponse('Zaakcpetowanie ankiety powiodło się');
+        return new JsonResponse(['message' =>'Zaakcpetowanie ankiety powiodło się']);
     }
 
     /**

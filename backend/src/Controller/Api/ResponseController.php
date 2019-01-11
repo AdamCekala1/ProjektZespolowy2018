@@ -34,9 +34,9 @@ class ResponseController extends BaseController
                 $this->entityManager->flush();
             }
         } catch (\Throwable $exception) {
-            return new JsonResponse('Wystąpił błąd podczas zapisu');
+            return new JsonResponse(['message' => $exception->getMessage()]);
         }
-        return new JsonResponse('Dziekuję za odpowiedz');
+        return new JsonResponse(['message' =>'Dziekuję za odpowiedz']);
     }
 
     /**
@@ -46,7 +46,7 @@ class ResponseController extends BaseController
     public function getResponse(int $questionnaire)
     {
        $result = $this->sumResponses($this->getResponses($questionnaire));
-       return new Response($this->serial->serialize($result,'json'));
+       return new \Symfony\Component\HttpFoundation\Response($this->serial->serialize($result,'json'));
     }
 
     private function getAnswer(int $id): Answer
