@@ -48,7 +48,7 @@ class QuestionnaireController extends BaseController
 
     /**
      * @Route("api/questionnaire/edit", name="questionnaire_edit")
-     * @Method("GET")
+     * @Method("POST")
      */
     public function editQuestionnaire(Request $request): Response
     {

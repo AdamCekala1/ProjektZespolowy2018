@@ -183,7 +183,7 @@ class Questionnaire implements EntityBase, Editable
 
     public function dontShowOwner(): self
     {
-        $this->owner = null;
+        $this->owner->clearQuestionnaire();
         return $this;
     }
 

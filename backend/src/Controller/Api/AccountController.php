@@ -54,14 +54,15 @@ class AccountController extends BaseController
 
     /**
      * @Route("api/account/about", name="about" )
-     * @Method("GET, PUT")
+     * @Method("GET, POST")
      */
     public function getDataUser(Request $request): Response
     {
         $user = $this->getUserEntity($request);
 
-        if ($request->getMethod() == 'PUT') {
-            return $this->processForm($request, Register::class, $user);
+        if ($request->getMethod() == 'POST') {
+            $this->processForm($request, Register::class, $user);
+            return new JsonResponse(['message' => 'Edycja się udała']);
         }
         return new Response($this->serial->serialize($user, 'json'));
     }
