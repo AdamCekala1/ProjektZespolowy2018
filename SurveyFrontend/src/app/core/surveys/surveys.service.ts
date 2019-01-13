@@ -4,7 +4,6 @@ import { AlertService } from 'ngx-alerts';
 import * as moment_ from 'moment';
 import { find, findIndex, get, isEmpty, map as mapLodash, omitBy } from 'lodash';
 
-import { IDictionary } from 'ac-login/lib/shared/interfaces/utils.interface';
 import { RequestsContants } from '../../shared/constants/requests.contants';
 import { RequestTypes } from '../http/http.enum';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -13,6 +12,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { IExtraInformations, ISurvey, ISurveyResolve, ISurveyResponse } from '../../shared/interfaces/result.interface';
 import { CONSTANTS } from '../../../../projects/ac-search-result/src/lib/components/search/search.constants';
 import { SurveyType } from './surveys-type.enum';
+import { IDictionary } from '../../shared/interfaces/utils.interfaces';
 
 const moment = moment_;
 

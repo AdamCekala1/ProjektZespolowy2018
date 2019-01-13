@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ISearchConfig } from '../../../../projects/ac-search-result/src/lib/shared/interfaces/search.interface';
-import { IDictionary } from 'ac-login/lib/shared/interfaces/utils.interface';
 import { chain, get, map, omitBy, isEmpty } from 'lodash';
 import { ISurvey } from '../../shared/interfaces/result.interface';
 import { searchConfig } from '../../shared/constants/search.config';
 import { SurveysService } from '../../core/surveys/surveys.service';
 import { Observable } from 'rxjs';
+import { IDictionary } from '../../shared/interfaces/utils.interfaces';
 
 @Component({
   selector: 'ac-main-page',
