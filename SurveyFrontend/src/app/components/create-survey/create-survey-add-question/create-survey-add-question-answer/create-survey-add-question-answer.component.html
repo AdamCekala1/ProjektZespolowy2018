@@ -1,0 +1,17 @@
+<mat-form-field class="width-100">
+  <input matInput
+         [(ngModel)]="content"
+         [ngModelOptions]="{standalone: true}"
+         placeholder="Odpowiedź">
+</mat-form-field>
+<button (click)="addAnswer()"
+        [disabled]="!content.length"
+        mat-stroked-button
+        color="primary">
+  Zapisz odpowiedź
+</button>
+<button (click)="cancelAnswer()"
+        mat-stroked-button
+        color="warn">
+  Usuń odpowiedź
+</button>

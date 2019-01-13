@@ -1,0 +1,13 @@
+.ac-result-element-wrapper {
+  margin-top: 20px;
+}
+
+.ac-result-elements-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  > * {
+    width: 100%;
+  }
+}

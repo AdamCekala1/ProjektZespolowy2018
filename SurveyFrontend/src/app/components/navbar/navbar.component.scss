@@ -1,0 +1,19 @@
+.ac-navbar {
+  position: fixed;
+  display: flex;
+  background: rgba(#000, 1);
+  z-index: 999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 67px;
+  color: #fff;
+
+  > * {
+    cursor: pointer;
+  }
+
+  .separate {
+    padding: 0 5px;
+  }
+}

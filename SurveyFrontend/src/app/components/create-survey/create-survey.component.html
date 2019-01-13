@@ -1,0 +1,61 @@
+<ac-modal *ngIf="isModalVisible() | async">
+  <h2>Dodaj nową ankietę!</h2>
+  <form>
+    <mat-form-field class="width-100">
+      <input matInput
+             [(ngModel)]="title"
+             [ngModelOptions]="{standalone: true}"
+             placeholder="Tytuł ankiety">
+    </mat-form-field>
+    <button *ngIf="!addQuestionMode; else qestionMode"
+            mat-stroked-button
+            (click)="toggleQuestionMode()"
+            color="accent">
+      Dodaj pytanie
+    </button>
+    <ng-template #qestionMode>
+      <ac-create-survey-add-question (onAddQuestion)="addQuestion($event)"
+                                     (onCancel)="toggleQuestionMode()"></ac-create-survey-add-question>
+    </ng-template>
+  </form>
+
+  <ng-container *ngIf="questions.length">
+    <p><b>Zapisane pytania:</b></p>
+    <mat-expansion-panel *ngFor="let question of questions">
+      <mat-expansion-panel-header >
+        <mat-panel-title>
+          <b>Pytanie: </b>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{question.content}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <b>Odpowiedzi: </b>
+      <p *ngFor="let answer of question.answers">
+        {{answer.content}}
+      </p>
+      <button mat-stroked-button
+              (click)="removeQuestion(question)"
+              color="accent">
+        Usuń pytanie
+      </button>
+    </mat-expansion-panel>
+  </ng-container>
+
+  <div class="padding-top-10px">
+  <button *ngIf="questions.length"
+          mat-stroked-button
+          class="width-100"
+          (click)="saveSurvey()"
+          color="accent">
+    Zapisz ankietę
+  </button>
+
+  <button mat-stroked-button
+          class="width-100"
+          (click)="removeSurvey()"
+          color="warn">
+    Wyjdź bez zapisywania
+  </button>
+  </div>
+</ac-modal>

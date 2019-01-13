@@ -1,0 +1,22 @@
+<!-- TODO: touchUi dla mobilek -->
+<label class="ac-label">{{title}}</label>
+<div class="pointer ac-input">
+  <div class="date-display"
+       (click)="datepicker.open()">
+    <i *ngIf="displayIcon"
+       class="fa fa-calendar center-and-left"
+       aria-hidden="true"></i>
+    <span class="center-element">
+      {{actualDate}}
+    </span>
+  </div>
+  <input class="pointer no-border-input width-100 hide-date-input"
+         [matDatepicker]="datepicker"
+         [max]="maxDate"
+         [min]="minDate"
+         (dateChange)="setDateFromDatePicker($event)"
+         disabled>
+  <mat-datepicker #datepicker
+                  disabled="false"></mat-datepicker>
+</div>
+

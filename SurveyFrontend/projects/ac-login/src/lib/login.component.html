@@ -1,0 +1,20 @@
+<div *ngIf="isDisplayed && config && getActiveView() | async"
+     [@itemAnim]
+     class="login-wrapper">
+  <div class="login-background-image"
+       [style.background-image]="'url(' + backgroundUrl + ')'"></div>
+  <mat-card [ngSwitch]="getActiveView() | async"
+            class="login-content">
+    <app-form *ngSwitchCase="viewType.LOGIN"
+              [config]="config.login"
+              [errors]="errors.login"
+              (onSubmit)="submit($event, viewType.LOGIN)"></app-form>
+    <app-form *ngSwitchCase="viewType.REGISTER"
+              [errors]="errors.register"
+              [config]="config.register"
+              (onSubmit)="submit($event, viewType.REGISTER)"></app-form>
+  </mat-card>
+  <i class="fa fa-window-close login-close"
+     (click)="closeModal()"
+     aria-hidden="true"></i>
+</div>

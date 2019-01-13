@@ -1,0 +1,18 @@
+<div class="edit-wrapper">
+  <mat-divider></mat-divider>
+  <div class="padding-bottom-10px padding-top-10px">
+    <ac-edit-survey-edit-mode [answer]="{id: question.id, content: question.content}"
+                              [prefix]="'Pytanie'"
+                              (onRemoveFromChanged)="removeFromChanged($event)"
+                              (onSubmit)="addToChanged($event, itemType.QUESTION)"></ac-edit-survey-edit-mode>
+  </div>
+  <mat-divider></mat-divider>
+  <p class="padding-top-10px"><b> Odpowiedzi: </b></p>
+  <div *ngFor="let answer of question.answers; let i = index">
+    {{i + 1}})
+    <ac-edit-survey-edit-mode [answer]="answer"
+                              [prefix]="'Odpowiedź'"
+                              (onRemoveFromChanged)="removeFromChanged($event)"
+                              (onSubmit)="addToChanged($event, itemType.ANSWER)"></ac-edit-survey-edit-mode>
+  </div>
+</div>

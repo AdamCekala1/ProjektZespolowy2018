@@ -1,0 +1,34 @@
+<div class="profile-bg"
+     [style.background-image]="'url(' + backgroundUrl + ')'">
+  <div class="profile-bg-content">
+    <h1>Panel admina!</h1>
+  </div>
+</div>
+<div class="profile-details-wrapper profile-move-up profile-details">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Ankiety niezaakceptowane:
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngIf="surveys.notAccepted.length">
+      <ac-result class="main-page-results"
+                 (onSelect)="selectSurvey($event)"
+                 [elements]="surveys.notAccepted"></ac-result>
+    </ng-container>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel class="margin-top-20px">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Ankiety zaakceptowane:
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngIf="surveys.accepted.length">
+      <ac-result class="main-page-results"
+                 (onSelect)="selectSurvey($event)"
+                 [elements]="surveys.accepted"></ac-result>
+    </ng-container>
+  </mat-expansion-panel>
+</div>

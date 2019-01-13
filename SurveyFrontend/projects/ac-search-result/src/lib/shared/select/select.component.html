@@ -1,0 +1,12 @@
+<div class="ac-input select-result fill-max-box"
+     (click)="toggleDisplay()">
+  <p>{{actualValue}}</p>
+  <i class="fa fa-caret-down"
+     aria-hidden="true"></i>
+</div>
+<div class="select-list-container fill-max-box">
+  <app-select-list [values]="isDisplayed ? values : []"
+                   [config]="config"
+                   (onMobileClose)="toggleDisplay()"
+                   (onSelect)="selectValue($event)"></app-select-list>
+</div>

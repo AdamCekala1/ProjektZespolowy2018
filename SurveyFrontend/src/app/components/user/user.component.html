@@ -1,0 +1,44 @@
+<div class="profile-bg"
+     [style.background-image]="'url(' + backgroundUrl + ')'">
+  <div class="profile-bg-content">
+    <h1>Wszystko dotyczące Twojego konta!</h1>
+  </div>
+</div>
+<div class="profile-details-wrapper">
+  <mat-card class="profile-details profile-move-up">
+    <mat-list [formGroup]="form">
+      <h3 mat-subheader>Dane personalne</h3>
+      <ac-user-personal-detail [formControlName]="userFormName.NAME"
+                               [oryginalValue]="clonedUser.name"
+                               [title]="'Imie: '"></ac-user-personal-detail>
+      <ac-user-personal-detail [formControlName]="userFormName.SURNAME"
+                               [oryginalValue]="clonedUser.surname"
+                               [title]="'Nazwisko: '"></ac-user-personal-detail>
+      <ac-user-personal-detail [formControlName]="userFormName.EMAIL"
+                               [oryginalValue]="clonedUser.email"
+                               [title]="'Email: '"></ac-user-personal-detail>
+      <ac-user-personal-detail [formControlName]="userFormName.AGE"
+                               [oryginalValue]="clonedUser.age"
+                               [title]="'Wiek: '"></ac-user-personal-detail>
+      <ac-user-personal-detail [formControlName]="userFormName.CITY"
+                               [oryginalValue]="clonedUser.city"
+                               [title]="'Miasto: '"></ac-user-personal-detail>
+    </mat-list>
+    <button mat-stroked-button
+            class="width-100 margin-top-20px"
+            (click)="saveChangedUserData()"
+            color="accent">
+      Zapisz zmainy
+    </button>
+  </mat-card>
+
+  <mat-card *ngIf="surveys.length"
+            class="profile-details">
+    <mat-list>
+      <h3 mat-subheader>Ankiety użytkownika: </h3>
+    </mat-list>
+    <ac-result class="main-page-results"
+               (onSelect)="selectSurvey($event)"
+               [elements]="surveys"></ac-result>
+  </mat-card>
+</div>

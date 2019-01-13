@@ -1,0 +1,6 @@
+<label class="ac-label">{{config?.title}}</label>
+<div class="pointer">
+  <app-select [values]="config.values"
+              [config]="selectOption"
+              (onSelect)="selectValue($event)"></app-select>
+</div>
