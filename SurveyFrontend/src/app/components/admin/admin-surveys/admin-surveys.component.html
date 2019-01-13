@@ -1,0 +1,35 @@
+<div class="profile-bg"
+     [style.background-image]="'url(' + backgroundUrl + ')'">
+  <div class="profile-bg-content">
+    <h1>Podgląd ankiety: {{survey?.response.title}}</h1>
+  </div>
+</div>
+<div class="profile-details-wrapper">
+  <mat-card class="profile-details profile-move-up profile-detail">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Podgląd pytań:
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let question of survey?.response.question; let i = index">
+        <div class="edit-wrapper">
+          <mat-divider></mat-divider>
+          <div class="padding-bottom-10px padding-top-10px">
+            <p><b>Pytanie: </b>{{question.content}}</p>
+          </div>
+          <mat-divider></mat-divider>
+          <p class="padding-top-10px"><b> Odpowiedzi: </b></p>
+          <div *ngFor="let answer of question.answers; let i = index">
+            <p> {{i + 1}}) {{answer.content}}</p>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-card>
+</div>
+<button *ngIf="!isAccetped()"
+        (click)="acceptSurvey()"
+        mat-flat-button
+        class="fixed-on-left"
+        color="primary">Akceptuj ankietę</button>

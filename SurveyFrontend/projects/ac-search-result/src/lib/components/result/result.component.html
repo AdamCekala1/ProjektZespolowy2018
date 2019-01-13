@@ -1,6 +1,14 @@
-<div *ngFor="let element of elements"
-     class="ac-result-elements-wrapper">
-  <div class="ac-result-element-wrapper">
-    <ac-result-element [element]="element"></ac-result-element>
+<ng-container *ngIf="elements.length; else noResults">
+  <div *ngFor="let element of elements"
+       class="ac-result-elements-wrapper">
+    <div class="ac-result-element-wrapper">
+      <ac-result-element [element]="element"
+                         (onAction)="emitSurvey(element)"></ac-result-element>
+    </div>
   </div>
-</div>
+</ng-container>
+<ng-template #noResults>
+  <mat-card>
+    brak wyników wyszukiwania
+  </mat-card>
+</ng-template>

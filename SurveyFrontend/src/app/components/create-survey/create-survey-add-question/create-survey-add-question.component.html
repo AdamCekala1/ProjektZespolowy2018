@@ -1,0 +1,52 @@
+<mat-form-field class="width-100">
+  <input matInput
+         [(ngModel)]="questions.content"
+         [ngModelOptions]="{standalone: true}"
+         placeholder="Pytanie">
+</mat-form-field>
+
+
+
+
+<div *ngIf="questions.answers.length"
+     class="answers">
+  <h4>Odpowiedzi:</h4>
+  <p *ngFor="let answer of questions.answers"
+     class="display-flex">
+    {{answer.content}}
+    <span (click)="removeAnswer(answer.content)">
+      Usuń odpowiedź
+    </span>
+  </p>
+</div>
+
+<button *ngIf="!isAddAnwerMode; else addAnswer"
+        mat-stroked-button
+        (click)="toggleAnswerMode()"
+        color="accent">
+  Dodaj odpowiedź
+</button>
+
+
+
+<ng-template #addAnswer>
+  <ac-create-survey-add-question-answer (onAccept)="handleQustionAnswer($event)"></ac-create-survey-add-question-answer>
+</ng-template>
+
+
+
+
+<button [disabled]="!(questions.content && questions.answers.length > 1)"
+        mat-stroked-button
+        class="width-100"
+        (click)="saveQuestion()"
+        color="accent">
+  Zapisz pytanie
+</button>
+
+<button mat-stroked-button
+        class="width-100"
+        (click)="cancelQuestion()"
+        color="accent">
+  Anuluj pytanie
+</button>

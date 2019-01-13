@@ -1,2 +1,7 @@
+<ngx-alerts></ngx-alerts>
 <ac-navbar></ac-navbar>
-<ac-main-page></ac-main-page>
+<router-outlet></router-outlet>
+<ng-container *ngIf="getUser() | async">
+  <ac-create-survey-button></ac-create-survey-button>
+  <ac-create-survey></ac-create-survey>
+</ng-container>

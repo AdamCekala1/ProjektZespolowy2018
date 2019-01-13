@@ -1,0 +1,18 @@
+<mat-list-item>
+  <i (click)="toggleEditMode()"
+     class="cursor-pointer fa fa-pencil padding-right-10"
+     aria-hidden="true"></i>
+  <div mat-line *ngIf="!isEditMode; else editMode">
+    <p><b>{{title}}</b> {{value}}</p>
+    <p *ngIf="isChanged()"><b>Przed edycją: </b> {{oryginalValue}}</p>
+  </div>
+  <ng-template #editMode>
+    <mat-form-field>
+      <input  matInput
+              [placeholder]="'Przed edycją :' + oryginalValue"
+              (input)="saveChanges($event.target.value)"
+              [value]="value"/>
+    </mat-form-field>
+  </ng-template>
+</mat-list-item>
+<mat-divider></mat-divider>

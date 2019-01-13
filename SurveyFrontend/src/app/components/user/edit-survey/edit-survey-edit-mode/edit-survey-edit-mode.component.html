@@ -1,0 +1,27 @@
+<div *ngIf="!isEditAnswer; else editAnswer"
+     class="display-flex">
+  <div>
+    <p><b>{{prefix}} <span *ngIf="isChanged()">oryginalne:</span></b>{{answer.content}}</p>
+    <p *ngIf="isChanged()"><b>{{prefix}} po zmianie:</b> {{editAnswerCopy.content}}</p>
+  </div>
+  <p (click)="isEditAnswer = true">{{isChanged() ? 'Powróć do edycji' : 'Edytuj'}}</p>
+</div>
+<ng-template #editAnswer>
+  <mat-form-field class="width-100">
+    <input matInput
+           [(ngModel)]="editAnswerCopy.content"
+           [placeholder]="answer.content">
+  </mat-form-field>
+  <div class="display-flex">
+    <button mat-stroked-button
+            (click)="submitChanges()"
+            color="primary">
+      Zapisz zmiany
+    </button>
+    <button mat-stroked-button
+            (click)="cancelChanges()"
+            color="warn">
+      Anuluj zmiany
+    </button>
+  </div>
+</ng-template>

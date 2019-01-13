@@ -6,23 +6,24 @@ import { catchError, finalize, map, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { RequestTypes } from './http.enum';
 import { IDictionary } from '../../shared/interfaces/utils.interfaces';
-import { IHttpResponse } from './http.interface';
 import { RequestsContants } from '../../shared/constants/requests.contants';
+import { StorageService } from '../storage/storage.service';
+import { UserHelperService } from '../user/user-helper.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  constructor( private http: HttpClient) {
+  constructor( private http: HttpClient, private userHelperService: UserHelperService) {
   }
 
   httpRequest(resourcePath: string,
               requestType: RequestTypes,
-              requestOptions: any = {}): Observable<IHttpResponse<any>> {
+              requestOptions: any = {}): Observable<HttpResponse<any>> {
     const path: string = RequestsContants.prefix + resourcePath;
     const defaultParams: any = {
       withCredentials: true,
-      headers: new HttpHeaders({}),
+      headers: new HttpHeaders({'Authorization': `Bearer ${StorageService.getToken()}`}),
       observe: 'response'
   };
     let request: Observable<any>;
@@ -48,7 +49,10 @@ export class HttpService {
                      requestOptions: any = {}): Observable<any> {
     return request.pipe(
       catchError((error: any) => {
-        console.log('display error');
+        console.log('display error', error);
+        if(error.status === 401) {
+          this.userHelperService.seTtriggerLogoutUser();
+        }
 
         return throwError(error);
       }),

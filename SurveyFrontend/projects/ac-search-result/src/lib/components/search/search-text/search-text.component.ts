@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ControlValueAccessorWrapper } from '../../../shared/class/control-value-accessor-wrapper.class';
 
@@ -6,6 +6,7 @@ import { ControlValueAccessorWrapper } from '../../../shared/class/control-value
   selector: 'app-search-text',
   templateUrl: './search-text.component.html',
   styleUrls: ['./search-text.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: SearchTextComponent,
@@ -13,6 +14,7 @@ import { ControlValueAccessorWrapper } from '../../../shared/class/control-value
   }],
 })
 export class SearchTextComponent extends ControlValueAccessorWrapper implements ControlValueAccessor {
+  @Input() title: string = '';
   actualValue: string = '';
 
   constructor() {

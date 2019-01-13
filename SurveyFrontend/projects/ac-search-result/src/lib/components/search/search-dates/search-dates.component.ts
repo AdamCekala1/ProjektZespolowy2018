@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as moment_ from 'moment';
 import {Moment} from 'moment';
@@ -12,6 +12,7 @@ const momentImported = moment_;
   selector: 'app-search-dates',
   templateUrl: './search-dates.component.html',
   styleUrls: ['./search-dates.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: SearchDatesComponent,
@@ -20,7 +21,7 @@ const momentImported = moment_;
 })
 export class SearchDatesComponent extends ControlValueAccessorWrapper implements ControlValueAccessor {
   @Input() displayIcon: boolean = true;
-  @Input() placeholder: string = '';
+  @Input() title: string = '';
   @Input('maxDate') set setMaxDate(value: string) {
     this.maxDate = momentImported(value, CONSTANTS.DATE_FORMAT.DISPLAY).toDate();
   }

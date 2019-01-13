@@ -38,6 +38,10 @@ $mobile: 900px;
   width: 100%;
 }
 
+.padding-top-10px {
+  padding-top: 10px;
+}
+
 .display-flex {
   display: flex !important;
   flex-direction: row;
@@ -118,4 +122,20 @@ $mobile: 900px;
 
 .margin-top-5px {
   margin-top: 5px;
+}
+
+.margin-top-20px {
+  margin-top: 20px;
+}
+
+.app-alert {
+  z-index: 10000000000000000000;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.padding-right-10 {
+  padding-right: 10px;
 }

@@ -1,12 +1,24 @@
+import { ViewType } from '../../../../projects/ac-login/src/lib/shared/enums/view-type.enum';
+
 export class RequestsContants {
   static prefix = 'http://pdrab.nazwa.pl/projekt2018/Backend/public/';
 
   static Authorization = {
-    LOGIN: 'account/security/token',
-    REGISTER: 'account/security/register',
+    [ViewType.LOGIN]: 'account/security/token',
+    [ViewType.REGISTER]: 'account/security/register',
   };
 
+  static USER = 'api/account/about';
+
   static SURVEYS = {
-    LIST: 'api/questionnaire/list'
+    RESPONSE: 'response/add',
+    USER: 'api/questionnaire/list-user',
+    LIST: 'questionnaire/list-all',
+    EDIT: 'api/questionnaire/edit',
+    ADD: 'api/questionnaire/add',
+    ADMIN_LIST: 'api/admin/questionnaire/list-all',
+    SINGLE: (id: number) => `questionnaire/${id}/get`,
+    ACCEPT: (id: number) => `api/admin/accept/${id}`,
+    DELETE: (id: number) => `api/questionnaire/${id}/delete`,
   };
 }

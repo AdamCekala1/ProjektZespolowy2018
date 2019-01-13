@@ -1,6 +1,22 @@
 <ac-login [config]="loginRegisterConfig"
           (onSubmit)="submitData($event)"></ac-login>
-<div class="ac-navbar">
-  <h2 (click)="openLogin()">Login / </h2>
-  <h2 (click)="openRegister()">Register</h2>
+<div class="ac-navbar display-flex">
+  <span routerLink="/">Ankiety</span>
+  <div *ngIf="(getUser() | async) as user; else noLoggedUser">
+    <h2 mat-button
+            [matMenuTriggerFor]="menu">
+      Witaj {{user.name}}
+    </h2>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/profile">Profil</button>
+      <button mat-menu-item>Wyloguj</button>
+    </mat-menu>
+  </div>
+  <ng-template #noLoggedUser>
+    <div class="display-flex">
+      <h2 (click)="openLogin()">Login</h2>
+      <h2 class="separate">/ </h2>
+      <h2 (click)="openRegister()">Register</h2>
+    </div>
+  </ng-template>
 </div>

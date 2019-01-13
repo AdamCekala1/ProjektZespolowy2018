@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { SearchFormName } from '../../projects/ac-search-result/src/lib/components/search/search-form-names.enum';
-import { ISearchConfig } from '../../projects/ac-search-result/src/lib/shared/interfaces/search.interface';
-
-// import { SearchFormName } from 'ac-search-result/lib/components/search/search-form-names.enum';
-// import { ISearchConfig } from 'ac-search-result/lib/shared/interfaces/search.interface';
+import { Observable } from 'rxjs';
+import { IUser } from './shared/interfaces/user.interface';
+import { UserService } from './core/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +9,10 @@ import { ISearchConfig } from '../../projects/ac-search-result/src/lib/shared/in
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(private userService: UserService) {
+  }
+
+  getUser(): Observable<IUser> {
+    return this.userService.getUser();
+  }
 }

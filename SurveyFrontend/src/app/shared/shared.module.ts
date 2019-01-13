@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalComponent } from './components/modal/modal.component';
+import { MatCardModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
-    BrowserAnimationsModule,
+    MatCardModule,
     HttpClientModule,
   ],
   exports: [
+    FormsModule,
     CommonModule,
-    BrowserAnimationsModule,
     HttpClientModule,
-  ]
+    ModalComponent,
+  ],
+  declarations: [ModalComponent]
 })
 export class SharedModule { }

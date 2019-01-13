@@ -1,0 +1,38 @@
+<div class="profile-bg"
+     [style.background-image]="'url(' + backgroundUrl + ')'">
+  <div class="profile-bg-content">
+    <h1>Edycja ankiety: {{survey?.response.title}}</h1>
+  </div>
+</div>
+<div class="profile-details-wrapper">
+  <mat-card class="profile-details">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Edycja pytań:
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ac-edit-survey-edit-mode [answer]="{id: survey?.response.id, content: survey?.response.title}"
+                                [prefix]="'Tytuł'"
+                                (onRemoveFromChanged)="removeTitleFromChanged()"
+                                (onSubmit)="addToChangedAndMap($event, itemType.SURVEY)"></ac-edit-survey-edit-mode>
+      <div *ngFor="let question of survey?.response.question; let i = index">
+        <ac-edit-survey-question [question]="question"
+                                 (onChanged)="addToChanged($event, i)"></ac-edit-survey-question>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Statystyki ankiety:
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+     wykresy
+    </mat-expansion-panel>
+  </mat-card>
+</div>
+<button *ngIf="isChanged()"
+        (click)="saveChanged()"
+        mat-flat-button
+        class="fixed-on-left"
+        color="primary">Zapisz zmiany w ankiecie</button>

@@ -3,7 +3,7 @@
 <div class="main-page-bg"
      [style.background-image]="'url(' + backgroundUrl + ')'">
   <div class="main-page-bg-content">
-    <h1>What are U looking for?</h1>
+    <h1>Czego szukasz?</h1>
     <div class="main-page-bg-search">
       <ac-search [config]="searchConfig"
                  (onSubmit)="searchSurveys($event)"></ac-search>
@@ -11,5 +11,6 @@
   </div>
 </div>
 <div class="main-page-results-wrapper">
-  <ac-result class="main-page-results"></ac-result>
+  <ac-result class="main-page-results"
+             [elements]="getSurveys() | async"></ac-result>
 </div>

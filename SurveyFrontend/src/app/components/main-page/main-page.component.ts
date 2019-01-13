@@ -1,58 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ISearchConfig } from '../../../../projects/ac-search-result/src/lib/shared/interfaces/search.interface';
-import { SearchFormName } from '../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum';
 import { IDictionary } from 'ac-login/lib/shared/interfaces/utils.interface';
-import { ViewType } from '../../../../projects/ac-login/src/lib/shared/enums/view-type.enum';
-import { RequestsContants } from '../../shared/constants/requests.contants';
-import { RequestTypes } from '../../core/http/http.enum';
-import { HttpService } from '../../core/http/http.service';
 import { chain, get, map, omitBy, isEmpty } from 'lodash';
+import { ISurvey } from '../../shared/interfaces/result.interface';
+import { searchConfig } from '../../shared/constants/search.config';
+import { SurveysService } from '../../core/surveys/surveys.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ac-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent implements OnInit {
-  backgroundUrl = 'assets/mainpage.jpg';
-  searchConfig: ISearchConfig = {
-    otherSelects: [],
-    inputs: {
-      [SearchFormName.TEXT]: {
-        value: 'Ankieta o ziemniakiach',
-        isRequired: false,
-        regex: '',
-        title: 'xddd',
-      },
-      [SearchFormName.TYPE]: {
-        title: 'Select type',
-        value: '',
-        isRequired: false,
-        selectOption: {
-          canBeNull: true,
-          text: 'Clear selection',
-        },
-        values: ['x', 'y', 'z2'],
-      }
-    }
-  };
+  backgroundUrl: string = 'assets/mainpage.jpg';
+  searchConfig: ISearchConfig = searchConfig;
 
-  constructor(private httpService: HttpService) { }
-
-  ngOnInit() {
-  }
+  constructor(private surveysService: SurveysService) { }
 
   searchSurveys(data: IDictionary<string>) {
-    console.log(omitBy(data, isEmpty))
-    console.log(isEmpty(omitBy(data, isEmpty)))
+    this.surveysService.fetchSurveys(data).subscribe();
+  }
 
-    if(isEmpty(omitBy(data, isEmpty))) {
-      this.httpService.httpRequest(RequestsContants.SURVEYS.LIST, RequestTypes.GET)
-        .subscribe(x => console.log(x));
-    } else {
-      this.httpService.httpRequest(RequestsContants.SURVEYS.LIST, RequestTypes.POST, {
-        queryObj: {start: get(data, 'beginDate', ''), end: get(data, 'endDate', '')},
-      }).subscribe(x => console.log(x));
-    }
+  getSurveys(): Observable<ISurvey[]> {
+    return this.surveysService.getSurveys();
+  }
+
+  ngOnInit() {
+    this.surveysService.fetchSurveys().subscribe();
   }
 }
