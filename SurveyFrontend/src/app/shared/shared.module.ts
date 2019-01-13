@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalComponent } from './components/modal/modal.component';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatProgressSpinnerModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   imports: [
@@ -11,13 +12,16 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MatCardModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
+    MatProgressSpinnerModule,
     FormsModule,
     CommonModule,
     HttpClientModule,
     ModalComponent,
+    LoaderComponent,
   ],
-  declarations: [ModalComponent]
+  declarations: [ModalComponent, LoaderComponent]
 })
 export class SharedModule { }

@@ -1,4 +1,5 @@
 import { IUser } from './user.interface';
+import { IDictionary } from './utils.interfaces';
 
 export interface ISurvey {
   id: string | number;
@@ -53,4 +54,24 @@ export interface ISurveyResponse {
 export interface ISurveyResolve {
   answer_id: number;
   question_id: number;
+}
+
+export interface IStatisticks {
+  question_id: number;
+  answers: IDictionary<{
+    answer_id: number;
+    sum: number;
+  }>;
+}
+
+export interface IStatisticksMapped {
+  question_id: number;
+  content: string;
+  answers: IStatisticksAnswerMapped[];
+}
+
+export interface IStatisticksAnswerMapped {
+  answer_id: number;
+  sum: number;
+  content: string;
 }

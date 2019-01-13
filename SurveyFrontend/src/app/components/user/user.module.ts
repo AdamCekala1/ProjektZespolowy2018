@@ -21,6 +21,8 @@ import { CanActivateUserGuard } from '../../core/guards/can-activate-user.guard'
 import { EditSurveyQuestionComponent } from './edit-survey/edit-survey-question/edit-survey-question.component';
 import { EditSurveyEditModeComponent } from './edit-survey/edit-survey-edit-mode/edit-survey-edit-mode.component';
 import { SurveysUserResolver } from './survey-user.resolver';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { SurveysUserResolver } from './survey-user.resolver';
     EditSurveyComponent,
     UserWrapperComponent,
     EditSurveyQuestionComponent,
-    EditSurveyEditModeComponent
+    EditSurveyEditModeComponent,
+    EditUserComponent
   ],
   providers: [CanActivateUserGuard, SurveysUserResolver],
   imports: [
@@ -37,6 +40,7 @@ import { SurveysUserResolver } from './survey-user.resolver';
     MatDividerModule,
     MatInputModule,
     CommonModule,
+    SharedModule,
     AcSearchResultModule,
     FormsModule,
     ReactiveFormsModule,

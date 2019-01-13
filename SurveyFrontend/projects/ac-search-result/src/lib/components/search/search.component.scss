@@ -26,11 +26,16 @@
   margin: 0;
 }
 
-.display-flex > .submit-button {
+.display-flex > .submit-buttons {
   width: 100%;
+  height: auto;
+
+  > * {
+    height: auto;
+  }
 
   @media (min-width: 700px) {
-    width: 65px;
+    width: 165px;
   }
 }
 

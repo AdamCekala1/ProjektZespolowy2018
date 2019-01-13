@@ -2,14 +2,19 @@
           (onSubmit)="submitData($event)"></ac-login>
 <div class="ac-navbar display-flex">
   <span routerLink="/">Ankiety</span>
-  <div *ngIf="(getUser() | async) as user; else noLoggedUser">
+  <div *ngIf="user; else noLoggedUser">
     <h2 mat-button
             [matMenuTriggerFor]="menu">
       Witaj {{user.name}}
     </h2>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/profile">Profil</button>
-      <button mat-menu-item>Wyloguj</button>
+      <button mat-menu-item
+              routerLink="/profile">Profil</button>
+      <button *ngIf="isAdmin"
+              mat-menu-item
+              routerLink="/admin">Panel admina</button>
+      <button mat-menu-item
+              (click)="logout()">Wyloguj</button>
     </mat-menu>
   </div>
   <ng-template #noLoggedUser>

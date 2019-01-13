@@ -16,6 +16,7 @@ export class RequestsContants {
     LIST: 'questionnaire/list-all',
     EDIT: 'api/questionnaire/edit',
     ADD: 'api/questionnaire/add',
+    STATISTIC: 'response/get/',
     ADMIN_LIST: 'api/admin/questionnaire/list-all',
     SINGLE: (id: number) => `questionnaire/${id}/get`,
     ACCEPT: (id: number) => `api/admin/accept/${id}`,

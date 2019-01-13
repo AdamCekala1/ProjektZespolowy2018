@@ -1,0 +1,24 @@
+<mat-list [formGroup]="form">
+  <h3 mat-subheader>Dane personalne</h3>
+  <ac-user-personal-detail [formControlName]="userFormName.NAME"
+                           [oryginalValue]="clonedUser.name"
+                           [title]="'Imie: '"></ac-user-personal-detail>
+  <ac-user-personal-detail [formControlName]="userFormName.SURNAME"
+                           [oryginalValue]="clonedUser.surname"
+                           [title]="'Nazwisko: '"></ac-user-personal-detail>
+  <ac-user-personal-detail [formControlName]="userFormName.EMAIL"
+                           [oryginalValue]="clonedUser.email"
+                           [title]="'Email: '"></ac-user-personal-detail>
+  <ac-user-personal-detail [formControlName]="userFormName.AGE"
+                           [oryginalValue]="clonedUser.age"
+                           [title]="'Wiek: '"></ac-user-personal-detail>
+  <ac-user-personal-detail [formControlName]="userFormName.CITY"
+                           [oryginalValue]="clonedUser.city"
+                           [title]="'Miasto: '"></ac-user-personal-detail>
+</mat-list>
+<button mat-stroked-button
+        class="width-100 margin-top-20px"
+        (click)="saveChangedUserData()"
+        color="accent">
+  Zapisz zmainy
+</button>

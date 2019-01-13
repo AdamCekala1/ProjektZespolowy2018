@@ -142,7 +142,7 @@ var AdminSurveysResolver = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Podgląd ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up profile-detail\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Podgląd pytań:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n        <div class=\"edit-wrapper\">\r\n          <mat-divider></mat-divider>\r\n          <div class=\"padding-bottom-10px padding-top-10px\">\r\n            <p><b>Pytanie: </b>{{question.content}}</p>\r\n          </div>\r\n          <mat-divider></mat-divider>\r\n          <p class=\"padding-top-10px\"><b> Odpowiedzi: </b></p>\r\n          <div *ngFor=\"let answer of question.answers; let i = index\">\r\n            <p> {{i + 1}}) {{answer.content}}</p>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </mat-expansion-panel>\r\n  </mat-card>\r\n</div>\r\n<button *ngIf=\"!isAccetped()\"\r\n        (click)=\"acceptSurvey()\"\r\n        mat-flat-button\r\n        class=\"fixed-on-left\"\r\n        color=\"primary\">Akceptuj ankietę</button>\r\n"
+module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Podgląd ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up profile-detail\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Podgląd pytań:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <ac-loader *ngIf=\"isLoading; else loadedAdata\"></ac-loader>\r\n      <ng-template #loadedAdata>\r\n        <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n          <div class=\"edit-wrapper\">\r\n            <mat-divider></mat-divider>\r\n            <div class=\"padding-bottom-10px padding-top-10px\">\r\n              <p><b>Pytanie: </b>{{question.content}}</p>\r\n            </div>\r\n            <mat-divider></mat-divider>\r\n            <p class=\"padding-top-10px\"><b> Odpowiedzi: </b></p>\r\n            <div *ngFor=\"let answer of question.answers; let i = index\">\r\n              <p> {{i + 1}}) {{answer.content}}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </ng-template>\r\n    </mat-expansion-panel>\r\n  </mat-card>\r\n</div>\r\n<button *ngIf=\"!isAccetped()\"\r\n        (click)=\"acceptSurvey()\"\r\n        mat-flat-button\r\n        class=\"fixed-on-left\"\r\n        color=\"primary\">Akceptuj ankietę</button>\r\n"
 
 /***/ }),
 
@@ -173,6 +173,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../core/surveys/surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
 /* harmony import */ var _admin_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../admin.service */ "./src/app/components/admin/admin.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -187,20 +188,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AdminSurveysComponent = /** @class */ (function () {
     function AdminSurveysComponent(activatedRoute, adminService, router) {
         this.activatedRoute = activatedRoute;
         this.adminService = adminService;
         this.router = router;
         this.backgroundUrl = 'assets/mainpage.jpg';
+        this.isLoading = false;
     }
     AdminSurveysComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activatedRoute.paramMap.subscribe(function (params) {
-            _this.survey = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["find"])(_this.adminService.getSurveysValue(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_3__["SurveyType"].ALL), { id: Object(lodash__WEBPACK_IMPORTED_MODULE_2__["toNumber"])(params.get('id')) });
-            if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["isNil"])(_this.survey)) {
-                _this.router.navigateByUrl('admin');
-            }
+            _this.updateSurvey(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["toNumber"])(params.get('id')));
         });
     };
     AdminSurveysComponent.prototype.isAccetped = function () {
@@ -208,9 +208,17 @@ var AdminSurveysComponent = /** @class */ (function () {
     };
     AdminSurveysComponent.prototype.acceptSurvey = function () {
         var _this = this;
-        this.adminService.acceptSurvey(this.survey.id).subscribe(function () {
-            _this.survey.response.accept = true;
-        });
+        this.isLoading = true;
+        this.adminService.acceptSurvey(this.survey.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["finalize"])(function () {
+            _this.isLoading = false;
+            _this.updateSurvey(_this.survey.id);
+        })).subscribe();
+    };
+    AdminSurveysComponent.prototype.updateSurvey = function (id) {
+        this.survey = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["find"])(this.adminService.getSurveysValue(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_3__["SurveyType"].ALL), { id: id });
+        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["isNil"])(this.survey)) {
+            this.router.navigateByUrl('admin');
+        }
     };
     AdminSurveysComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -483,7 +491,7 @@ var AdminService = /** @class */ (function () {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])({});
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (response) { return response.body.message; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["tap"])(function (message) {
             _this.alertService.success(message);
-        }));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["switchMap"])(function () { return _this.fetchAdminSurveys(); }));
     };
     AdminService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -512,10 +520,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CanActivateAdminGuard", function() { return CanActivateAdminGuard; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _storage_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../storage/storage.service */ "./src/app/core/storage/storage.service.ts");
-/* harmony import */ var _shared_enums_user_roles_enum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/enums/user-roles.enum */ "./src/app/shared/enums/user-roles.enum.ts");
+/* harmony import */ var _user_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../user/user.service */ "./src/app/core/user/user.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -528,15 +533,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
 var CanActivateAdminGuard = /** @class */ (function () {
-    function CanActivateAdminGuard(router) {
+    function CanActivateAdminGuard(router, userService) {
         this.router = router;
+        this.userService = userService;
     }
     CanActivateAdminGuard.prototype.canActivate = function (next, state) {
-        var userRoles = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(_storage_storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"].getUser(), 'roles', []);
-        var canActive = !!Object(lodash__WEBPACK_IMPORTED_MODULE_2__["find"])(userRoles, function (role) { return role === _shared_enums_user_roles_enum__WEBPACK_IMPORTED_MODULE_4__["UserRoles"].ADMIN; });
+        var canActive = this.userService.isAdmin();
         if (!canActive) {
             this.router.navigateByUrl('');
         }
@@ -546,29 +549,12 @@ var CanActivateAdminGuard = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _user_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
     ], CanActivateAdminGuard);
     return CanActivateAdminGuard;
 }());
 
-
-
-/***/ }),
-
-/***/ "./src/app/shared/enums/user-roles.enum.ts":
-/*!*************************************************!*\
-  !*** ./src/app/shared/enums/user-roles.enum.ts ***!
-  \*************************************************/
-/*! exports provided: UserRoles */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserRoles", function() { return UserRoles; });
-var UserRoles;
-(function (UserRoles) {
-    UserRoles["ADMIN"] = "ROLE_ADMIN";
-})(UserRoles || (UserRoles = {}));
 
 
 /***/ })

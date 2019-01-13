@@ -4,7 +4,7 @@
     <h1>Edycja ankiety: {{survey?.response.title}}</h1>
   </div>
 </div>
-<div class="profile-details-wrapper">
+<div class="profile-details-wrapper margin-bottom-30px">
   <mat-card class="profile-details">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -12,27 +12,64 @@
           Edycja pytań:
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ac-edit-survey-edit-mode [answer]="{id: survey?.response.id, content: survey?.response.title}"
-                                [prefix]="'Tytuł'"
-                                (onRemoveFromChanged)="removeTitleFromChanged()"
-                                (onSubmit)="addToChangedAndMap($event, itemType.SURVEY)"></ac-edit-survey-edit-mode>
-      <div *ngFor="let question of survey?.response.question; let i = index">
-        <ac-edit-survey-question [question]="question"
-                                 (onChanged)="addToChanged($event, i)"></ac-edit-survey-question>
-      </div>
+
+      <ac-loader *ngIf="isLoading; else editSurveySection"></ac-loader>
+      <ng-template #editSurveySection>
+        <ac-edit-survey-edit-mode [answer]="{id: survey?.response.id, content: survey?.response.title}"
+                                  [prefix]="'Tytuł'"
+                                  (onRemoveFromChanged)="removeTitleFromChanged()"
+                                  (onSubmit)="addToChangedAndMap($event, itemType.SURVEY)"></ac-edit-survey-edit-mode>
+        <div *ngFor="let question of survey?.response.question; let i = index">
+          <ac-edit-survey-question [question]="question"
+                                   (onChanged)="addToChanged($event, i)"></ac-edit-survey-question>
+        </div>
+      </ng-template>
+
+
+
     </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Statystyki ankiety:
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-     wykresy
-    </mat-expansion-panel>
+    <div class="margin-top-20px">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Statystyki ankiety:
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+
+
+        <div *ngFor="let statQuestion of statisticks">
+          <div class="edit-wrapper">
+            <mat-divider></mat-divider>
+            <div class="padding-bottom-10px padding-top-10px">
+              <p><b>Pytanie: </b>{{statQuestion.content}}</p>
+            </div>
+            <mat-divider></mat-divider>
+            <p class="padding-top-10px"><b> Odpowiedzi: </b></p>
+            <div *ngFor="let answer of statQuestion.answers; let i = index">
+              <div class="display-flex">
+                <p>{{i + 1}}) {{answer.content}}</p>
+                <p>Ilość odp: {{answer.sum}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </mat-expansion-panel>
+    </div>
   </mat-card>
 </div>
+
+<div class="fixed-on-left">
 <button *ngIf="isChanged()"
         (click)="saveChanged()"
         mat-flat-button
-        class="fixed-on-left"
         color="primary">Zapisz zmiany w ankiecie</button>
+<button (click)="removeSurvey()"
+        mat-flat-button
+        [class.margin-left-20px]="isChanged()"
+        color="warn">Usuń ankietę</button>
+</div>

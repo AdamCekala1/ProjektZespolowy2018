@@ -4,6 +4,7 @@ import { find, get, isNil, toNumber, cloneDeep } from 'lodash';
 import { SurveyType } from '../../../core/surveys/surveys-type.enum';
 import { ISurvey } from '../../../shared/interfaces/result.interface';
 import { AdminService } from '../admin.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'ac-admin-surveys',
@@ -13,6 +14,7 @@ import { AdminService } from '../admin.service';
 export class AdminSurveysComponent implements OnInit {
   backgroundUrl: string = 'assets/mainpage.jpg';
   survey: ISurvey;
+  isLoading: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private adminService: AdminService,
@@ -20,11 +22,7 @@ export class AdminSurveysComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.survey = find(this.adminService.getSurveysValue(SurveyType.ALL), {id: toNumber(params.get('id'))});
-
-      if(isNil(this.survey)) {
-        this.router.navigateByUrl('admin');
-      }
+      this.updateSurvey(toNumber(params.get('id')));
     });
   }
 
@@ -33,8 +31,20 @@ export class AdminSurveysComponent implements OnInit {
   }
 
   acceptSurvey() {
-    this.adminService.acceptSurvey(this.survey.id as number).subscribe(() => {
-      this.survey.response.accept = true;
-    });
+    this.isLoading = true;
+
+    this.adminService.acceptSurvey(this.survey.id as number).pipe(finalize(() => {
+      this.isLoading = false;
+
+      this.updateSurvey(this.survey.id as number);
+    })).subscribe();
+  }
+
+  private updateSurvey(id: number) {
+    this.survey = find(this.adminService.getSurveysValue(SurveyType.ALL), {id});
+
+    if(isNil(this.survey)) {
+      this.router.navigateByUrl('admin');
+    }
   }
 }

@@ -78,7 +78,7 @@ var EditQuestionService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!isEditAnswer; else editAnswer\"\r\n     class=\"display-flex\">\r\n  <div>\r\n    <p><b>{{prefix}} <span *ngIf=\"isChanged()\">oryginalne:</span></b>{{answer.content}}</p>\r\n    <p *ngIf=\"isChanged()\"><b>{{prefix}} po zmianie:</b> {{editAnswerCopy.content}}</p>\r\n  </div>\r\n  <p (click)=\"isEditAnswer = true\">{{isChanged() ? 'Powróć do edycji' : 'Edytuj'}}</p>\r\n</div>\r\n<ng-template #editAnswer>\r\n  <mat-form-field class=\"width-100\">\r\n    <input matInput\r\n           [(ngModel)]=\"editAnswerCopy.content\"\r\n           [placeholder]=\"answer.content\">\r\n  </mat-form-field>\r\n  <div class=\"display-flex\">\r\n    <button mat-stroked-button\r\n            (click)=\"submitChanges()\"\r\n            color=\"primary\">\r\n      Zapisz zmiany\r\n    </button>\r\n    <button mat-stroked-button\r\n            (click)=\"cancelChanges()\"\r\n            color=\"warn\">\r\n      Anuluj zmiany\r\n    </button>\r\n  </div>\r\n</ng-template>\r\n"
+module.exports = "<div *ngIf=\"!isEditAnswer; else editAnswer\"\r\n     class=\"display-flex\">\r\n  <div>\r\n    <p><b><span *ngIf=\"isChanged()\"> {{prefix}} oryginalne:</span></b>{{answer.content}}</p>\r\n    <p *ngIf=\"isChanged()\"><b>{{prefix}} po zmianie:</b> {{editAnswerCopy.content}}</p>\r\n  </div>\r\n  <p (click)=\"isEditAnswer = true\">{{isChanged() ? 'Powróć do edycji' : 'Edytuj'}}</p>\r\n</div>\r\n<ng-template #editAnswer>\r\n  <mat-form-field class=\"width-100\">\r\n    <input matInput\r\n           [(ngModel)]=\"editAnswerCopy.content\"\r\n           [placeholder]=\"answer.content\">\r\n  </mat-form-field>\r\n  <div class=\"display-flex\">\r\n    <button mat-stroked-button\r\n            (click)=\"submitChanges()\"\r\n            color=\"primary\">\r\n      Zapisz zmiany\r\n    </button>\r\n    <button mat-stroked-button\r\n            (click)=\"cancelChanges()\"\r\n            color=\"warn\">\r\n      Anuluj zmiany\r\n    </button>\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -245,9 +245,6 @@ var EditSurveyQuestionComponent = /** @class */ (function () {
         this.itemType = _item_type_enum__WEBPACK_IMPORTED_MODULE_1__["ItemType"];
         this.changedItems = [];
     }
-    EditSurveyQuestionComponent.prototype.ngOnInit = function () {
-        console.log(this.question);
-    };
     EditSurveyQuestionComponent.prototype.removeFromChanged = function (changed) {
         Object(lodash__WEBPACK_IMPORTED_MODULE_2__["remove"])(this.changedItems, { id: changed.id });
         this.onChanged.emit(this.changedItems);
@@ -292,7 +289,7 @@ var EditSurveyQuestionComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Edycja ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Edycja pytań:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <ac-edit-survey-edit-mode [answer]=\"{id: survey?.response.id, content: survey?.response.title}\"\r\n                                [prefix]=\"'Tytuł'\"\r\n                                (onRemoveFromChanged)=\"removeTitleFromChanged()\"\r\n                                (onSubmit)=\"addToChangedAndMap($event, itemType.SURVEY)\"></ac-edit-survey-edit-mode>\r\n      <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n        <ac-edit-survey-question [question]=\"question\"\r\n                                 (onChanged)=\"addToChanged($event, i)\"></ac-edit-survey-question>\r\n      </div>\r\n    </mat-expansion-panel>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Statystyki ankiety:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n     wykresy\r\n    </mat-expansion-panel>\r\n  </mat-card>\r\n</div>\r\n<button *ngIf=\"isChanged()\"\r\n        (click)=\"saveChanged()\"\r\n        mat-flat-button\r\n        class=\"fixed-on-left\"\r\n        color=\"primary\">Zapisz zmiany w ankiecie</button>\r\n"
+module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Edycja ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper margin-bottom-30px\">\r\n  <mat-card class=\"profile-details\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Edycja pytań:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n\r\n      <ac-loader *ngIf=\"isLoading; else editSurveySection\"></ac-loader>\r\n      <ng-template #editSurveySection>\r\n        <ac-edit-survey-edit-mode [answer]=\"{id: survey?.response.id, content: survey?.response.title}\"\r\n                                  [prefix]=\"'Tytuł'\"\r\n                                  (onRemoveFromChanged)=\"removeTitleFromChanged()\"\r\n                                  (onSubmit)=\"addToChangedAndMap($event, itemType.SURVEY)\"></ac-edit-survey-edit-mode>\r\n        <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n          <ac-edit-survey-question [question]=\"question\"\r\n                                   (onChanged)=\"addToChanged($event, i)\"></ac-edit-survey-question>\r\n        </div>\r\n      </ng-template>\r\n\r\n\r\n\r\n    </mat-expansion-panel>\r\n    <div class=\"margin-top-20px\">\r\n      <mat-expansion-panel>\r\n        <mat-expansion-panel-header>\r\n          <mat-panel-title>\r\n            Statystyki ankiety:\r\n          </mat-panel-title>\r\n        </mat-expansion-panel-header>\r\n\r\n\r\n\r\n        <div *ngFor=\"let statQuestion of statisticks\">\r\n          <div class=\"edit-wrapper\">\r\n            <mat-divider></mat-divider>\r\n            <div class=\"padding-bottom-10px padding-top-10px\">\r\n              <p><b>Pytanie: </b>{{statQuestion.content}}</p>\r\n            </div>\r\n            <mat-divider></mat-divider>\r\n            <p class=\"padding-top-10px\"><b> Odpowiedzi: </b></p>\r\n            <div *ngFor=\"let answer of statQuestion.answers; let i = index\">\r\n              <div class=\"display-flex\">\r\n                <p>{{i + 1}}) {{answer.content}}</p>\r\n                <p>Ilość odp: {{answer.sum}}</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n\r\n\r\n\r\n      </mat-expansion-panel>\r\n    </div>\r\n  </mat-card>\r\n</div>\r\n\r\n<div class=\"fixed-on-left\">\r\n<button *ngIf=\"isChanged()\"\r\n        (click)=\"saveChanged()\"\r\n        mat-flat-button\r\n        color=\"primary\">Zapisz zmiany w ankiecie</button>\r\n<button (click)=\"removeSurvey()\"\r\n        mat-flat-button\r\n        [class.margin-left-20px]=\"isChanged()\"\r\n        color=\"warn\">Usuń ankietę</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -303,7 +300,7 @@ module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".profile-details {\n  max-width: 1200px;\n  margin: auto;\n  position: relative;\n  z-index: 10;\n  -webkit-transform: translateY(-20px);\n          transform: translateY(-20px); }\n  .profile-details-wrapper {\n    padding: 0 30px; }\n  .profile-bg {\n  position: relative;\n  height: 60vh;\n  width: 100vw;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover; }\n  .profile-bg-content {\n    position: absolute;\n    z-index: 2;\n    color: #fff;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n  .profile-bg-content h1 {\n      font-size: 50px;\n      font-weight: 900;\n      letter-spacing: 3px; }\n  .profile-bg:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    z-index: 1;\n    top: 0;\n    left: 0;\n    background-color: rgba(0, 0, 0, 0.4); }\n  .fixed-on-left {\n  position: fixed;\n  left: 20px;\n  bottom: 20px;\n  z-index: 444; }\n"
+module.exports = ".profile-details {\n  max-width: 1200px;\n  margin: auto;\n  position: relative;\n  z-index: 10;\n  -webkit-transform: translateY(-20px);\n          transform: translateY(-20px); }\n  .profile-details-wrapper {\n    padding: 0 30px; }\n  .profile-bg {\n  position: relative;\n  height: 60vh;\n  width: 100vw;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover; }\n  .profile-bg-content {\n    position: absolute;\n    z-index: 2;\n    color: #fff;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n  .profile-bg-content h1 {\n      font-size: 50px;\n      font-weight: 900;\n      letter-spacing: 3px; }\n  .profile-bg:after {\n    content: \"\";\n    display: block;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    z-index: 1;\n    top: 0;\n    left: 0;\n    background-color: rgba(0, 0, 0, 0.4); }\n  .fixed-on-left {\n  position: fixed;\n  left: 20px;\n  bottom: 20px;\n  z-index: 444; }\n  .display-flex {\n  justify-content: space-between; }\n"
 
 /***/ }),
 
@@ -321,10 +318,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
-/* harmony import */ var _core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../core/surveys/surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
-/* harmony import */ var _item_type_enum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./item-type.enum */ "./src/app/components/user/edit-survey/item-type.enum.ts");
-/* harmony import */ var _edit_question_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit-question.service */ "./src/app/components/user/edit-survey/edit-question.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
+/* harmony import */ var _core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../core/surveys/surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
+/* harmony import */ var _item_type_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./item-type.enum */ "./src/app/components/user/edit-survey/item-type.enum.ts");
+/* harmony import */ var _edit_question_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./edit-question.service */ "./src/app/components/user/edit-survey/edit-question.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -349,6 +348,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var EditSurveyComponent = /** @class */ (function () {
     function EditSurveyComponent(activatedRoute, surveyService, editQuestionService, router) {
         this.activatedRoute = activatedRoute;
@@ -356,29 +357,65 @@ var EditSurveyComponent = /** @class */ (function () {
         this.editQuestionService = editQuestionService;
         this.router = router;
         this.backgroundUrl = 'assets/mainpage.jpg';
-        this.itemType = _item_type_enum__WEBPACK_IMPORTED_MODULE_5__["ItemType"];
+        this.isLoading = false;
+        this.itemType = _item_type_enum__WEBPACK_IMPORTED_MODULE_6__["ItemType"];
+        this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_8__["Subject"]();
         this.changedItems = {};
     }
     EditSurveyComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activatedRoute.paramMap.subscribe(function (params) {
-            _this.survey = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["find"])(_this.surveyService.getSurveysValue(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_4__["SurveyType"].USER), { id: Object(lodash__WEBPACK_IMPORTED_MODULE_1__["toNumber"])(params.get('id')) });
+            _this.survey = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["find"])(_this.surveyService.getSurveysValue(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_5__["SurveyType"].USER), { id: Object(lodash__WEBPACK_IMPORTED_MODULE_1__["toNumber"])(params.get('id')) });
             if (Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isNil"])(_this.survey)) {
-                _this.router.navigateByUrl('profile/survey');
+                _this.router.navigateByUrl('profile');
             }
             else {
                 _this.surveyCloned = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_this.survey);
+                _this.surveyService.getStatisticks(_this.survey.id)
+                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(_this.onDestroy))
+                    .subscribe(function (statisticks) {
+                    var newStatistics = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["map"])(statisticks, function (mapped) {
+                        var foundQuestion = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["find"])(_this.survey.response.question, { id: mapped.question_id });
+                        var mappedAnswers = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["map"])(mapped.answers, function (answer) {
+                            var foundAnswer = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["find"])(foundQuestion.answers, { id: answer.answer_id });
+                            Object(lodash__WEBPACK_IMPORTED_MODULE_1__["set"])(answer, 'content', foundAnswer.content);
+                            return answer;
+                        });
+                        Object(lodash__WEBPACK_IMPORTED_MODULE_1__["set"])(mapped, 'content', foundQuestion.content);
+                        Object(lodash__WEBPACK_IMPORTED_MODULE_1__["set"])(mapped, 'answers', mappedAnswers);
+                        return mapped;
+                    });
+                    console.log(newStatistics);
+                    _this.statisticks = newStatistics;
+                });
             }
+        });
+    };
+    EditSurveyComponent.prototype.ngOnDestroy = function () {
+        this.onDestroy.next();
+        this.onDestroy.complete();
+        this.onDestroy.unsubscribe();
+    };
+    EditSurveyComponent.prototype.removeSurvey = function () {
+        var _this = this;
+        this.isLoading = true;
+        this.surveyService.removeSurvey(this.survey.id).subscribe(function () {
+            _this.isLoading = false;
+            _this.router.navigateByUrl('profile');
         });
     };
     EditSurveyComponent.prototype.saveChanged = function () {
         var _this = this;
         if (this.isChanged()) {
+            this.isLoading = true;
             var reductedChangedItems = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["reduce"])(this.changedItems, function (result, value) {
                 return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])(result, value);
             }, []);
-            this.editQuestionService.editItem(reductedChangedItems, this.survey.id).subscribe(function () {
-                _this.survey = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["find"])(_this.surveyService.getSurveysValue(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_4__["SurveyType"].USER), { id: _this.survey.id });
+            this.editQuestionService.editItem(reductedChangedItems, this.survey.id)
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["finalize"])(function () {
+                _this.isLoading = false;
+            })).subscribe(function () {
+                _this.survey = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["find"])(_this.surveyService.getSurveysValue(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_5__["SurveyType"].USER), { id: _this.survey.id });
                 _this.surveyCloned = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_this.survey);
                 _this.changedItems = {};
             });
@@ -409,8 +446,8 @@ var EditSurveyComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./edit-survey.component.scss */ "./src/app/components/user/edit-survey/edit-survey.component.scss")]
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_3__["SurveysService"],
-            _edit_question_service__WEBPACK_IMPORTED_MODULE_6__["EditQuestionService"],
+            _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_4__["SurveysService"],
+            _edit_question_service__WEBPACK_IMPORTED_MODULE_7__["EditQuestionService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], EditSurveyComponent);
     return EditSurveyComponent;
@@ -436,6 +473,125 @@ var ItemType;
     ItemType[ItemType["ANSWER"] = 1] = "ANSWER";
     ItemType[ItemType["QUESTION"] = 2] = "QUESTION";
 })(ItemType || (ItemType = {}));
+
+
+/***/ }),
+
+/***/ "./src/app/components/user/edit-user/edit-user.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/components/user/edit-user/edit-user.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-list [formGroup]=\"form\">\n  <h3 mat-subheader>Dane personalne</h3>\n  <ac-user-personal-detail [formControlName]=\"userFormName.NAME\"\n                           [oryginalValue]=\"clonedUser.name\"\n                           [title]=\"'Imie: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.SURNAME\"\n                           [oryginalValue]=\"clonedUser.surname\"\n                           [title]=\"'Nazwisko: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.EMAIL\"\n                           [oryginalValue]=\"clonedUser.email\"\n                           [title]=\"'Email: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.AGE\"\n                           [oryginalValue]=\"clonedUser.age\"\n                           [title]=\"'Wiek: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.CITY\"\n                           [oryginalValue]=\"clonedUser.city\"\n                           [title]=\"'Miasto: '\"></ac-user-personal-detail>\n</mat-list>\n<button mat-stroked-button\n        class=\"width-100 margin-top-20px\"\n        (click)=\"saveChangedUserData()\"\n        color=\"accent\">\n  Zapisz zmainy\n</button>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/user/edit-user/edit-user.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/components/user/edit-user/edit-user.component.scss ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/user/edit-user/edit-user.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/components/user/edit-user/edit-user.component.ts ***!
+  \******************************************************************/
+/*! exports provided: EditUserComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditUserComponent", function() { return EditUserComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../user-form-name.enum */ "./src/app/components/user/user-form-name.enum.ts");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _core_user_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../core/user/user.service */ "./src/app/core/user/user.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var EditUserComponent = /** @class */ (function () {
+    function EditUserComponent(userService, router, changeDetectorRef, formBuilder) {
+        this.userService = userService;
+        this.router = router;
+        this.changeDetectorRef = changeDetectorRef;
+        this.formBuilder = formBuilder;
+        this.userFormName = _user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"];
+        this.onSubmit = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+    }
+    EditUserComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.getUser()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["takeUntil"])(this.onDestroy))
+            .subscribe(function (user) {
+            _this.user = user;
+            _this.clonedUser = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["cloneDeep"])(user);
+            _this.initForm(user);
+            _this.changeDetectorRef.detectChanges();
+        });
+    };
+    EditUserComponent.prototype.ngOnDestroy = function () {
+        this.onDestroy.next();
+        this.onDestroy.complete();
+        this.onDestroy.unsubscribe();
+    };
+    EditUserComponent.prototype.saveChangedUserData = function () {
+        this.onSubmit.emit(this.form.value);
+    };
+    EditUserComponent.prototype.initForm = function (data) {
+        this.form = this.formBuilder.group((_a = {},
+            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].NAME] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'name', ''),
+            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].SURNAME] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'surname', ''),
+            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].AGE] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'age', ''),
+            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].CITY] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'city', ''),
+            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].EMAIL] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'email', ''),
+            _a));
+        var _a;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], EditUserComponent.prototype, "onSubmit", void 0);
+    EditUserComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'ac-edit-user',
+            template: __webpack_require__(/*! ./edit-user.component.html */ "./src/app/components/user/edit-user/edit-user.component.html"),
+            styles: [__webpack_require__(/*! ./edit-user.component.scss */ "./src/app/components/user/edit-user/edit-user.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_core_user_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"]])
+    ], EditUserComponent);
+    return EditUserComponent;
+}());
+
 
 
 /***/ }),
@@ -677,7 +833,7 @@ var UserWrapperComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Wszystko dotyczące Twojego konta!</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up\">\r\n    <mat-list [formGroup]=\"form\">\r\n      <h3 mat-subheader>Dane personalne</h3>\r\n      <ac-user-personal-detail [formControlName]=\"userFormName.NAME\"\r\n                               [oryginalValue]=\"clonedUser.name\"\r\n                               [title]=\"'Imie: '\"></ac-user-personal-detail>\r\n      <ac-user-personal-detail [formControlName]=\"userFormName.SURNAME\"\r\n                               [oryginalValue]=\"clonedUser.surname\"\r\n                               [title]=\"'Nazwisko: '\"></ac-user-personal-detail>\r\n      <ac-user-personal-detail [formControlName]=\"userFormName.EMAIL\"\r\n                               [oryginalValue]=\"clonedUser.email\"\r\n                               [title]=\"'Email: '\"></ac-user-personal-detail>\r\n      <ac-user-personal-detail [formControlName]=\"userFormName.AGE\"\r\n                               [oryginalValue]=\"clonedUser.age\"\r\n                               [title]=\"'Wiek: '\"></ac-user-personal-detail>\r\n      <ac-user-personal-detail [formControlName]=\"userFormName.CITY\"\r\n                               [oryginalValue]=\"clonedUser.city\"\r\n                               [title]=\"'Miasto: '\"></ac-user-personal-detail>\r\n    </mat-list>\r\n    <button mat-stroked-button\r\n            class=\"width-100 margin-top-20px\"\r\n            (click)=\"saveChangedUserData()\"\r\n            color=\"accent\">\r\n      Zapisz zmainy\r\n    </button>\r\n  </mat-card>\r\n\r\n  <mat-card *ngIf=\"surveys.length\"\r\n            class=\"profile-details\">\r\n    <mat-list>\r\n      <h3 mat-subheader>Ankiety użytkownika: </h3>\r\n    </mat-list>\r\n    <ac-result class=\"main-page-results\"\r\n               (onSelect)=\"selectSurvey($event)\"\r\n               [elements]=\"surveys\"></ac-result>\r\n  </mat-card>\r\n</div>\r\n"
+module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Wszystko dotyczące Twojego konta!</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up\">\r\n    <ac-loader *ngIf=\"isLoadingUserData; else userData\"></ac-loader>\r\n    <ng-template #userData>\r\n      <ac-edit-user (onSubmit)=\"saveChangedUserData($event)\"></ac-edit-user>\r\n    </ng-template>\r\n  </mat-card>\r\n\r\n  <mat-card *ngIf=\"surveys.length\"\r\n            class=\"profile-details\">\r\n    <mat-list>\r\n      <h3 mat-subheader>Ankiety użytkownika: </h3>\r\n    </mat-list>\r\n    <ac-result class=\"main-page-results\"\r\n               (onSelect)=\"selectSurvey($event)\"\r\n               [elements]=\"surveys\"></ac-result>\r\n  </mat-card>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -706,13 +862,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_user_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/user/user.service */ "./src/app/core/user/user.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _user_form_name_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./user-form-name.enum */ "./src/app/components/user/user-form-name.enum.ts");
-/* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
-/* harmony import */ var _core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/surveys/surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
+/* harmony import */ var _core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/surveys/surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -730,8 +883,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
 var UserComponent = /** @class */ (function () {
     function UserComponent(userService, surveysService, router, changeDetectorRef, formBuilder) {
         this.userService = userService;
@@ -740,30 +891,26 @@ var UserComponent = /** @class */ (function () {
         this.changeDetectorRef = changeDetectorRef;
         this.formBuilder = formBuilder;
         this.backgroundUrl = 'assets/mainpage.jpg';
-        this.userFormName = _user_form_name_enum__WEBPACK_IMPORTED_MODULE_6__["UserFormName"];
-        this.isUserChanged = false;
+        this.isLoadingUserData = false;
         this.surveys = [];
         this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
-    UserComponent.prototype.saveChangedUserData = function () {
-        this.userService.updateUser(this.form.value).subscribe();
+    UserComponent.prototype.saveChangedUserData = function (values) {
+        var _this = this;
+        this.isLoadingUserData = true;
+        this.changeDetectorRef.detectChanges();
+        this.userService.updateUser(values).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["finalize"])(function () {
+            _this.isLoadingUserData = false;
+            _this.changeDetectorRef.detectChanges();
+        })).subscribe();
     };
     UserComponent.prototype.selectSurvey = function (survey) {
         this.router.navigateByUrl('profile/survey/' + survey.id);
     };
     UserComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.initForm();
-        this.userService.getUser()
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["takeUntil"])(this.onDestroy))
-            .subscribe(function (user) {
-            _this.user = user;
-            _this.clonedUser = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["cloneDeep"])(user);
-            _this.initForm(user);
-            _this.changeDetectorRef.detectChanges();
-        });
         this.surveysService.fetUserSurveys().subscribe();
-        this.surveysService.getSurveys(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_8__["SurveyType"].USER)
+        this.surveysService.getSurveys(_core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_6__["SurveyType"].USER)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["takeUntil"])(this.onDestroy))
             .subscribe(function (surveys) {
             _this.surveys = surveys;
@@ -775,16 +922,6 @@ var UserComponent = /** @class */ (function () {
         this.onDestroy.complete();
         this.onDestroy.unsubscribe();
     };
-    UserComponent.prototype.initForm = function (data) {
-        this.form = this.formBuilder.group((_a = {},
-            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_6__["UserFormName"].NAME] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'name', ''),
-            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_6__["UserFormName"].SURNAME] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'surname', ''),
-            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_6__["UserFormName"].AGE] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'age', ''),
-            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_6__["UserFormName"].CITY] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'city', ''),
-            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_6__["UserFormName"].EMAIL] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'email', ''),
-            _a));
-        var _a;
-    };
     UserComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-user',
@@ -793,10 +930,10 @@ var UserComponent = /** @class */ (function () {
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
         }),
         __metadata("design:paramtypes", [_core_user_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"],
-            _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_7__["SurveysService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
+            _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_5__["SurveysService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"]])
+            _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]])
     ], UserComponent);
     return UserComponent;
 }());
@@ -830,12 +967,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit_survey_edit_survey_question_edit_survey_question_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./edit-survey/edit-survey-question/edit-survey-question.component */ "./src/app/components/user/edit-survey/edit-survey-question/edit-survey-question.component.ts");
 /* harmony import */ var _edit_survey_edit_survey_edit_mode_edit_survey_edit_mode_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./edit-survey/edit-survey-edit-mode/edit-survey-edit-mode.component */ "./src/app/components/user/edit-survey/edit-survey-edit-mode/edit-survey-edit-mode.component.ts");
 /* harmony import */ var _survey_user_resolver__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./survey-user.resolver */ "./src/app/components/user/survey-user.resolver.ts");
+/* harmony import */ var _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./edit-user/edit-user.component */ "./src/app/components/user/edit-user/edit-user.component.ts");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../shared/shared.module */ "./src/app/shared/shared.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -862,7 +1003,8 @@ var UserModule = /** @class */ (function () {
                 _edit_survey_edit_survey_component__WEBPACK_IMPORTED_MODULE_9__["EditSurveyComponent"],
                 _user_wrapper_user_wrapper_component__WEBPACK_IMPORTED_MODULE_10__["UserWrapperComponent"],
                 _edit_survey_edit_survey_question_edit_survey_question_component__WEBPACK_IMPORTED_MODULE_12__["EditSurveyQuestionComponent"],
-                _edit_survey_edit_survey_edit_mode_edit_survey_edit_mode_component__WEBPACK_IMPORTED_MODULE_13__["EditSurveyEditModeComponent"]
+                _edit_survey_edit_survey_edit_mode_edit_survey_edit_mode_component__WEBPACK_IMPORTED_MODULE_13__["EditSurveyEditModeComponent"],
+                _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_15__["EditUserComponent"]
             ],
             providers: [_core_guards_can_activate_user_guard__WEBPACK_IMPORTED_MODULE_11__["CanActivateUserGuard"], _survey_user_resolver__WEBPACK_IMPORTED_MODULE_14__["SurveysUserResolver"]],
             imports: [
@@ -870,6 +1012,7 @@ var UserModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDividerModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatInputModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_16__["SharedModule"],
                 _projects_ac_search_result_src_lib_ac_search_result_module__WEBPACK_IMPORTED_MODULE_8__["AcSearchResultModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],

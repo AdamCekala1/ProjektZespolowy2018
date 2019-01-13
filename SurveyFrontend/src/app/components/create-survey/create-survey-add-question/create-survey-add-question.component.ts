@@ -19,14 +19,11 @@ export class CreateSurveyAddQuestionComponent implements OnInit {
   }
 
   toggleAnswerMode() {
-    console.log(this.isAddAnwerMode)
     this.isAddAnwerMode = !this.isAddAnwerMode;
   }
 
   handleQustionAnswer(content: string) {
-    console.log('handleQustionAnswer')
     if(content) {
-      console.log('content', content)
       this.questions.answers.push({content});
     }
 

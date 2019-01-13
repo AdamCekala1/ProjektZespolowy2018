@@ -35,13 +35,12 @@ export class SearchComponent implements OnInit {
   }
 
   isSubmitDisabled(): boolean {
+    console.log(!this.form.valid)
     return !this.form.valid;
   }
 
-  submit() {
-    console.log(this.form.value);
-
-    this.onSubmit.emit(this.form.value);
+  submit(isAll: boolean = false) {
+    this.onSubmit.emit(isAll ? null : this.form.value);
   }
 
   private createForm(config: ISearchConfigInputs) {

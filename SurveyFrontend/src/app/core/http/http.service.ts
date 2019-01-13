@@ -38,9 +38,6 @@ export class HttpService {
       request = this.http[requestType]<any>(path, requestOptions.queryObj, defaultParams);
     }
 
-    console.log(requestOptions.queryObj)
-
-
     console.log('start request')
     return this.getRequest(request, requestOptions);
   }
@@ -49,7 +46,6 @@ export class HttpService {
                      requestOptions: any = {}): Observable<any> {
     return request.pipe(
       catchError((error: any) => {
-        console.log('display error', error);
         if(error.status === 401) {
           this.userHelperService.seTtriggerLogoutUser();
         }

@@ -7,7 +7,7 @@ import { AlertService } from 'ngx-alerts';
 import { filter } from 'lodash';
 import { RequestsContants } from '../../shared/constants/requests.contants';
 import { RequestTypes } from '../../core/http/http.enum';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { SurveysService } from '../../core/surveys/surveys.service';
 
@@ -58,7 +58,7 @@ export class AdminService {
     );
   }
 
-  acceptSurvey(id: number): Observable<string> {
+  acceptSurvey(id: number): Observable<ISurvey[]> {
     return this.httpService.httpRequest(RequestsContants.SURVEYS.ACCEPT(id), RequestTypes.POST).pipe(
       catchError((err: HttpErrorResponse) => {
         this.alertService.danger(err.statusText);
@@ -68,7 +68,8 @@ export class AdminService {
       map((response: HttpResponse<{message: string}>) => response.body.message),
       tap((message: string) => {
         this.alertService.success(message);
-      })
+      }),
+      switchMap(() => this.fetchAdminSurveys())
     );
   }
 }

@@ -34,6 +34,25 @@ export class SurveysService {
     return this.surveys[type];
   }
 
+  getStatisticks(id: number): Observable<any> {
+    return this.httpService.httpRequest(RequestsContants.SURVEYS.STATISTIC + id, RequestTypes.GET)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.alertService.danger(err.statusText);
+
+          return throwError({});
+        }),
+        map((response: HttpResponse<any>) => response.body),
+      );
+  }
+
+  removeSurvey(id: number): Observable<any> {
+    return this.httpService.httpRequest(RequestsContants.SURVEYS.DELETE(id), RequestTypes.DELETE)
+      .pipe(tap(() => {
+        this.alertService.success('Ankieta usunięta pomyślnie');
+      }))
+  }
+
   getSurveysValue(type: SurveyType = SurveyType.ALL): ISurvey[] {
     return this.getSurveys(type).value;
   }
@@ -114,7 +133,16 @@ export class SurveysService {
   resolveSurveys(resolvers: ISurveyResolve[]): Observable<any> {
     return this.httpService.httpRequest(RequestsContants.SURVEYS.RESPONSE, RequestTypes.POST, {
       queryObj: resolvers,
-    });
+    }) .pipe(
+      catchError((err: HttpErrorResponse) => {
+        this.alertService.danger(err.statusText);
+
+        return throwError({});
+      }),
+    tap((response: HttpResponse<{message: string}>) => {
+      this.alertService.success(response.body.message);
+    })
+    );
   }
 
   private mapDate(date: string): string {

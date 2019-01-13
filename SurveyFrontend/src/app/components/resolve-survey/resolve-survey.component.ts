@@ -15,6 +15,7 @@ export class ResolveSurveyComponent implements OnInit {
   backgroundUrl: string = 'assets/mainpage.jpg';
   survey: ISurvey;
   resolvers: ISurveyResolve[] = [];
+  isSolved: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private surveysService: SurveysService,
@@ -58,7 +59,9 @@ export class ResolveSurveyComponent implements OnInit {
 
   resolveSurvey() {
     if(this.isDone()) {
-      this.surveysService.resolveSurveys(this.resolvers).subscribe()
+      this.surveysService.resolveSurveys(this.resolvers).subscribe(() => {
+        this.isSolved = true;
+      });
     }
   }
 }

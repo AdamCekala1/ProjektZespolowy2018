@@ -22,6 +22,7 @@
           <p class="padding-top-10px"><b> Odpowiedzi: </b></p>
           <div *ngFor="let answer of question.answers; let i = index">
             <p [class.active]="answer.active"
+               class="cursor-pointer"
                (click)="selectAnswer(question.id, answer.id, answer)"> {{i + 1}}) {{answer.content}}</p>
           </div>
         </div>
@@ -29,8 +30,15 @@
     </mat-expansion-panel>
   </mat-card>
 </div>
-<button [disabled]="!isDone()"
-        (click)="resolveSurvey()"
+<button *ngIf="isSolved; else submitButton"
+        routerLink="/"
         mat-flat-button
         class="fixed-on-left"
-        color="primary">Wyślij rozwązanie ankiety</button>
+        color="warn">Powrót na stronę głowną</button>
+<ng-template #submitButton>
+  <button [disabled]="!isDone()"
+          (click)="resolveSurvey()"
+          mat-flat-button
+          class="fixed-on-left"
+          color="primary">Wyślij rozwązanie ankiety</button>
+</ng-template>

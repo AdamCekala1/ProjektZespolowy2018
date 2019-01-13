@@ -12,19 +12,22 @@
           Podgląd pytań:
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div *ngFor="let question of survey?.response.question; let i = index">
-        <div class="edit-wrapper">
-          <mat-divider></mat-divider>
-          <div class="padding-bottom-10px padding-top-10px">
-            <p><b>Pytanie: </b>{{question.content}}</p>
-          </div>
-          <mat-divider></mat-divider>
-          <p class="padding-top-10px"><b> Odpowiedzi: </b></p>
-          <div *ngFor="let answer of question.answers; let i = index">
-            <p> {{i + 1}}) {{answer.content}}</p>
+      <ac-loader *ngIf="isLoading; else loadedAdata"></ac-loader>
+      <ng-template #loadedAdata>
+        <div *ngFor="let question of survey?.response.question; let i = index">
+          <div class="edit-wrapper">
+            <mat-divider></mat-divider>
+            <div class="padding-bottom-10px padding-top-10px">
+              <p><b>Pytanie: </b>{{question.content}}</p>
+            </div>
+            <mat-divider></mat-divider>
+            <p class="padding-top-10px"><b> Odpowiedzi: </b></p>
+            <div *ngFor="let answer of question.answers; let i = index">
+              <p> {{i + 1}}) {{answer.content}}</p>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </mat-expansion-panel>
   </mat-card>
 </div>

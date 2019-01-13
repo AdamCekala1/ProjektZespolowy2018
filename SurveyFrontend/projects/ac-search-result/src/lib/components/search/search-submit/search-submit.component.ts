@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class SearchSubmitComponent {
   @Input() isDisabled: boolean = true;
+  @Input() text: string = '';
   @Output() onSubmit: EventEmitter<boolean> = new EventEmitter();
 
   submit() {

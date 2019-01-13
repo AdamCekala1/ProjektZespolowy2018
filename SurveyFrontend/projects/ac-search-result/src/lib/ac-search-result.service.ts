@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { forEach, set } from 'lodash';
 import { IInputConfig, ISearchConfigInputs, ISearchMainSelect } from './shared/interfaces/search.interface';
-import { IDictionary } from 'ac-login/lib/shared/interfaces/utils.interface';
+import { IDictionary } from '../../../../src/app/shared/interfaces/utils.interfaces';
 
 @Injectable({
   providedIn: 'root'

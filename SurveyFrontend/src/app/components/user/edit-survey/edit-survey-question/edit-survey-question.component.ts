@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IAnswer, IAnswerWithType, IQuestion } from '../../../create-survey/create-survey.interface';
 import { ItemType } from '../item-type.enum';
 import { find, remove} from 'lodash';
@@ -8,15 +8,11 @@ import { find, remove} from 'lodash';
   templateUrl: './edit-survey-question.component.html',
   styleUrls: ['./edit-survey-question.component.scss']
 })
-export class EditSurveyQuestionComponent implements OnInit {
+export class EditSurveyQuestionComponent {
   @Input() question: IQuestion;
   @Output() onChanged: EventEmitter<IAnswerWithType[]> = new EventEmitter();
   readonly itemType = ItemType;
   private changedItems: IAnswerWithType[] = [];
-
-  ngOnInit() {
-    console.log(this.question);
-  }
 
   removeFromChanged(changed: IAnswer) {
     remove(this.changedItems, {id: changed.id});

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../core/user/user.service';
-import { takeUntil } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { get, isEqual, cloneDeep } from 'lodash';
 import { IUser } from '../../shared/interfaces/user.interface';
@@ -11,6 +11,7 @@ import { searchResultMocks } from '../../mocks/search/search-results.mocks';
 import { SurveysService } from '../../core/surveys/surveys.service';
 import { SurveyType } from '../../core/surveys/surveys-type.enum';
 import { Router } from '@angular/router';
+import { IDictionary } from '../../shared/interfaces/utils.interfaces';
 
 @Component({
   selector: 'app-user',
@@ -20,11 +21,7 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit, OnDestroy {
   backgroundUrl: string = 'assets/mainpage.jpg';
-  userFormName = UserFormName;
-  user: IUser;
-  clonedUser: IUser;
-  form: FormGroup;
-  isUserChanged: boolean = false;
+  isLoadingUserData: boolean = false;
   surveys: ISurvey[] = [];
   private onDestroy: Subject<boolean> = new Subject<boolean>();
 
@@ -35,8 +32,14 @@ export class UserComponent implements OnInit, OnDestroy {
               private formBuilder: FormBuilder) {
   }
 
-  saveChangedUserData() {
-    this.userService.updateUser(this.form.value).subscribe();
+  saveChangedUserData(values: IDictionary<string>) {
+    this.isLoadingUserData = true;
+    this.changeDetectorRef.detectChanges();
+
+    this.userService.updateUser(values).pipe(finalize(() => {
+      this.isLoadingUserData = false;
+      this.changeDetectorRef.detectChanges();
+    })).subscribe();
   }
 
   selectSurvey(survey: ISurvey) {
@@ -44,16 +47,6 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initForm();
-    this.userService.getUser()
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe((user: IUser) => {
-        this.user = user;
-        this.clonedUser = cloneDeep(user);
-
-        this.initForm(user);
-        this.changeDetectorRef.detectChanges();
-      });
     this.surveysService.fetUserSurveys().subscribe();
 
     this.surveysService.getSurveys(SurveyType.USER)
@@ -69,15 +62,5 @@ export class UserComponent implements OnInit, OnDestroy {
     this.onDestroy.next();
     this.onDestroy.complete();
     this.onDestroy.unsubscribe();
-  }
-
-  private initForm(data?: IUser) {
-    this.form = this.formBuilder.group({
-      [UserFormName.NAME]: get(data, 'name', ''),
-      [UserFormName.SURNAME]: get(data, 'surname', ''),
-      [UserFormName.AGE]: get(data, 'age', ''),
-      [UserFormName.CITY]: get(data, 'city', ''),
-      [UserFormName.EMAIL]: get(data, 'email', ''),
-    });
   }
 }

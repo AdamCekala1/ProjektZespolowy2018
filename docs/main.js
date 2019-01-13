@@ -1393,7 +1393,7 @@ var SearchSelectComponent = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"center-element margin-top-5px\">\r\n  <button mat-raised-button\r\n          color=\"warn\"\r\n          class=\"fill-max-box \"\r\n          [disabled]=\"isDisabled\"\r\n          (click)=\"submit()\">\r\n    <i class=\"fa fa-search\"\r\n       aria-hidden=\"true\"></i>\r\n  </button>\r\n</div>\r\n"
+module.exports = "<div class=\"margin-top-5px\">\r\n  <button mat-raised-button\r\n          color=\"warn\"\r\n          class=\"fill-max-box \"\r\n          [disabled]=\"isDisabled\"\r\n          (click)=\"submit()\">\r\n    <i *ngIf=\"!text\"\r\n       class=\"fa fa-search\"\r\n       aria-hidden=\"true\"></i>\r\n    {{text}}\r\n  </button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1432,6 +1432,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var SearchSubmitComponent = /** @class */ (function () {
     function SearchSubmitComponent() {
         this.isDisabled = true;
+        this.text = '';
         this.onSubmit = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     SearchSubmitComponent.prototype.submit = function () {
@@ -1441,6 +1442,10 @@ var SearchSubmitComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Boolean)
     ], SearchSubmitComponent.prototype, "isDisabled", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", String)
+    ], SearchSubmitComponent.prototype, "text", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
@@ -1566,7 +1571,7 @@ var SearchTextComponent = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [formGroup]=\"form\"\r\n     class=\"search-wrapper display-flex child-center\">\r\n  <app-search-text [title]=\"config.inputs[searchFormName.TEXT]?.title\"\r\n                   [formControlName]=\"searchFormName.TEXT\"></app-search-text>\r\n\r\n  <app-search-select *ngIf=\"config?.inputs[searchFormName.TYPE]\"\r\n                     [config]=\"config.inputs[searchFormName.TYPE]\"\r\n                     [formControlName]=\"searchFormName.TYPE\"></app-search-select>\r\n\r\n  <div class=\"display-flex child-center ac-search-dates\">\r\n    <app-search-dates [formControlName]=\"searchFormName.BEGIN_DATE\"\r\n                      [title]=\"config.inputs[searchFormName.BEGIN_DATE]?.title || 'Data początkowa'\"></app-search-dates>\r\n    <app-search-dates [formControlName]=\"searchFormName.END_DATE\"\r\n                      [displayIcon]=\"false\"\r\n                      [minDate]=\"form.get(searchFormName.BEGIN_DATE).value\"\r\n                      [title]=\"config.inputs[searchFormName.END_DATE]?.title || 'Data końcowa'\"></app-search-dates>\r\n  </div >\r\n  <app-search-submit class=\"submit-button width-50px\" [isDisabled]=\"isSubmitDisabled()\"\r\n                     (onSubmit)=\"submit()\"></app-search-submit>\r\n</div>\r\n"
+module.exports = "<div [formGroup]=\"form\"\r\n     class=\"search-wrapper display-flex child-center\">\r\n  <app-search-text *ngIf=\"config?.inputs[searchFormName.TEXT]\"\r\n                   [title]=\"config.inputs[searchFormName.TEXT]?.title\"\r\n                   [formControlName]=\"searchFormName.TEXT\"></app-search-text>\r\n\r\n  <app-search-select *ngIf=\"config?.inputs[searchFormName.TYPE]\"\r\n                     [config]=\"config.inputs[searchFormName.TYPE]\"\r\n                     [formControlName]=\"searchFormName.TYPE\"></app-search-select>\r\n\r\n  <div class=\"display-flex child-center ac-search-dates\">\r\n    <app-search-dates [formControlName]=\"searchFormName.BEGIN_DATE\"\r\n                      [title]=\"config.inputs[searchFormName.BEGIN_DATE]?.title || 'Data początkowa'\"></app-search-dates>\r\n    <app-search-dates [formControlName]=\"searchFormName.END_DATE\"\r\n                      [displayIcon]=\"false\"\r\n                      [minDate]=\"form.get(searchFormName.BEGIN_DATE).value\"\r\n                      [title]=\"config.inputs[searchFormName.END_DATE]?.title || 'Data końcowa'\"></app-search-dates>\r\n  </div >\r\n  <div class=\"display-flex submit-buttons\">\r\n    <app-search-submit class=\"submit-button width-50px\"\r\n                       [isDisabled]=\"isSubmitDisabled()\"\r\n                       (onSubmit)=\"submit()\"></app-search-submit>\r\n    <app-search-submit class=\"submit-button width-50px\"\r\n                       [isDisabled]=\"false\"\r\n                       [text]=\"'Wszystkie'\"\r\n                       (onSubmit)=\"submit(true)\"></app-search-submit>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1577,7 +1582,7 @@ module.exports = "<div [formGroup]=\"form\"\r\n     class=\"search-wrapper displ
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".display-flex {\n  flex-wrap: wrap; }\n  @media (min-width: 700px) {\n    .display-flex {\n      flex-wrap: nowrap; } }\n  .display-flex > * {\n  margin: 5px;\n  width: 100%;\n  height: 60px;\n  position: relative; }\n  @media (min-width: 700px) {\n    .display-flex > * {\n      width: 100px; } }\n  @media (min-width: 900px) {\n    .display-flex > * {\n      width: 130px; } }\n  .ac-search-dates > * {\n  width: 50%;\n  margin: 0; }\n  .display-flex > .submit-button {\n  width: 100%; }\n  @media (min-width: 700px) {\n    .display-flex > .submit-button {\n      width: 65px; } }\n  .ac-search-dates {\n  min-width: 250px; }\n  .ac-search-dates *:first-child .ac-input {\n    border-right: none; }\n"
+module.exports = ".display-flex {\n  flex-wrap: wrap; }\n  @media (min-width: 700px) {\n    .display-flex {\n      flex-wrap: nowrap; } }\n  .display-flex > * {\n  margin: 5px;\n  width: 100%;\n  height: 60px;\n  position: relative; }\n  @media (min-width: 700px) {\n    .display-flex > * {\n      width: 100px; } }\n  @media (min-width: 900px) {\n    .display-flex > * {\n      width: 130px; } }\n  .ac-search-dates > * {\n  width: 50%;\n  margin: 0; }\n  .display-flex > .submit-buttons {\n  width: 100%;\n  height: auto; }\n  .display-flex > .submit-buttons > * {\n    height: auto; }\n  @media (min-width: 700px) {\n    .display-flex > .submit-buttons {\n      width: 165px; } }\n  .ac-search-dates {\n  min-width: 250px; }\n  .ac-search-dates *:first-child .ac-input {\n    border-right: none; }\n"
 
 /***/ }),
 
@@ -1629,11 +1634,12 @@ var SearchComponent = /** @class */ (function () {
         }
     };
     SearchComponent.prototype.isSubmitDisabled = function () {
+        console.log(!this.form.valid);
         return !this.form.valid;
     };
-    SearchComponent.prototype.submit = function () {
-        console.log(this.form.value);
-        this.onSubmit.emit(this.form.value);
+    SearchComponent.prototype.submit = function (isAll) {
+        if (isAll === void 0) { isAll = false; }
+        this.onSubmit.emit(isAll ? null : this.form.value);
     };
     SearchComponent.prototype.createForm = function (config) {
         this.form = this.formBuilder.group((_a = {},
@@ -1688,7 +1694,7 @@ var CONSTANTS = /** @class */ (function () {
     };
     CONSTANTS.DATE_FORMAT = {
         DISPLAY: 'DD/MM/YYYY',
-        REQUEST: 'DD-MM-YYYY',
+        REQUEST: 'YYYY-MM-DD',
     };
     return CONSTANTS;
 }());
@@ -2492,13 +2498,10 @@ var CreateSurveyAddQuestionComponent = /** @class */ (function () {
     CreateSurveyAddQuestionComponent.prototype.ngOnInit = function () {
     };
     CreateSurveyAddQuestionComponent.prototype.toggleAnswerMode = function () {
-        console.log(this.isAddAnwerMode);
         this.isAddAnwerMode = !this.isAddAnwerMode;
     };
     CreateSurveyAddQuestionComponent.prototype.handleQustionAnswer = function (content) {
-        console.log('handleQustionAnswer');
         if (content) {
-            console.log('content', content);
             this.questions.answers.push({ content: content });
         }
         this.toggleAnswerMode();
@@ -2839,7 +2842,7 @@ var CreateSurveyService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<!--<ac-login></ac-login>-->\r\n<div class=\"main-page-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"main-page-bg-content\">\r\n    <h1>Czego szukasz?</h1>\r\n    <div class=\"main-page-bg-search\">\r\n      <ac-search [config]=\"searchConfig\"\r\n                 (onSubmit)=\"searchSurveys($event)\"></ac-search>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"main-page-results-wrapper\">\r\n  <ac-result class=\"main-page-results\"\r\n             [elements]=\"getSurveys() | async\"></ac-result>\r\n</div>\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<!--<ac-login></ac-login>-->\r\n<div class=\"main-page-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"main-page-bg-content\">\r\n    <h1>Czego szukasz?</h1>\r\n    <div class=\"main-page-bg-search\">\r\n      <ac-search [config]=\"searchConfig\"\r\n                 (onSubmit)=\"searchSurveys($event)\"></ac-search>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"main-page-results-wrapper\">\r\n  <ac-loader *ngIf=\"isLoading; else loadedData\"></ac-loader>\r\n  <ng-template #loadedData>\r\n    <ac-result class=\"main-page-results\"\r\n               (onSelect)=\"displaySurvey($event)\"\r\n               [elements]=\"surveys\"></ac-result>\r\n  </ng-template>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2867,6 +2870,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _shared_constants_search_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/constants/search.config */ "./src/app/shared/constants/search.config.ts");
 /* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2879,20 +2885,52 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var MainPageComponent = /** @class */ (function () {
-    function MainPageComponent(surveysService) {
+    function MainPageComponent(surveysService, changeDetectorRef, router) {
         this.surveysService = surveysService;
+        this.changeDetectorRef = changeDetectorRef;
+        this.router = router;
         this.backgroundUrl = 'assets/mainpage.jpg';
         this.searchConfig = _shared_constants_search_config__WEBPACK_IMPORTED_MODULE_1__["searchConfig"];
+        this.isLoading = false;
+        this.surveys = [];
+        this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     MainPageComponent.prototype.searchSurveys = function (data) {
-        this.surveysService.fetchSurveys(data).subscribe();
+        var _this = this;
+        this.isLoading = true;
+        this.surveysService.fetchSurveys(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function () {
+            _this.isLoading = false;
+            _this.changeDetectorRef.detectChanges();
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])([]);
+        })).subscribe();
+    };
+    MainPageComponent.prototype.displaySurvey = function (survey) {
+        this.router.navigateByUrl('survey/' + survey.id);
     };
     MainPageComponent.prototype.getSurveys = function () {
         return this.surveysService.getSurveys();
     };
     MainPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.isLoading = true;
         this.surveysService.fetchSurveys().subscribe();
+        this.surveysService.getSurveys()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(this.onDestroy)).subscribe(function (surveys) {
+            _this.surveys = surveys;
+            if (surveys.length && _this.isLoading) {
+                _this.isLoading = false;
+                _this.changeDetectorRef.detectChanges();
+            }
+        });
+    };
+    MainPageComponent.prototype.ngOnDestroy = function () {
+        this.onDestroy.next();
+        this.onDestroy.complete();
+        this.onDestroy.unsubscribe();
     };
     MainPageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2901,7 +2939,9 @@ var MainPageComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./main-page.component.scss */ "./src/app/components/main-page/main-page.component.scss")],
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
         }),
-        __metadata("design:paramtypes", [_core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_2__["SurveysService"]])
+        __metadata("design:paramtypes", [_core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_2__["SurveysService"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], MainPageComponent);
     return MainPageComponent;
 }());
@@ -2972,7 +3012,7 @@ var MainPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ac-login [config]=\"loginRegisterConfig\"\r\n          (onSubmit)=\"submitData($event)\"></ac-login>\r\n<div class=\"ac-navbar display-flex\">\r\n  <span routerLink=\"/\">Ankiety</span>\r\n  <div *ngIf=\"(getUser() | async) as user; else noLoggedUser\">\r\n    <h2 mat-button\r\n            [matMenuTriggerFor]=\"menu\">\r\n      Witaj {{user.name}}\r\n    </h2>\r\n    <mat-menu #menu=\"matMenu\">\r\n      <button mat-menu-item routerLink=\"/profile\">Profil</button>\r\n      <button mat-menu-item>Wyloguj</button>\r\n    </mat-menu>\r\n  </div>\r\n  <ng-template #noLoggedUser>\r\n    <div class=\"display-flex\">\r\n      <h2 (click)=\"openLogin()\">Login</h2>\r\n      <h2 class=\"separate\">/ </h2>\r\n      <h2 (click)=\"openRegister()\">Register</h2>\r\n    </div>\r\n  </ng-template>\r\n</div>\r\n"
+module.exports = "<ac-login [config]=\"loginRegisterConfig\"\r\n          (onSubmit)=\"submitData($event)\"></ac-login>\r\n<div class=\"ac-navbar display-flex\">\r\n  <span routerLink=\"/\">Ankiety</span>\r\n  <div *ngIf=\"user; else noLoggedUser\">\r\n    <h2 mat-button\r\n            [matMenuTriggerFor]=\"menu\">\r\n      Witaj {{user.name}}\r\n    </h2>\r\n    <mat-menu #menu=\"matMenu\">\r\n      <button mat-menu-item\r\n              routerLink=\"/profile\">Profil</button>\r\n      <button *ngIf=\"isAdmin\"\r\n              mat-menu-item\r\n              routerLink=\"/admin\">Panel admina</button>\r\n      <button mat-menu-item\r\n              (click)=\"logout()\">Wyloguj</button>\r\n    </mat-menu>\r\n  </div>\r\n  <ng-template #noLoggedUser>\r\n    <div class=\"display-flex\">\r\n      <h2 (click)=\"openLogin()\">Login</h2>\r\n      <h2 class=\"separate\">/ </h2>\r\n      <h2 (click)=\"openRegister()\">Register</h2>\r\n    </div>\r\n  </ng-template>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3000,9 +3040,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _projects_ac_login_src_lib_login_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../projects/ac-login/src/lib/login.service */ "./projects/ac-login/src/lib/login.service.ts");
 /* harmony import */ var _core_http_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/http/http.service */ "./src/app/core/http/http.service.ts");
-/* harmony import */ var _core_user_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../core/user/user.service */ "./src/app/core/user/user.service.ts");
-/* harmony import */ var _shared_constants_login_register_config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/constants/login-register.config */ "./src/app/shared/constants/login-register.config.ts");
-/* harmony import */ var ngx_alerts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-alerts */ "./node_modules/ngx-alerts/fesm5/ngx-alerts.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _core_user_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/user/user.service */ "./src/app/core/user/user.service.ts");
+/* harmony import */ var _shared_constants_login_register_config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/constants/login-register.config */ "./src/app/shared/constants/login-register.config.ts");
+/* harmony import */ var ngx_alerts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-alerts */ "./node_modules/ngx-alerts/fesm5/ngx-alerts.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3018,16 +3059,34 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var NavbarComponent = /** @class */ (function () {
     function NavbarComponent(loginService, httpService, alertService, userService) {
         this.loginService = loginService;
         this.httpService = httpService;
         this.alertService = alertService;
         this.userService = userService;
-        this.loginRegisterConfig = _shared_constants_login_register_config__WEBPACK_IMPORTED_MODULE_4__["LoginRegisterConfig"];
+        this.isAdmin = false;
+        this.loginRegisterConfig = _shared_constants_login_register_config__WEBPACK_IMPORTED_MODULE_5__["LoginRegisterConfig"];
+        this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
+    NavbarComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.getUser().subscribe(function (user) {
+            _this.user = user;
+            _this.isAdmin = _this.userService.isAdmin();
+        });
+    };
+    NavbarComponent.prototype.ngOnDestroy = function () {
+        this.onDestroy.next();
+        this.onDestroy.complete();
+        this.onDestroy.unsubscribe();
+    };
     NavbarComponent.prototype.getUser = function () {
         return this.userService.getUser();
+    };
+    NavbarComponent.prototype.logout = function () {
+        this.userService.logout();
     };
     NavbarComponent.prototype.openLogin = function () {
         this.loginService.displayLogin();
@@ -3051,8 +3110,8 @@ var NavbarComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_projects_ac_login_src_lib_login_service__WEBPACK_IMPORTED_MODULE_1__["LoginService"],
             _core_http_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"],
-            ngx_alerts__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
-            _core_user_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]])
+            ngx_alerts__WEBPACK_IMPORTED_MODULE_6__["AlertService"],
+            _core_user_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -3068,7 +3127,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Podgląd ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up profile-detail\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Pytania:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n        <div class=\"edit-wrapper\">\r\n          <mat-divider></mat-divider>\r\n          <div class=\"padding-bottom-10px padding-top-10px\">\r\n            <p><b>Pytanie: </b>{{question.content}}</p>\r\n          </div>\r\n          <mat-divider></mat-divider>\r\n          <p class=\"padding-top-10px\"><b> Odpowiedzi: </b></p>\r\n          <div *ngFor=\"let answer of question.answers; let i = index\">\r\n            <p [class.active]=\"answer.active\"\r\n               (click)=\"selectAnswer(question.id, answer.id, answer)\"> {{i + 1}}) {{answer.content}}</p>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </mat-expansion-panel>\r\n  </mat-card>\r\n</div>\r\n<button [disabled]=\"!isDone()\"\r\n        (click)=\"resolveSurvey()\"\r\n        mat-flat-button\r\n        class=\"fixed-on-left\"\r\n        color=\"primary\">Wyślij rozwązanie ankiety</button>\r\n"
+module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Podgląd ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up profile-detail\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Pytania:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n        <div class=\"edit-wrapper\">\r\n          <mat-divider></mat-divider>\r\n          <div class=\"padding-bottom-10px padding-top-10px\">\r\n            <p><b>Pytanie: </b>{{question.content}}</p>\r\n          </div>\r\n          <mat-divider></mat-divider>\r\n          <p class=\"padding-top-10px\"><b> Odpowiedzi: </b></p>\r\n          <div *ngFor=\"let answer of question.answers; let i = index\">\r\n            <p [class.active]=\"answer.active\"\r\n               class=\"cursor-pointer\"\r\n               (click)=\"selectAnswer(question.id, answer.id, answer)\"> {{i + 1}}) {{answer.content}}</p>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </mat-expansion-panel>\r\n  </mat-card>\r\n</div>\r\n<button *ngIf=\"isSolved; else submitButton\"\r\n        routerLink=\"/\"\r\n        mat-flat-button\r\n        class=\"fixed-on-left\"\r\n        color=\"warn\">Powrót na stronę głowną</button>\r\n<ng-template #submitButton>\r\n  <button [disabled]=\"!isDone()\"\r\n          (click)=\"resolveSurvey()\"\r\n          mat-flat-button\r\n          class=\"fixed-on-left\"\r\n          color=\"primary\">Wyślij rozwązanie ankiety</button>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -3120,6 +3179,7 @@ var ResolveSurveyComponent = /** @class */ (function () {
         this.router = router;
         this.backgroundUrl = 'assets/mainpage.jpg';
         this.resolvers = [];
+        this.isSolved = false;
     }
     ResolveSurveyComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -3149,8 +3209,11 @@ var ResolveSurveyComponent = /** @class */ (function () {
         answer.active = true;
     };
     ResolveSurveyComponent.prototype.resolveSurvey = function () {
+        var _this = this;
         if (this.isDone()) {
-            this.surveysService.resolveSurveys(this.resolvers).subscribe();
+            this.surveysService.resolveSurveys(this.resolvers).subscribe(function () {
+                _this.isSolved = true;
+            });
         }
     };
     ResolveSurveyComponent = __decorate([
@@ -3259,7 +3322,6 @@ var HttpService = /** @class */ (function () {
         else {
             request = this.http[requestType](path, requestOptions.queryObj, defaultParams);
         }
-        console.log(requestOptions.queryObj);
         console.log('start request');
         return this.getRequest(request, requestOptions);
     };
@@ -3267,7 +3329,6 @@ var HttpService = /** @class */ (function () {
         var _this = this;
         if (requestOptions === void 0) { requestOptions = {}; }
         return request.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (error) {
-            console.log('display error', error);
             if (error.status === 401) {
                 _this.userHelperService.seTtriggerLogoutUser();
             }
@@ -3419,6 +3480,21 @@ var SurveysService = /** @class */ (function () {
         if (type === void 0) { type = _surveys_type_enum__WEBPACK_IMPORTED_MODULE_10__["SurveyType"].ALL; }
         return this.surveys[type];
     };
+    SurveysService.prototype.getStatisticks = function (id) {
+        var _this = this;
+        return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.STATISTIC + id, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].GET)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function (err) {
+            _this.alertService.danger(err.statusText);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_8__["throwError"])({});
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (response) { return response.body; }));
+    };
+    SurveysService.prototype.removeSurvey = function (id) {
+        var _this = this;
+        return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.DELETE(id), _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].DELETE)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function () {
+            _this.alertService.success('Ankieta usunięta pomyślnie');
+        }));
+    };
     SurveysService.prototype.getSurveysValue = function (type) {
         if (type === void 0) { type = _surveys_type_enum__WEBPACK_IMPORTED_MODULE_10__["SurveyType"].ALL; }
         return this.getSurveys(type).value;
@@ -3482,9 +3558,15 @@ var SurveysService = /** @class */ (function () {
         });
     };
     SurveysService.prototype.resolveSurveys = function (resolvers) {
+        var _this = this;
         return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.RESPONSE, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].POST, {
             queryObj: resolvers,
-        });
+        }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function (err) {
+            _this.alertService.danger(err.statusText);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_8__["throwError"])({});
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function (response) {
+            _this.alertService.success(response.body.message);
+        }));
     };
     SurveysService.prototype.mapDate = function (date) {
         return date ? moment(date, _projects_ac_search_result_src_lib_components_search_search_constants__WEBPACK_IMPORTED_MODULE_9__["CONSTANTS"].DATE_FORMAT.DISPLAY).format(_projects_ac_search_result_src_lib_components_search_search_constants__WEBPACK_IMPORTED_MODULE_9__["CONSTANTS"].DATE_FORMAT.REQUEST) : '';
@@ -3584,6 +3666,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _storage_storage_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../storage/storage.service */ "./src/app/core/storage/storage.service.ts");
 /* harmony import */ var _user_helper_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./user-helper.service */ "./src/app/core/user/user-helper.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _shared_enums_user_roles_enum__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../shared/enums/user-roles.enum */ "./src/app/shared/enums/user-roles.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3593,6 +3676,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -3626,6 +3710,10 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getUser = function () {
         return this.user;
     };
+    UserService.prototype.isAdmin = function () {
+        var userRoles = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(_storage_storage_service__WEBPACK_IMPORTED_MODULE_9__["StorageService"].getUser(), 'roles', []);
+        return !!Object(lodash__WEBPACK_IMPORTED_MODULE_4__["find"])(userRoles, function (role) { return role === _shared_enums_user_roles_enum__WEBPACK_IMPORTED_MODULE_12__["UserRoles"].ADMIN; });
+    };
     UserService.prototype.getUserValue = function () {
         return this.getUser().value;
     };
@@ -3645,8 +3733,7 @@ var UserService = /** @class */ (function () {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])({});
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["tap"])(function (response) {
             _this.alertService.success("U\u017Cytkownik " + data.name + " zaktualizowany pomy\u015Blnie");
-            _this.setUser(response.body);
-        }));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["switchMap"])(function () { return _this.fetchUser(false); }));
     };
     UserService.prototype.userRequest = function (data) {
         var _this = this;
@@ -3668,11 +3755,14 @@ var UserService = /** @class */ (function () {
             }
         }));
     };
-    UserService.prototype.fetchUser = function () {
+    UserService.prototype.fetchUser = function (withAlert) {
         var _this = this;
+        if (withAlert === void 0) { withAlert = true; }
         return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].USER, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].GET)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["tap"])(function (response) {
-            _this.alertService.success("U\u017Cytkownik " + response.body.name + " zalogowany pomy\u015Blnie");
+            if (withAlert) {
+                _this.alertService.success("U\u017Cytkownik " + response.body.name + " zalogowany pomy\u015Blnie");
+            }
             _this.setUser(response.body);
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])(function (response) { return response.body; }));
     };
@@ -3686,6 +3776,63 @@ var UserService = /** @class */ (function () {
             ngx_alerts__WEBPACK_IMPORTED_MODULE_1__["AlertService"]])
     ], UserService);
     return UserService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/components/loader/loader.component.html":
+/*!****************************************************************!*\
+  !*** ./src/app/shared/components/loader/loader.component.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"width-100\">\n  <mat-progress-spinner\n    class=\"center-element\"\n    [color]=\"'warn'\"\n    [mode]=\"'indeterminate'\"></mat-progress-spinner>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/loader/loader.component.scss":
+/*!****************************************************************!*\
+  !*** ./src/app/shared/components/loader/loader.component.scss ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/loader/loader.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/shared/components/loader/loader.component.ts ***!
+  \**************************************************************/
+/*! exports provided: LoaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoaderComponent", function() { return LoaderComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var LoaderComponent = /** @class */ (function () {
+    function LoaderComponent() {
+    }
+    LoaderComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'ac-loader',
+            template: __webpack_require__(/*! ./loader.component.html */ "./src/app/shared/components/loader/loader.component.html"),
+            styles: [__webpack_require__(/*! ./loader.component.scss */ "./src/app/shared/components/loader/loader.component.scss")]
+        })
+    ], LoaderComponent);
+    return LoaderComponent;
 }());
 
 
@@ -3905,6 +4052,7 @@ var RequestsContants = /** @class */ (function () {
         LIST: 'questionnaire/list-all',
         EDIT: 'api/questionnaire/edit',
         ADD: 'api/questionnaire/add',
+        STATISTIC: 'response/get/',
         ADMIN_LIST: 'api/admin/questionnaire/list-all',
         SINGLE: function (id) { return "questionnaire/" + id + "/get"; },
         ACCEPT: function (id) { return "api/admin/accept/" + id; },
@@ -3928,30 +4076,28 @@ var _a;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchConfig", function() { return searchConfig; });
-/* harmony import */ var _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum */ "./projects/ac-search-result/src/lib/components/search/search-form-names.enum.ts");
-
 var searchConfig = {
     otherSelects: [],
-    inputs: (_a = {},
-        _a[_projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_0__["SearchFormName"].TEXT] = {
-            value: 'Ankieta o ziemniakiach',
-            isRequired: false,
-            regex: '',
-            title: 'xddd',
-        },
-        _a[_projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_0__["SearchFormName"].TYPE] = {
-            title: 'Select type',
-            value: '',
-            isRequired: false,
-            selectOption: {
-                canBeNull: true,
-                text: 'Clear selection',
-            },
-            values: ['x', 'y', 'z2'],
-        },
-        _a)
+    inputs: {}
 };
-var _a;
+
+
+/***/ }),
+
+/***/ "./src/app/shared/enums/user-roles.enum.ts":
+/*!*************************************************!*\
+  !*** ./src/app/shared/enums/user-roles.enum.ts ***!
+  \*************************************************/
+/*! exports provided: UserRoles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserRoles", function() { return UserRoles; });
+var UserRoles;
+(function (UserRoles) {
+    UserRoles["ADMIN"] = "ROLE_ADMIN";
+})(UserRoles || (UserRoles = {}));
 
 
 /***/ }),
@@ -3972,12 +4118,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/modal/modal.component */ "./src/app/shared/components/modal/modal.component.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/loader/loader.component */ "./src/app/shared/components/loader/loader.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -3994,14 +4142,17 @@ var SharedModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatCardModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatProgressSpinnerModule"],
             ],
             exports: [
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatProgressSpinnerModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
                 _components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"],
+                _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"],
             ],
-            declarations: [_components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"]]
+            declarations: [_components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"], _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"]]
         })
     ], SharedModule);
     return SharedModule;

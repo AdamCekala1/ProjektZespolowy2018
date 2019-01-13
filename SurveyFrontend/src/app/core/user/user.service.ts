@@ -3,7 +3,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AlertService } from 'ngx-alerts';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, concat, Observable, throwError } from 'rxjs';
-import { omit } from 'lodash';
+import { get, find, omit } from 'lodash';
 
 import { IUser } from '../../shared/interfaces/user.interface';
 import { IDictionary } from '../../shared/interfaces/utils.interfaces';
@@ -15,6 +15,7 @@ import { StorageService } from '../storage/storage.service';
 import { ISurvey, ISurveyResponse } from '../../shared/interfaces/result.interface';
 import { UserHelperService } from './user-helper.service';
 import { Router } from '@angular/router';
+import { UserRoles } from '../../shared/enums/user-roles.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,12 @@ export class UserService {
     return this.user;
   }
 
+  isAdmin(): boolean {
+    const userRoles: UserRoles[] = get(StorageService.getUser(), 'roles', []);
+
+    return !!find(userRoles, (role: UserRoles) => role === UserRoles.ADMIN);
+  }
+
   getUserValue(): IUser {
     return this.getUser().value;
   }
@@ -67,9 +74,8 @@ export class UserService {
       }),
       tap((response: HttpResponse<IUser>) => {
         this.alertService.success(`Użytkownik ${data.name} zaktualizowany pomyślnie`);
-
-        this.setUser(response.body);
       }),
+      switchMap(() => this.fetchUser(false))
     );
   }
 
@@ -100,11 +106,13 @@ export class UserService {
     );
   }
 
-  private fetchUser(): Observable<IUser> {
+  private fetchUser(withAlert: boolean = true): Observable<IUser> {
     return this.httpService.httpRequest(RequestsContants.USER, RequestTypes.GET)
       .pipe(
         tap((response: HttpResponse<IUser>) => {
-          this.alertService.success(`Użytkownik ${response.body.name} zalogowany pomyślnie`);
+          if(withAlert) {
+            this.alertService.success(`Użytkownik ${response.body.name} zalogowany pomyślnie`);
+          }
 
           this.setUser(response.body);
         }),

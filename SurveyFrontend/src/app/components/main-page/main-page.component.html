@@ -11,6 +11,10 @@
   </div>
 </div>
 <div class="main-page-results-wrapper">
-  <ac-result class="main-page-results"
-             [elements]="getSurveys() | async"></ac-result>
+  <ac-loader *ngIf="isLoading; else loadedData"></ac-loader>
+  <ng-template #loadedData>
+    <ac-result class="main-page-results"
+               (onSelect)="displaySurvey($event)"
+               [elements]="surveys"></ac-result>
+  </ng-template>
 </div>

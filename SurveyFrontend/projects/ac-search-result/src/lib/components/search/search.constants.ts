@@ -6,6 +6,6 @@ export class CONSTANTS {
 
   public static DATE_FORMAT = {
     DISPLAY: 'DD/MM/YYYY',
-    REQUEST: 'DD-MM-YYYY',
+    REQUEST: 'YYYY-MM-DD',
   };
 }
