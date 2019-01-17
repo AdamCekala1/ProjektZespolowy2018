@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ISearchConfig } from '../../../../projects/ac-search-result/src/lib/shared/interfaces/search.interface';
-import { chain, get, map, omitBy, isEmpty } from 'lodash';
+import { cloneDeep, get, map, omitBy, isEmpty } from 'lodash';
 import { ISurvey } from '../../shared/interfaces/result.interface';
 import { searchConfig } from '../../shared/constants/search.config';
 import { SurveysService } from '../../core/surveys/surveys.service';
@@ -8,6 +8,9 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { IDictionary } from '../../shared/interfaces/utils.interfaces';
 import { Router } from '@angular/router';
 import { catchError, finalize, takeUntil } from 'rxjs/operators';
+import { CategoriesService } from '../../core/categories/categories.service';
+import { ICategories } from '../../core/categories/categories.interface';
+import { SearchFormName } from '../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum';
 
 @Component({
   selector: 'ac-main-page',
@@ -17,25 +20,39 @@ import { catchError, finalize, takeUntil } from 'rxjs/operators';
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   backgroundUrl: string = 'assets/mainpage.jpg';
-  searchConfig: ISearchConfig = searchConfig;
   isLoading: boolean = false;
   surveys: ISurvey[] = [];
+  private searchConfig: ISearchConfig = cloneDeep(searchConfig);
   private onDestroy: Subject<boolean> = new Subject<boolean>();
 
   constructor(private surveysService: SurveysService,
               private changeDetectorRef: ChangeDetectorRef,
-              private router: Router) { }
+              private categoriesService: CategoriesService,
+              private router: Router) {
+  }
+
+  getSearchConfig(): ISearchConfig {
+    return cloneDeep(this.searchConfig);
+  }
 
   searchSurveys(data: IDictionary<string>) {
     this.isLoading = true;
 
-    this.surveysService.fetchSurveys(data).pipe(catchError(() => {
-      this.isLoading = false;
+    this.surveysService.fetchSurveys(data)
+      .pipe(
+        catchError(() => {
+          this.isLoading = false;
 
-      this.changeDetectorRef.detectChanges();
+          this.changeDetectorRef.detectChanges();
 
-      return throwError([]);
-    })).subscribe();
+          return throwError([]);
+      }),
+        finalize(() => {
+          this.isLoading = false;
+
+          this.changeDetectorRef.detectChanges();
+        })
+      ).subscribe();
   }
 
   displaySurvey(survey: ISurvey) {
@@ -48,6 +65,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
+
+    this.categoriesService.fetchCategories().subscribe();
+
+    this.categoriesService.getCategories()
+      .pipe(
+        takeUntil(this.onDestroy),
+      )
+      .subscribe((values: ICategories[]) => {
+        this.searchConfig.inputs[SearchFormName.TYPE].values = map(values, (category: ICategories) => category.name);
+
+        this.changeDetectorRef.detectChanges();
+      });
 
     this.surveysService.fetchSurveys().subscribe();
 

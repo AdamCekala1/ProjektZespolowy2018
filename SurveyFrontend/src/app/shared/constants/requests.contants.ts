@@ -13,6 +13,8 @@ export class RequestsContants {
   static SURVEYS = {
     RESPONSE: 'response/add',
     USER: 'api/questionnaire/list-user',
+    CATEGORIES: 'category/get',
+    CATEGORIES_ADD: 'api/category/add',
     LIST: 'questionnaire/list-all',
     EDIT: 'api/questionnaire/edit',
     ADD: 'api/questionnaire/add',
@@ -21,5 +23,7 @@ export class RequestsContants {
     SINGLE: (id: number) => `questionnaire/${id}/get`,
     ACCEPT: (id: number) => `api/admin/accept/${id}`,
     DELETE: (id: number) => `api/questionnaire/${id}/delete`,
+    CATEGORIES_DELETE: (id: number) => `api/category/edit/${id}`,
+    CATEGORIES_EDIT: (id: number) => `api/category/edit/${id}`,
   };
 }

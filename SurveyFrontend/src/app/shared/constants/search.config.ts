@@ -9,15 +9,15 @@ export const searchConfig = {
   //     regex: '',
   //     title: 'xddd',
   //   },
-  //   [SearchFormName.TYPE]: {
-  //     title: 'Select type',
-  //     value: '',
-  //     isRequired: false,
-  //     selectOption: {
-  //       canBeNull: true,
-  //       text: 'Clear selection',
-  //     },
-  //     values: ['x', 'y', 'z2'],
-  //   }
+    [SearchFormName.TYPE]: {
+      title: 'Wybierz kategorię',
+      value: '',
+      isRequired: true,
+      selectOption: {
+        canBeNull: false,
+        // text: 'Wyczyść wybór',
+      },
+      values: [],
+    }
   }
 };

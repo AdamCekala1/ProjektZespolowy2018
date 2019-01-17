@@ -13,6 +13,8 @@ import { IExtraInformations, ISurvey, ISurveyResolve, ISurveyResponse } from '..
 import { CONSTANTS } from '../../../../projects/ac-search-result/src/lib/components/search/search.constants';
 import { SurveyType } from './surveys-type.enum';
 import { IDictionary } from '../../shared/interfaces/utils.interfaces';
+import { SearchFormName } from '../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum';
+import { CategoriesService } from '../categories/categories.service';
 
 const moment = moment_;
 
@@ -27,6 +29,7 @@ export class SurveysService {
   };
 
   constructor(private httpService: HttpService,
+              private categoriesService: CategoriesService,
               private alertService: AlertService) {
   }
 
@@ -106,10 +109,7 @@ export class SurveysService {
     return (isEmpty(omitBy(data, isEmpty))
       ? this.httpService.httpRequest(RequestsContants.SURVEYS.LIST, RequestTypes.GET)
       : this.httpService.httpRequest(RequestsContants.SURVEYS.LIST, RequestTypes.POST, {
-        queryObj: {
-          start: this.mapDate(get(data, 'beginDate', '')),
-          end: this.mapDate(get(data, 'endDate', ''))
-        },
+        queryObj: this.getFetchQueryObj(data),
       }))
       .pipe(
         catchError((err: HttpErrorResponse) => {
@@ -145,6 +145,14 @@ export class SurveysService {
     );
   }
 
+  private getFetchQueryObj(data?: IDictionary<string>): {start?: string, end?: string, category?: number | string} {
+    return  {
+        start: this.mapDate(get(data, `[${SearchFormName.BEGIN_DATE}]`, '')),
+        end: this.mapDate(get(data, `[${SearchFormName.END_DATE}]`, '')),
+        category: this.categoriesService.getCategoryId(get(data, `[${SearchFormName.TYPE}]`, '')),
+    };
+  }
+
   private mapDate(date: string): string {
     return date ? moment(date, CONSTANTS.DATE_FORMAT.DISPLAY).format(CONSTANTS.DATE_FORMAT.REQUEST) : '';
   }
@@ -153,6 +161,7 @@ export class SurveysService {
     const extraInformations: IExtraInformations[] = [
       {name: 'Autor', value: survey.owner.name},
       {name: 'Utworzono', value: survey.created_at},
+      {name: 'Kategoria', value: get(survey, 'category.name', '')},
     ];
 
     if(survey.updated_at) {

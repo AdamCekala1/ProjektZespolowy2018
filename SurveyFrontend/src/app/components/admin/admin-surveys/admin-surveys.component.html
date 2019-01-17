@@ -9,11 +9,19 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Podgląd pytań:
+          Podgląd ankiety:
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ac-loader *ngIf="isLoading; else loadedAdata"></ac-loader>
       <ng-template #loadedAdata>
+        <div>
+          <div class="edit-wrapper">
+            <mat-divider></mat-divider>
+            <div class="padding-bottom-10px padding-top-10px">
+              <p><b>Kategoria: </b>{{survey?.response.category?.name}}</p>
+            </div>
+          </div>
+        </div>
         <div *ngFor="let question of survey?.response.question; let i = index">
           <div class="edit-wrapper">
             <mat-divider></mat-divider>

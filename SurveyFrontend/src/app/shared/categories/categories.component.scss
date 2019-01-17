@@ -1,0 +1,13 @@
+.display-flex {
+  justify-content: space-between;
+}
+
+.active {
+  font-weight: 900;
+  color: green;
+}
+
+.max-height-300 {
+  max-height: 300px;
+  overflow-y: auto;
+}

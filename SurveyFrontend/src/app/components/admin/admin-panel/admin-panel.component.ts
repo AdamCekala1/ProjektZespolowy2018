@@ -5,6 +5,8 @@ import { AdminService } from '../admin.service';
 import { Router } from '@angular/router';
 import { SurveyType } from '../../../core/surveys/surveys-type.enum';
 import { takeUntil } from 'rxjs/operators';
+import { ICategories } from '../../../core/categories/categories.interface';
+import { CategoriesService } from '../../../core/categories/categories.service';
 
 @Component({
   selector: 'ac-admin-panel',
@@ -17,6 +19,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   private onDestroy: Subject<boolean> = new Subject<boolean>();
 
   constructor(private adminService: AdminService,
+              private categoriesService: CategoriesService,
               private router: Router) {
   }
 

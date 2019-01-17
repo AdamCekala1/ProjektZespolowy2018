@@ -7,6 +7,23 @@
              [ngModelOptions]="{standalone: true}"
              placeholder="Tytuł ankiety">
     </mat-form-field>
+
+
+
+
+    <div class="margin-top-20px margin-bottom-30px">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header >
+          <mat-panel-title>
+            <b>Wybierz kategorię: </b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ac-categories [activeId]="category.id"
+                       (onSelect)="setActiveCategoryId($event)"></ac-categories>
+      </mat-expansion-panel>
+    </div>
+
+
     <button *ngIf="!addQuestionMode; else qestionMode"
             mat-stroked-button
             (click)="toggleQuestionMode()"

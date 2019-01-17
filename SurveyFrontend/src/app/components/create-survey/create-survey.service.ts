@@ -8,6 +8,8 @@ import * as moment_ from 'moment';
 import { HttpResponse } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { AlertService } from 'ngx-alerts';
+import { ICategories } from '../../core/categories/categories.interface';
+import { IQuestion } from './create-survey.interface';
 const moment = moment_;
 
 @Injectable()
@@ -26,11 +28,12 @@ export class CreateSurveyService {
     this.isModalVisible.next(isVisible);
   }
 
-  saveSurvey(title, question): Observable<{message: string}> {
+  saveSurvey(title: string, question: IQuestion[], category: ICategories): Observable<{message: string}> {
     return this.httpService.httpRequest(RequestsContants.SURVEYS.ADD, RequestTypes.POST, {
       queryObj: {
         title,
         question,
+        category,
         created_at: moment().format()
       },
     })

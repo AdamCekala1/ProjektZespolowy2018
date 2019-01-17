@@ -10,6 +10,8 @@ import { RequestTypes } from '../../core/http/http.enum';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { SurveysService } from '../../core/surveys/surveys.service';
+import { CategoriesService } from '../../core/categories/categories.service';
+import { ICategories } from '../../core/categories/categories.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,12 @@ export class AdminService {
 
   constructor(private httpService: HttpService,
               private surveysService: SurveysService,
+              private categoriesService: CategoriesService,
               private alertService: AlertService) {
+  }
+
+  fetchCategories(): Observable<ICategories[]> {
+    return this.categoriesService.fetchCategories();
   }
 
   getSurveys(type: SurveyType = SurveyType.ALL): BehaviorSubject<ISurvey[]> {

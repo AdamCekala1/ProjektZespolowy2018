@@ -4,20 +4,21 @@
                    [title]="config.inputs[searchFormName.TEXT]?.title"
                    [formControlName]="searchFormName.TEXT"></app-search-text>
 
-  <app-search-select *ngIf="config?.inputs[searchFormName.TYPE]"
+  <app-search-select *ngIf="config?.inputs[searchFormName.TYPE] && config.inputs[searchFormName.TYPE].values.length"
                      [config]="config.inputs[searchFormName.TYPE]"
                      [formControlName]="searchFormName.TYPE"></app-search-select>
 
   <div class="display-flex child-center ac-search-dates">
-    <app-search-dates [formControlName]="searchFormName.BEGIN_DATE"
-                      [title]="config.inputs[searchFormName.BEGIN_DATE]?.title || 'Data początkowa'"></app-search-dates>
-    <app-search-dates [formControlName]="searchFormName.END_DATE"
+    <ac-search-dates [formControlName]="searchFormName.BEGIN_DATE"
+                      [title]="config.inputs[searchFormName.BEGIN_DATE]?.title || 'Data początkowa'"></ac-search-dates>
+    <ac-search-dates [formControlName]="searchFormName.END_DATE"
                       [displayIcon]="false"
                       [minDate]="form.get(searchFormName.BEGIN_DATE).value"
-                      [title]="config.inputs[searchFormName.END_DATE]?.title || 'Data końcowa'"></app-search-dates>
+                      [title]="config.inputs[searchFormName.END_DATE]?.title || 'Data końcowa'"></ac-search-dates>
   </div >
   <div class="display-flex submit-buttons">
     <app-search-submit class="submit-button width-50px"
+                       matTooltip="{{isSubmitDisabled() ? 'Uzupełnij wszystkie pola' : ''}}"
                        [isDisabled]="isSubmitDisabled()"
                        (onSubmit)="submit()"></app-search-submit>
     <app-search-submit class="submit-button width-50px"

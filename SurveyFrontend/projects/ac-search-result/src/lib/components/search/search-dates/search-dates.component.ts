@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as moment_ from 'moment';
 import {Moment} from 'moment';
@@ -9,7 +9,7 @@ import { CONSTANTS } from '../search.constants';
 const momentImported = moment_;
 
 @Component({
-  selector: 'app-search-dates',
+  selector: 'ac-search-dates',
   templateUrl: './search-dates.component.html',
   styleUrls: ['./search-dates.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,12 +38,13 @@ export class SearchDatesComponent extends ControlValueAccessorWrapper implements
   minDate: Date;
   actualDate: string = '';
 
-  constructor() {
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
     super();
   }
 
   writeValue(value: string) {
     this.actualDate = value;
+    console.log('write,', value)
   }
 
   setDateFromDatePicker(value: any) {
@@ -51,7 +52,10 @@ export class SearchDatesComponent extends ControlValueAccessorWrapper implements
   }
 
   private setDate(value: string) {
+    console.log('setDate', value)
     this.onChange(value);
     this.writeValue(value);
+    console.log(this.actualDate)
+    this.changeDetectorRef.detectChanges();
   }
 }

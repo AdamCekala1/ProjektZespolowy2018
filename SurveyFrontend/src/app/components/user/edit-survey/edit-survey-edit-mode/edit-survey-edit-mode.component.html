@@ -1,7 +1,7 @@
 <div *ngIf="!isEditAnswer; else editAnswer"
      class="display-flex">
   <div>
-    <p><b><span *ngIf="isChanged()"> {{prefix}} oryginalne:</span></b>{{answer.content}}</p>
+    <p><b>{{prefix}}<span *ngIf="isChanged()"> oryginalne</span> :</b>{{answer.content}}</p>
     <p *ngIf="isChanged()"><b>{{prefix}} po zmianie:</b> {{editAnswerCopy.content}}</p>
   </div>
   <p (click)="isEditAnswer = true">{{isChanged() ? 'Powróć do edycji' : 'Edytuj'}}</p>

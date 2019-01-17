@@ -1,7 +1,7 @@
 <div class="profile-bg"
      [style.background-image]="'url(' + backgroundUrl + ')'">
   <div class="profile-bg-content">
-    <h1>Edycja ankiety: {{survey?.response.title}}</h1>
+    <h1>Edycja ankiety: <b>{{survey?.response.title}}</b> ({{survey?.response.category?.name}})</h1>
   </div>
 </div>
 <div class="profile-details-wrapper margin-bottom-30px">
@@ -9,7 +9,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Edycja pytań:
+          Edycja:
         </mat-panel-title>
       </mat-expansion-panel-header>
 

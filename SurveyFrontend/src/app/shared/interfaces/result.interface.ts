@@ -1,5 +1,6 @@
 import { IUser } from './user.interface';
 import { IDictionary } from './utils.interfaces';
+import { ICategories } from '../../core/categories/categories.interface';
 
 export interface ISurvey {
   id: string | number;
@@ -47,6 +48,7 @@ export interface ISurveyResponse {
   question: ISurveyQuestion[];
   owner: IUser;
   title: string;
+  category: ICategories;
   updated_at: string;
   accept?: boolean;
 }

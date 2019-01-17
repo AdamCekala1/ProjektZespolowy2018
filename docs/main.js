@@ -1182,8 +1182,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var momentImported = moment__WEBPACK_IMPORTED_MODULE_2__;
 var SearchDatesComponent = /** @class */ (function (_super) {
     __extends(SearchDatesComponent, _super);
-    function SearchDatesComponent() {
+    function SearchDatesComponent(changeDetectorRef) {
         var _this = _super.call(this) || this;
+        _this.changeDetectorRef = changeDetectorRef;
         _this.displayIcon = true;
         _this.title = '';
         _this.actualDate = '';
@@ -1210,13 +1211,17 @@ var SearchDatesComponent = /** @class */ (function (_super) {
     });
     SearchDatesComponent.prototype.writeValue = function (value) {
         this.actualDate = value;
+        console.log('write,', value);
     };
     SearchDatesComponent.prototype.setDateFromDatePicker = function (value) {
         this.setDate(momentImported(value.value).format(_search_constants__WEBPACK_IMPORTED_MODULE_4__["CONSTANTS"].DATE_FORMAT.DISPLAY));
     };
     SearchDatesComponent.prototype.setDate = function (value) {
+        console.log('setDate', value);
         this.onChange(value);
         this.writeValue(value);
+        console.log(this.actualDate);
+        this.changeDetectorRef.detectChanges();
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -1238,7 +1243,7 @@ var SearchDatesComponent = /** @class */ (function (_super) {
     ], SearchDatesComponent.prototype, "setMinDate", null);
     SearchDatesComponent = SearchDatesComponent_1 = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-search-dates',
+            selector: 'ac-search-dates',
             template: __webpack_require__(/*! ./search-dates.component.html */ "./projects/ac-search-result/src/lib/components/search/search-dates/search-dates.component.html"),
             styles: [__webpack_require__(/*! ./search-dates.component.scss */ "./projects/ac-search-result/src/lib/components/search/search-dates/search-dates.component.scss")],
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
@@ -1248,7 +1253,7 @@ var SearchDatesComponent = /** @class */ (function (_super) {
                     multi: true,
                 }],
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
     ], SearchDatesComponent);
     return SearchDatesComponent;
     var SearchDatesComponent_1;
@@ -1571,7 +1576,7 @@ var SearchTextComponent = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [formGroup]=\"form\"\r\n     class=\"search-wrapper display-flex child-center\">\r\n  <app-search-text *ngIf=\"config?.inputs[searchFormName.TEXT]\"\r\n                   [title]=\"config.inputs[searchFormName.TEXT]?.title\"\r\n                   [formControlName]=\"searchFormName.TEXT\"></app-search-text>\r\n\r\n  <app-search-select *ngIf=\"config?.inputs[searchFormName.TYPE]\"\r\n                     [config]=\"config.inputs[searchFormName.TYPE]\"\r\n                     [formControlName]=\"searchFormName.TYPE\"></app-search-select>\r\n\r\n  <div class=\"display-flex child-center ac-search-dates\">\r\n    <app-search-dates [formControlName]=\"searchFormName.BEGIN_DATE\"\r\n                      [title]=\"config.inputs[searchFormName.BEGIN_DATE]?.title || 'Data początkowa'\"></app-search-dates>\r\n    <app-search-dates [formControlName]=\"searchFormName.END_DATE\"\r\n                      [displayIcon]=\"false\"\r\n                      [minDate]=\"form.get(searchFormName.BEGIN_DATE).value\"\r\n                      [title]=\"config.inputs[searchFormName.END_DATE]?.title || 'Data końcowa'\"></app-search-dates>\r\n  </div >\r\n  <div class=\"display-flex submit-buttons\">\r\n    <app-search-submit class=\"submit-button width-50px\"\r\n                       [isDisabled]=\"isSubmitDisabled()\"\r\n                       (onSubmit)=\"submit()\"></app-search-submit>\r\n    <app-search-submit class=\"submit-button width-50px\"\r\n                       [isDisabled]=\"false\"\r\n                       [text]=\"'Wszystkie'\"\r\n                       (onSubmit)=\"submit(true)\"></app-search-submit>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div [formGroup]=\"form\"\r\n     class=\"search-wrapper display-flex child-center\">\r\n  <app-search-text *ngIf=\"config?.inputs[searchFormName.TEXT]\"\r\n                   [title]=\"config.inputs[searchFormName.TEXT]?.title\"\r\n                   [formControlName]=\"searchFormName.TEXT\"></app-search-text>\r\n\r\n  <app-search-select *ngIf=\"config?.inputs[searchFormName.TYPE] && config.inputs[searchFormName.TYPE].values.length\"\r\n                     [config]=\"config.inputs[searchFormName.TYPE]\"\r\n                     [formControlName]=\"searchFormName.TYPE\"></app-search-select>\r\n\r\n  <div class=\"display-flex child-center ac-search-dates\">\r\n    <ac-search-dates [formControlName]=\"searchFormName.BEGIN_DATE\"\r\n                      [title]=\"config.inputs[searchFormName.BEGIN_DATE]?.title || 'Data początkowa'\"></ac-search-dates>\r\n    <ac-search-dates [formControlName]=\"searchFormName.END_DATE\"\r\n                      [displayIcon]=\"false\"\r\n                      [minDate]=\"form.get(searchFormName.BEGIN_DATE).value\"\r\n                      [title]=\"config.inputs[searchFormName.END_DATE]?.title || 'Data końcowa'\"></ac-search-dates>\r\n  </div >\r\n  <div class=\"display-flex submit-buttons\">\r\n    <app-search-submit class=\"submit-button width-50px\"\r\n                       matTooltip=\"{{isSubmitDisabled() ? 'Uzupełnij wszystkie pola' : ''}}\"\r\n                       [isDisabled]=\"isSubmitDisabled()\"\r\n                       (onSubmit)=\"submit()\"></app-search-submit>\r\n    <app-search-submit class=\"submit-button width-50px\"\r\n                       [isDisabled]=\"false\"\r\n                       [text]=\"'Wszystkie'\"\r\n                       (onSubmit)=\"submit(true)\"></app-search-submit>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1623,7 +1628,9 @@ var SearchComponent = /** @class */ (function () {
     Object.defineProperty(SearchComponent.prototype, "setConfig", {
         set: function (config) {
             this.config = config;
-            this.createForm(config.inputs);
+            if (!this.form) {
+                this.createForm(config.inputs);
+            }
         },
         enumerable: true,
         configurable: true
@@ -1634,7 +1641,6 @@ var SearchComponent = /** @class */ (function () {
         }
     };
     SearchComponent.prototype.isSubmitDisabled = function () {
-        console.log(!this.form.valid);
         return !this.form.valid;
     };
     SearchComponent.prototype.submit = function (isAll) {
@@ -1644,9 +1650,9 @@ var SearchComponent = /** @class */ (function () {
     SearchComponent.prototype.createForm = function (config) {
         this.form = this.formBuilder.group((_a = {},
             _a[_search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].TEXT] = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(config, "[" + _search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].TEXT + "].value", ''),
-            _a[_search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].TYPE] = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(config, "[" + _search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].TYPE + "].value", ''),
-            _a[_search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].BEGIN_DATE] = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(config, "[" + _search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].BEGIN_DATE + "].value", ''),
-            _a[_search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].END_DATE] = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(config, "[" + _search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].END_DATE + "].value", ''),
+            _a[_search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].TYPE] = [Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(config, "[" + _search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].TYPE + "].value", ''), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            _a[_search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].BEGIN_DATE] = [Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(config, "[" + _search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].BEGIN_DATE + "].value", ''), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            _a[_search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].END_DATE] = [Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(config, "[" + _search_form_names_enum__WEBPACK_IMPORTED_MODULE_3__["SearchFormName"].END_DATE + "].value", ''), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             _a));
         var _a;
     };
@@ -1721,12 +1727,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _search_select_search_select_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./search-select/search-select.component */ "./projects/ac-search-result/src/lib/components/search/search-select/search-select.component.ts");
 /* harmony import */ var _search_submit_search_submit_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./search-submit/search-submit.component */ "./projects/ac-search-result/src/lib/components/search/search-submit/search-submit.component.ts");
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/shared.module */ "./projects/ac-search-result/src/lib/shared/shared.module.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1743,6 +1751,7 @@ var SearchModule = /** @class */ (function () {
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatTooltipModule"],
             ],
             declarations: [
                 _search_component__WEBPACK_IMPORTED_MODULE_2__["SearchComponent"],
@@ -2614,7 +2623,7 @@ var CreateSurveyButtonComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ac-modal *ngIf=\"isModalVisible() | async\">\r\n  <h2>Dodaj nową ankietę!</h2>\r\n  <form>\r\n    <mat-form-field class=\"width-100\">\r\n      <input matInput\r\n             [(ngModel)]=\"title\"\r\n             [ngModelOptions]=\"{standalone: true}\"\r\n             placeholder=\"Tytuł ankiety\">\r\n    </mat-form-field>\r\n    <button *ngIf=\"!addQuestionMode; else qestionMode\"\r\n            mat-stroked-button\r\n            (click)=\"toggleQuestionMode()\"\r\n            color=\"accent\">\r\n      Dodaj pytanie\r\n    </button>\r\n    <ng-template #qestionMode>\r\n      <ac-create-survey-add-question (onAddQuestion)=\"addQuestion($event)\"\r\n                                     (onCancel)=\"toggleQuestionMode()\"></ac-create-survey-add-question>\r\n    </ng-template>\r\n  </form>\r\n\r\n  <ng-container *ngIf=\"questions.length\">\r\n    <p><b>Zapisane pytania:</b></p>\r\n    <mat-expansion-panel *ngFor=\"let question of questions\">\r\n      <mat-expansion-panel-header >\r\n        <mat-panel-title>\r\n          <b>Pytanie: </b>\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n          {{question.content}}\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <b>Odpowiedzi: </b>\r\n      <p *ngFor=\"let answer of question.answers\">\r\n        {{answer.content}}\r\n      </p>\r\n      <button mat-stroked-button\r\n              (click)=\"removeQuestion(question)\"\r\n              color=\"accent\">\r\n        Usuń pytanie\r\n      </button>\r\n    </mat-expansion-panel>\r\n  </ng-container>\r\n\r\n  <div class=\"padding-top-10px\">\r\n  <button *ngIf=\"questions.length\"\r\n          mat-stroked-button\r\n          class=\"width-100\"\r\n          (click)=\"saveSurvey()\"\r\n          color=\"accent\">\r\n    Zapisz ankietę\r\n  </button>\r\n\r\n  <button mat-stroked-button\r\n          class=\"width-100\"\r\n          (click)=\"removeSurvey()\"\r\n          color=\"warn\">\r\n    Wyjdź bez zapisywania\r\n  </button>\r\n  </div>\r\n</ac-modal>\r\n"
+module.exports = "<ac-modal *ngIf=\"isModalVisible() | async\">\r\n  <h2>Dodaj nową ankietę!</h2>\r\n  <form>\r\n    <mat-form-field class=\"width-100\">\r\n      <input matInput\r\n             [(ngModel)]=\"title\"\r\n             [ngModelOptions]=\"{standalone: true}\"\r\n             placeholder=\"Tytuł ankiety\">\r\n    </mat-form-field>\r\n\r\n\r\n\r\n\r\n    <div class=\"margin-top-20px margin-bottom-30px\">\r\n      <mat-expansion-panel>\r\n        <mat-expansion-panel-header >\r\n          <mat-panel-title>\r\n            <b>Wybierz kategorię: </b>\r\n          </mat-panel-title>\r\n        </mat-expansion-panel-header>\r\n        <ac-categories [activeId]=\"category.id\"\r\n                       (onSelect)=\"setActiveCategoryId($event)\"></ac-categories>\r\n      </mat-expansion-panel>\r\n    </div>\r\n\r\n\r\n    <button *ngIf=\"!addQuestionMode; else qestionMode\"\r\n            mat-stroked-button\r\n            (click)=\"toggleQuestionMode()\"\r\n            color=\"accent\">\r\n      Dodaj pytanie\r\n    </button>\r\n    <ng-template #qestionMode>\r\n      <ac-create-survey-add-question (onAddQuestion)=\"addQuestion($event)\"\r\n                                     (onCancel)=\"toggleQuestionMode()\"></ac-create-survey-add-question>\r\n    </ng-template>\r\n  </form>\r\n\r\n  <ng-container *ngIf=\"questions.length\">\r\n    <p><b>Zapisane pytania:</b></p>\r\n    <mat-expansion-panel *ngFor=\"let question of questions\">\r\n      <mat-expansion-panel-header >\r\n        <mat-panel-title>\r\n          <b>Pytanie: </b>\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n          {{question.content}}\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <b>Odpowiedzi: </b>\r\n      <p *ngFor=\"let answer of question.answers\">\r\n        {{answer.content}}\r\n      </p>\r\n      <button mat-stroked-button\r\n              (click)=\"removeQuestion(question)\"\r\n              color=\"accent\">\r\n        Usuń pytanie\r\n      </button>\r\n    </mat-expansion-panel>\r\n  </ng-container>\r\n\r\n  <div class=\"padding-top-10px\">\r\n  <button *ngIf=\"questions.length\"\r\n          mat-stroked-button\r\n          class=\"width-100\"\r\n          (click)=\"saveSurvey()\"\r\n          color=\"accent\">\r\n    Zapisz ankietę\r\n  </button>\r\n\r\n  <button mat-stroked-button\r\n          class=\"width-100\"\r\n          (click)=\"removeSurvey()\"\r\n          color=\"warn\">\r\n    Wyjdź bez zapisywania\r\n  </button>\r\n  </div>\r\n</ac-modal>\r\n"
 
 /***/ }),
 
@@ -2665,7 +2674,11 @@ var CreateSurveyComponent = /** @class */ (function () {
         this.questions = [];
         this.title = '';
         this.addQuestionMode = false;
+        this.category = {};
     }
+    CreateSurveyComponent.prototype.setActiveCategoryId = function (category) {
+        this.category = category;
+    };
     CreateSurveyComponent.prototype.isModalVisible = function () {
         return this.createSurveyService.getIsVisible();
     };
@@ -2680,7 +2693,7 @@ var CreateSurveyComponent = /** @class */ (function () {
         Object(lodash__WEBPACK_IMPORTED_MODULE_1__["remove"])(this.questions, question);
     };
     CreateSurveyComponent.prototype.saveSurvey = function () {
-        this.createSurveyService.saveSurvey(this.title, this.questions).subscribe();
+        this.createSurveyService.saveSurvey(this.title, this.questions, this.category).subscribe();
     };
     CreateSurveyComponent.prototype.removeSurvey = function () {
         this.createSurveyService.setIsModalVisible(false);
@@ -2809,12 +2822,13 @@ var CreateSurveyService = /** @class */ (function () {
     CreateSurveyService.prototype.setIsModalVisible = function (isVisible) {
         this.isModalVisible.next(isVisible);
     };
-    CreateSurveyService.prototype.saveSurvey = function (title, question) {
+    CreateSurveyService.prototype.saveSurvey = function (title, question, category) {
         var _this = this;
         return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_2__["RequestsContants"].SURVEYS.ADD, _core_http_http_enum__WEBPACK_IMPORTED_MODULE_3__["RequestTypes"].POST, {
             queryObj: {
                 title: title,
                 question: question,
+                category: category,
                 created_at: moment().format()
             },
         })
@@ -2842,7 +2856,7 @@ var CreateSurveyService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<!--<ac-login></ac-login>-->\r\n<div class=\"main-page-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"main-page-bg-content\">\r\n    <h1>Czego szukasz?</h1>\r\n    <div class=\"main-page-bg-search\">\r\n      <ac-search [config]=\"searchConfig\"\r\n                 (onSubmit)=\"searchSurveys($event)\"></ac-search>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"main-page-results-wrapper\">\r\n  <ac-loader *ngIf=\"isLoading; else loadedData\"></ac-loader>\r\n  <ng-template #loadedData>\r\n    <ac-result class=\"main-page-results\"\r\n               (onSelect)=\"displaySurvey($event)\"\r\n               [elements]=\"surveys\"></ac-result>\r\n  </ng-template>\r\n</div>\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<!--<ac-login></ac-login>-->\r\n<div class=\"main-page-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"main-page-bg-content\">\r\n    <h1>Czego szukasz?</h1>\r\n    <div class=\"main-page-bg-search\">\r\n      <ac-search [config]=\"getSearchConfig()\"\r\n                 (onSubmit)=\"searchSurveys($event)\"></ac-search>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"main-page-results-wrapper\">\r\n  <ac-loader *ngIf=\"isLoading; else loadedData\"></ac-loader>\r\n  <ng-template #loadedData>\r\n    <ac-result class=\"main-page-results\"\r\n               (onSelect)=\"displaySurvey($event)\"\r\n               [elements]=\"surveys\"></ac-result>\r\n  </ng-template>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2868,11 +2882,15 @@ module.exports = ".main-page-bg {\n  position: relative;\n  height: 100vh;\n  wi
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainPageComponent", function() { return MainPageComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _shared_constants_search_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/constants/search.config */ "./src/app/shared/constants/search.config.ts");
-/* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _shared_constants_search_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/constants/search.config */ "./src/app/shared/constants/search.config.ts");
+/* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _core_categories_categories_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/categories/categories.service */ "./src/app/core/categories/categories.service.ts");
+/* harmony import */ var _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum */ "./projects/ac-search-result/src/lib/components/search/search-form-names.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2888,24 +2906,35 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var MainPageComponent = /** @class */ (function () {
-    function MainPageComponent(surveysService, changeDetectorRef, router) {
+    function MainPageComponent(surveysService, changeDetectorRef, categoriesService, router) {
         this.surveysService = surveysService;
         this.changeDetectorRef = changeDetectorRef;
+        this.categoriesService = categoriesService;
         this.router = router;
         this.backgroundUrl = 'assets/mainpage.jpg';
-        this.searchConfig = _shared_constants_search_config__WEBPACK_IMPORTED_MODULE_1__["searchConfig"];
         this.isLoading = false;
         this.surveys = [];
-        this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.searchConfig = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_shared_constants_search_config__WEBPACK_IMPORTED_MODULE_2__["searchConfig"]);
+        this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
     }
+    MainPageComponent.prototype.getSearchConfig = function () {
+        return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(this.searchConfig);
+    };
     MainPageComponent.prototype.searchSurveys = function (data) {
         var _this = this;
         this.isLoading = true;
-        this.surveysService.fetchSurveys(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function () {
+        this.surveysService.fetchSurveys(data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(function () {
             _this.isLoading = false;
             _this.changeDetectorRef.detectChanges();
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])([]);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])([]);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["finalize"])(function () {
+            _this.isLoading = false;
+            _this.changeDetectorRef.detectChanges();
         })).subscribe();
     };
     MainPageComponent.prototype.displaySurvey = function (survey) {
@@ -2917,9 +2946,16 @@ var MainPageComponent = /** @class */ (function () {
     MainPageComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.isLoading = true;
+        this.categoriesService.fetchCategories().subscribe();
+        this.categoriesService.getCategories()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this.onDestroy))
+            .subscribe(function (values) {
+            _this.searchConfig.inputs[_projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_8__["SearchFormName"].TYPE].values = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["map"])(values, function (category) { return category.name; });
+            _this.changeDetectorRef.detectChanges();
+        });
         this.surveysService.fetchSurveys().subscribe();
         this.surveysService.getSurveys()
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(this.onDestroy)).subscribe(function (surveys) {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this.onDestroy)).subscribe(function (surveys) {
             _this.surveys = surveys;
             if (surveys.length && _this.isLoading) {
                 _this.isLoading = false;
@@ -2939,9 +2975,10 @@ var MainPageComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./main-page.component.scss */ "./src/app/components/main-page/main-page.component.scss")],
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
         }),
-        __metadata("design:paramtypes", [_core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_2__["SurveysService"],
+        __metadata("design:paramtypes", [_core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_3__["SurveysService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+            _core_categories_categories_service__WEBPACK_IMPORTED_MODULE_7__["CategoriesService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], MainPageComponent);
     return MainPageComponent;
 }());
@@ -3233,6 +3270,100 @@ var ResolveSurveyComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/core/categories/categories.service.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/core/categories/categories.service.ts ***!
+  \*******************************************************/
+/*! exports provided: CategoriesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoriesService", function() { return CategoriesService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _http_http_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../http/http.service */ "./src/app/core/http/http.service.ts");
+/* harmony import */ var ngx_alerts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-alerts */ "./node_modules/ngx-alerts/fesm5/ngx-alerts.js");
+/* harmony import */ var _shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/constants/requests.contants */ "./src/app/shared/constants/requests.contants.ts");
+/* harmony import */ var _http_http_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../http/http.enum */ "./src/app/core/http/http.enum.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var CategoriesService = /** @class */ (function () {
+    function CategoriesService(httpService, alertService) {
+        this.httpService = httpService;
+        this.alertService = alertService;
+        this.categories = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+    }
+    CategoriesService.prototype.remove = function (id) {
+        var _this = this;
+        return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.CATEGORIES_DELETE(id), _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].DELETE)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function () {
+            _this.alertService.danger('Kategoria nie została usunięta, wystąpił chwilowy błąd');
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])({});
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function () { return _this.alertService.success('Kategoria poprawnie usunięta'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["switchMap"])(function () { return _this.fetchCategories(); }));
+    };
+    CategoriesService.prototype.add = function (name) {
+        var _this = this;
+        return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.CATEGORIES_ADD, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].POST, {
+            queryObj: { name: name },
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function () {
+            _this.alertService.danger('Kategoria nie została dodana, wystąpił chwilowy błąd');
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])({});
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function () { return _this.alertService.success('Kategoria poprawnie dodana'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["switchMap"])(function () { return _this.fetchCategories(); }));
+    };
+    CategoriesService.prototype.getCategories = function () {
+        return this.categories;
+    };
+    CategoriesService.prototype.getCategoriesValue = function () {
+        return this.getCategories().getValue();
+    };
+    CategoriesService.prototype.setCategories = function (values) {
+        this.getCategories().next(values);
+    };
+    CategoriesService.prototype.getCategoryId = function (name) {
+        return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["find"])(this.getCategoriesValue(), { name: name }, 0), 'id', '');
+    };
+    CategoriesService.prototype.fetchCategories = function () {
+        var _this = this;
+        return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.CATEGORIES, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].GET)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function (err) {
+            _this.alertService.danger(err.statusText);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])({});
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (response) { return response.body; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function (response) { return _this.setCategories(response); }));
+    };
+    CategoriesService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_http_http_service__WEBPACK_IMPORTED_MODULE_3__["HttpService"],
+            ngx_alerts__WEBPACK_IMPORTED_MODULE_4__["AlertService"]])
+    ], CategoriesService);
+    return CategoriesService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/core/http/http.enum.ts":
 /*!****************************************!*\
   !*** ./src/app/core/http/http.enum.ts ***!
@@ -3445,6 +3576,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var _projects_ac_search_result_src_lib_components_search_search_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../projects/ac-search-result/src/lib/components/search/search.constants */ "./projects/ac-search-result/src/lib/components/search/search.constants.ts");
 /* harmony import */ var _surveys_type_enum__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
+/* harmony import */ var _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum */ "./projects/ac-search-result/src/lib/components/search/search-form-names.enum.ts");
+/* harmony import */ var _categories_categories_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../categories/categories.service */ "./src/app/core/categories/categories.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3465,10 +3598,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var moment = moment__WEBPACK_IMPORTED_MODULE_3__;
 var SurveysService = /** @class */ (function () {
-    function SurveysService(httpService, alertService) {
+    function SurveysService(httpService, categoriesService, alertService) {
         this.httpService = httpService;
+        this.categoriesService = categoriesService;
         this.alertService = alertService;
         this.surveys = (_a = {},
             _a[_surveys_type_enum__WEBPACK_IMPORTED_MODULE_10__["SurveyType"].USER] = new rxjs__WEBPACK_IMPORTED_MODULE_8__["BehaviorSubject"]([]),
@@ -3539,10 +3675,7 @@ var SurveysService = /** @class */ (function () {
         return (Object(lodash__WEBPACK_IMPORTED_MODULE_4__["isEmpty"])(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["omitBy"])(data, lodash__WEBPACK_IMPORTED_MODULE_4__["isEmpty"]))
             ? this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.LIST, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].GET)
             : this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.LIST, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].POST, {
-                queryObj: {
-                    start: this.mapDate(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'beginDate', '')),
-                    end: this.mapDate(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'endDate', ''))
-                },
+                queryObj: this.getFetchQueryObj(data),
             }))
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function (err) {
             _this.alertService.danger(err.statusText);
@@ -3568,6 +3701,13 @@ var SurveysService = /** @class */ (function () {
             _this.alertService.success(response.body.message);
         }));
     };
+    SurveysService.prototype.getFetchQueryObj = function (data) {
+        return {
+            start: this.mapDate(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, "[" + _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_11__["SearchFormName"].BEGIN_DATE + "]", '')),
+            end: this.mapDate(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, "[" + _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_11__["SearchFormName"].END_DATE + "]", '')),
+            category: this.categoriesService.getCategoryId(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, "[" + _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_11__["SearchFormName"].TYPE + "]", '')),
+        };
+    };
     SurveysService.prototype.mapDate = function (date) {
         return date ? moment(date, _projects_ac_search_result_src_lib_components_search_search_constants__WEBPACK_IMPORTED_MODULE_9__["CONSTANTS"].DATE_FORMAT.DISPLAY).format(_projects_ac_search_result_src_lib_components_search_search_constants__WEBPACK_IMPORTED_MODULE_9__["CONSTANTS"].DATE_FORMAT.REQUEST) : '';
     };
@@ -3575,6 +3715,7 @@ var SurveysService = /** @class */ (function () {
         var extraInformations = [
             { name: 'Autor', value: survey.owner.name },
             { name: 'Utworzono', value: survey.created_at },
+            { name: 'Kategoria', value: Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(survey, 'category.name', '') },
         ];
         if (survey.updated_at) {
             extraInformations.push({ name: 'Zaktualizowano', value: survey.updated_at });
@@ -3592,6 +3733,7 @@ var SurveysService = /** @class */ (function () {
     SurveysService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
         __metadata("design:paramtypes", [_http_http_service__WEBPACK_IMPORTED_MODULE_1__["HttpService"],
+            _categories_categories_service__WEBPACK_IMPORTED_MODULE_12__["CategoriesService"],
             ngx_alerts__WEBPACK_IMPORTED_MODULE_2__["AlertService"]])
     ], SurveysService);
     return SurveysService;
@@ -3776,6 +3918,133 @@ var UserService = /** @class */ (function () {
             ngx_alerts__WEBPACK_IMPORTED_MODULE_1__["AlertService"]])
     ], UserService);
     return UserService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/categories/categories.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/shared/categories/categories.component.html ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ac-loader *ngIf=\"isLoading; else loadedData\"></ac-loader>\n<ng-template #loadedData>\n  <div class=\"max-height-300\">\n    <mat-list *ngFor=\"let category of categories\">\n      <mat-list-item>\n        <div class=\"display-flex width-100\">\n          <p class=\"pointer\"\n             [class.active]=\"activeId === category.id\"\n             (click)=\"select(category)\">\n            {{category.name}}\n          </p>\n          <div *ngIf=\"isActionButtons\"\n               class=\"display-flex\">\n            <button mat-button\n                    (click)=\"remove(category)\"\n                    color=\"warn\">\n              Usuń kategorię\n            </button>\n            <button mat-button\n                    (click)=\"edit(category)\"\n                    color=\"primary\">\n              Edytuj kategorię\n            </button>\n          </div>\n        </div>\n      </mat-list-item>\n    </mat-list>\n  </div>\n</ng-template>\n<div *ngIf=\"isAddNewCategorySection\">\n  <form class=\"display-flex width-100 margin-top-20px\">\n    <mat-form-field>\n      <input matInput\n             placeholder=\"Nazwa nowej kategorii\"\n             [value]=\"newCategoryName\"\n             (input)=\"newCategoryName = $event.target.value\">\n    </mat-form-field>\n    <button mat-button\n            [disabled]=\"!newCategoryName\"\n            (click)=\"add()\"\n            color=\"primary\">Dodaj kategorię</button>\n  </form>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/categories/categories.component.scss":
+/*!*************************************************************!*\
+  !*** ./src/app/shared/categories/categories.component.scss ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".display-flex {\n  justify-content: space-between; }\n\n.active {\n  font-weight: 900;\n  color: green; }\n\n.max-height-300 {\n  max-height: 300px;\n  overflow-y: auto; }\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/categories/categories.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/shared/categories/categories.component.ts ***!
+  \***********************************************************/
+/*! exports provided: CategoriesComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoriesComponent", function() { return CategoriesComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _core_categories_categories_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/categories/categories.service */ "./src/app/core/categories/categories.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var CategoriesComponent = /** @class */ (function () {
+    function CategoriesComponent(categoriesService) {
+        this.categoriesService = categoriesService;
+        this.isActionButtons = false;
+        this.isAddNewCategorySection = false;
+        this.onSelect = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.categories = [];
+        this.isLoading = true;
+        this.newCategoryName = '';
+        this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+    }
+    CategoriesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.getCategories()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(this.onDestroy))
+            .subscribe(function (categories) {
+            _this.categories = categories;
+            _this.isLoading = false;
+        });
+    };
+    CategoriesComponent.prototype.ngOnDestroy = function () {
+        this.onDestroy.next();
+        this.onDestroy.complete();
+        this.onDestroy.unsubscribe();
+    };
+    CategoriesComponent.prototype.remove = function (event) {
+        var _this = this;
+        this.isLoading = true;
+        this.categoriesService.remove(event.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["finalize"])(function () { return _this.isLoading = false; })).subscribe();
+    };
+    CategoriesComponent.prototype.edit = function (category) {
+        console.log(category);
+    };
+    CategoriesComponent.prototype.add = function () {
+        var _this = this;
+        this.isLoading = true;
+        this.categoriesService.add(this.newCategoryName).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["finalize"])(function () {
+            _this.isLoading = false;
+            _this.newCategoryName = '';
+        })).subscribe();
+    };
+    CategoriesComponent.prototype.select = function (event) {
+        this.onSelect.emit(event);
+    };
+    CategoriesComponent.prototype.getCategories = function () {
+        return this.categoriesService.getCategories();
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], CategoriesComponent.prototype, "isActionButtons", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], CategoriesComponent.prototype, "isAddNewCategorySection", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], CategoriesComponent.prototype, "activeId", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], CategoriesComponent.prototype, "onSelect", void 0);
+    CategoriesComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'ac-categories',
+            template: __webpack_require__(/*! ./categories.component.html */ "./src/app/shared/categories/categories.component.html"),
+            styles: [__webpack_require__(/*! ./categories.component.scss */ "./src/app/shared/categories/categories.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_core_categories_categories_service__WEBPACK_IMPORTED_MODULE_1__["CategoriesService"]])
+    ], CategoriesComponent);
+    return CategoriesComponent;
 }());
 
 
@@ -4049,6 +4318,8 @@ var RequestsContants = /** @class */ (function () {
     RequestsContants.SURVEYS = {
         RESPONSE: 'response/add',
         USER: 'api/questionnaire/list-user',
+        CATEGORIES: 'category/get',
+        CATEGORIES_ADD: 'api/category/add',
         LIST: 'questionnaire/list-all',
         EDIT: 'api/questionnaire/edit',
         ADD: 'api/questionnaire/add',
@@ -4057,6 +4328,8 @@ var RequestsContants = /** @class */ (function () {
         SINGLE: function (id) { return "questionnaire/" + id + "/get"; },
         ACCEPT: function (id) { return "api/admin/accept/" + id; },
         DELETE: function (id) { return "api/questionnaire/" + id + "/delete"; },
+        CATEGORIES_DELETE: function (id) { return "api/category/edit/" + id; },
+        CATEGORIES_EDIT: function (id) { return "api/category/edit/" + id; },
     };
     return RequestsContants;
 }());
@@ -4076,10 +4349,29 @@ var _a;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchConfig", function() { return searchConfig; });
+/* harmony import */ var _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum */ "./projects/ac-search-result/src/lib/components/search/search-form-names.enum.ts");
+
 var searchConfig = {
     otherSelects: [],
-    inputs: {}
+    inputs: (_a = {},
+        //   [SearchFormName.TEXT]: {
+        //     value: 'Ankieta o ziemniakiach',
+        //     isRequired: false,
+        //     regex: '',
+        //     title: 'xddd',
+        //   },
+        _a[_projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_0__["SearchFormName"].TYPE] = {
+            title: 'Wybierz kategorię',
+            value: '',
+            isRequired: true,
+            selectOption: {
+                canBeNull: false,
+            },
+            values: [],
+        },
+        _a)
 };
+var _a;
 
 
 /***/ }),
@@ -4119,12 +4411,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/loader/loader.component */ "./src/app/shared/components/loader/loader.component.ts");
+/* harmony import */ var _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./categories/categories.component */ "./src/app/shared/categories/categories.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -4141,7 +4435,10 @@ var SharedModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatListModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatProgressSpinnerModule"],
             ],
             exports: [
@@ -4151,8 +4448,9 @@ var SharedModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
                 _components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"],
                 _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"],
+                _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__["CategoriesComponent"],
             ],
-            declarations: [_components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"], _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"]]
+            declarations: [_components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"], _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"], _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__["CategoriesComponent"]]
         })
     ], SharedModule);
     return SharedModule;

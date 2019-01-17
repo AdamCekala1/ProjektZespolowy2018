@@ -6,11 +6,13 @@ import { SearchDatesComponent } from './search-dates/search-dates.component';
 import { SearchSelectComponent } from './search-select/search-select.component';
 import { SearchSubmitComponent } from './search-submit/search-submit.component';
 import { SharedModule } from '../../shared/shared.module';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    MatTooltipModule,
   ],
   declarations: [
     SearchComponent,

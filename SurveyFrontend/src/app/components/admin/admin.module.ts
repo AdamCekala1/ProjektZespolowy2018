@@ -16,6 +16,7 @@ import {
 import { AcSearchResultModule } from '../../../../projects/ac-search-result/src/lib/ac-search-result.module';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminSurveysResolver } from './admin-surveys.resolver';
+import { AdminCategoriesResolver } from './admin-categories.resolver';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { AdminSurveysResolver } from './admin-surveys.resolver';
     AdminSurveysComponent,
     AdminPanelComponent,
   ],
-  providers: [AdminSurveysResolver],
+  providers: [AdminSurveysResolver, AdminCategoriesResolver],
   imports: [
     CommonModule,
     SharedModule,

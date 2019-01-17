@@ -5,6 +5,7 @@ import * as moment_ from 'moment';
 import { IQuestion } from './create-survey.interface';
 import { CreateSurveyService } from './create-survey.service';
 import { Observable } from 'rxjs';
+import { ICategories } from '../../core/categories/categories.interface';
 
 const moment = moment_;
 
@@ -17,8 +18,14 @@ export class CreateSurveyComponent {
   questions: IQuestion[] = [];
   title: string = '';
   addQuestionMode: boolean = false;
+  category: ICategories = {} as ICategories;
 
-  constructor(private createSurveyService: CreateSurveyService) { }
+  constructor(private createSurveyService: CreateSurveyService) {
+  }
+
+  setActiveCategoryId(category: ICategories) {
+    this.category = category;
+  }
 
   isModalVisible(): Observable<boolean> {
     return this.createSurveyService.getIsVisible();
@@ -39,7 +46,7 @@ export class CreateSurveyComponent {
   }
 
   saveSurvey() {
-    this.createSurveyService.saveSurvey(this.title, this.questions).subscribe()
+    this.createSurveyService.saveSurvey(this.title, this.questions, this.category).subscribe();
   }
 
   removeSurvey() {

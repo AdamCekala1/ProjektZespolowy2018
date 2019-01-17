@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import { get } from 'lodash';
 
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SearchFormName } from './search-form-names.enum';
 import {
   ISearchConfig,
@@ -19,7 +27,9 @@ export class SearchComponent implements OnInit {
   @Input('config') set setConfig(config: ISearchConfig) {
     this.config = config;
 
-    this.createForm(config.inputs);
+    if(!this.form) {
+      this.createForm(config.inputs);
+    }
   }
   @Output() onSubmit: EventEmitter<IDictionary<string>> = new EventEmitter();
   config: ISearchConfig;
@@ -35,7 +45,6 @@ export class SearchComponent implements OnInit {
   }
 
   isSubmitDisabled(): boolean {
-    console.log(!this.form.valid)
     return !this.form.valid;
   }
 
@@ -46,9 +55,9 @@ export class SearchComponent implements OnInit {
   private createForm(config: ISearchConfigInputs) {
     this.form = this.formBuilder.group({
       [SearchFormName.TEXT]: get(config, `[${SearchFormName.TEXT}].value`, ''),
-      [SearchFormName.TYPE]: get(config, `[${SearchFormName.TYPE}].value`, ''),
-      [SearchFormName.BEGIN_DATE]: get(config, `[${SearchFormName.BEGIN_DATE}].value`, ''),
-      [SearchFormName.END_DATE]: get(config, `[${SearchFormName.END_DATE}].value`, ''),
+      [SearchFormName.TYPE]: [get(config, `[${SearchFormName.TYPE}].value`, ''), Validators.required],
+      [SearchFormName.BEGIN_DATE]: [get(config, `[${SearchFormName.BEGIN_DATE}].value`, ''), Validators.required],
+      [SearchFormName.END_DATE]: [get(config, `[${SearchFormName.END_DATE}].value`, ''), Validators.required],
     });
   }
 }

@@ -5,7 +5,7 @@
   <div class="main-page-bg-content">
     <h1>Czego szukasz?</h1>
     <div class="main-page-bg-search">
-      <ac-search [config]="searchConfig"
+      <ac-search [config]="getSearchConfig()"
                  (onSubmit)="searchSurveys($event)"></ac-search>
     </div>
   </div>

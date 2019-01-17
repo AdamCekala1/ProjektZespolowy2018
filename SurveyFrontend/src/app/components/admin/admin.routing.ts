@@ -6,13 +6,14 @@ import { CanActivateAdminGuard } from '../../core/guards/can-activate-admin.guar
 import { AdminSurveysComponent } from './admin-surveys/admin-surveys.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminSurveysResolver } from './admin-surveys.resolver';
+import { AdminCategoriesResolver } from './admin-categories.resolver';
 
 export const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
     canActivate: [CanActivateUserGuard, CanActivateAdminGuard],
-    resolve: [AdminSurveysResolver],
+    resolve: { surveys: AdminSurveysResolver, categories: AdminCategoriesResolver},
     children: [
       {
         path: '',

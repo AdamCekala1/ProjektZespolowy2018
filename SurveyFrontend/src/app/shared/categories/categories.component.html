@@ -1,0 +1,43 @@
+<ac-loader *ngIf="isLoading; else loadedData"></ac-loader>
+<ng-template #loadedData>
+  <div class="max-height-300">
+    <mat-list *ngFor="let category of categories">
+      <mat-list-item>
+        <div class="display-flex width-100">
+          <p class="pointer"
+             [class.active]="activeId === category.id"
+             (click)="select(category)">
+            {{category.name}}
+          </p>
+          <div *ngIf="isActionButtons"
+               class="display-flex">
+            <button mat-button
+                    (click)="remove(category)"
+                    color="warn">
+              Usuń kategorię
+            </button>
+            <button mat-button
+                    (click)="edit(category)"
+                    color="primary">
+              Edytuj kategorię
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</ng-template>
+<div *ngIf="isAddNewCategorySection">
+  <form class="display-flex width-100 margin-top-20px">
+    <mat-form-field>
+      <input matInput
+             placeholder="Nazwa nowej kategorii"
+             [value]="newCategoryName"
+             (input)="newCategoryName = $event.target.value">
+    </mat-form-field>
+    <button mat-button
+            [disabled]="!newCategoryName"
+            (click)="add()"
+            color="primary">Dodaj kategorię</button>
+  </form>
+</div>
