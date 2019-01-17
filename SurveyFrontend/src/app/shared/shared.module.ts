@@ -12,6 +12,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from './components/loader/loader.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { CategoriesContentListComponent } from './categories/categories-content-list/categories-content-list.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,6 @@ import { CategoriesComponent } from './categories/categories.component';
     LoaderComponent,
     CategoriesComponent,
   ],
-  declarations: [ModalComponent, LoaderComponent, CategoriesComponent]
+  declarations: [ModalComponent, LoaderComponent, CategoriesComponent, CategoriesContentListComponent]
 })
 export class SharedModule { }

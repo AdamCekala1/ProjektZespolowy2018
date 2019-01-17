@@ -38,16 +38,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.onDestroy.unsubscribe();
   }
 
-  remove(event: ICategories) {
-    this.isLoading = true;
-
-    this.categoriesService.remove(event.id).pipe(finalize(() => this.isLoading = false)).subscribe();
-  }
-
-  edit(category: ICategories) {
-    console.log(category);
-  }
-
   add() {
     this.isLoading = true;
 

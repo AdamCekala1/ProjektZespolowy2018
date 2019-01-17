@@ -1,0 +1,47 @@
+<div *ngIf="!isEdit;else editMode"
+     class="display-flex width-100">
+  <p class="pointer"
+     [class.active]="activeId === category.id"
+     (click)="select()">
+    {{category.name}}
+  </p>
+  <div *ngIf="isActionButtons"
+       class="display-flex">
+    <button mat-button
+            (click)="remove()"
+            color="warn">
+      Usuń kategorię
+    </button>
+    <button mat-button
+            (click)="setIsEdit(true)"
+            color="primary">
+      Edytuj kategorię
+    </button>
+  </div>
+</div>
+<ng-template #editMode>
+  <div class="display-flex width-100">
+    <form class="display-flex width-100 margin-top-20px">
+      <mat-form-field>
+        <input matInput
+               placeholder="{{category.name}}"
+               [value]="newCategoryName"
+               (input)="newCategoryName = $event.target.value">
+      </mat-form-field>
+      <div *ngIf="isActionButtons"
+           class="display-flex">
+        <button mat-button
+                (click)="closeEditMode()"
+                color="warn">
+          Anuluj zmiany
+        </button>
+        <button mat-button
+                [disabled]="!newCategoryName || newCategoryName === category.name"
+                (click)="edit()"
+                color="primary">
+          Zmień kategorię
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

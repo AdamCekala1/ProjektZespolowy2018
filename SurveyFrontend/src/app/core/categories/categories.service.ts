@@ -19,6 +19,21 @@ export class CategoriesService {
               private alertService: AlertService) {
   }
 
+  edit(name: string, id: number) {
+    return this.httpService.httpRequest(RequestsContants.SURVEYS.CATEGORIES_EDIT(id), RequestTypes.POST, {
+      queryObj: {name},
+    })
+      .pipe(
+        catchError(() => {
+          this.alertService.danger('Kategoria nie została zmieniona, wystąpił chwilowy błąd');
+
+          return throwError({});
+        }),
+        tap(() => this.alertService.success('Kategoria poprawnie zmieniona')),
+        switchMap(() => this.fetchCategories())
+      );
+  }
+
   remove(id: number): Observable<ICategories[]> {
     return this.httpService.httpRequest(RequestsContants.SURVEYS.CATEGORIES_DELETE(id), RequestTypes.DELETE)
       .pipe(

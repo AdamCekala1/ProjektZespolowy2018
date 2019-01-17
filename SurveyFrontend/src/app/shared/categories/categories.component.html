@@ -3,26 +3,11 @@
   <div class="max-height-300">
     <mat-list *ngFor="let category of categories">
       <mat-list-item>
-        <div class="display-flex width-100">
-          <p class="pointer"
-             [class.active]="activeId === category.id"
-             (click)="select(category)">
-            {{category.name}}
-          </p>
-          <div *ngIf="isActionButtons"
-               class="display-flex">
-            <button mat-button
-                    (click)="remove(category)"
-                    color="warn">
-              Usuń kategorię
-            </button>
-            <button mat-button
-                    (click)="edit(category)"
-                    color="primary">
-              Edytuj kategorię
-            </button>
-          </div>
-        </div>
+        <ac-categories-content-list class="width-100"
+                                    [category]="category"
+                                    [isActionButtons]="isActionButtons"
+                                    [activeId]="activeId"
+                                    (isLoading)="isLoading = $event"></ac-categories-content-list>
       </mat-list-item>
     </mat-list>
   </div>

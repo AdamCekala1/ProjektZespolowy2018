@@ -3312,6 +3312,16 @@ var CategoriesService = /** @class */ (function () {
         this.alertService = alertService;
         this.categories = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
     }
+    CategoriesService.prototype.edit = function (name, id) {
+        var _this = this;
+        return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.CATEGORIES_EDIT(id), _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].POST, {
+            queryObj: { name: name },
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function () {
+            _this.alertService.danger('Kategoria nie została zmieniona, wystąpił chwilowy błąd');
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])({});
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function () { return _this.alertService.success('Kategoria poprawnie zmieniona'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["switchMap"])(function () { return _this.fetchCategories(); }));
+    };
     CategoriesService.prototype.remove = function (id) {
         var _this = this;
         return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.CATEGORIES_DELETE(id), _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].DELETE)
@@ -3924,6 +3934,118 @@ var UserService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/categories/categories-content-list/categories-content-list.component.html":
+/*!**************************************************************************************************!*\
+  !*** ./src/app/shared/categories/categories-content-list/categories-content-list.component.html ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"!isEdit;else editMode\"\n     class=\"display-flex width-100\">\n  <p class=\"pointer\"\n     [class.active]=\"activeId === category.id\"\n     (click)=\"select()\">\n    {{category.name}}\n  </p>\n  <div *ngIf=\"isActionButtons\"\n       class=\"display-flex\">\n    <button mat-button\n            (click)=\"remove()\"\n            color=\"warn\">\n      Usuń kategorię\n    </button>\n    <button mat-button\n            (click)=\"setIsEdit(true)\"\n            color=\"primary\">\n      Edytuj kategorię\n    </button>\n  </div>\n</div>\n<ng-template #editMode>\n  <div class=\"display-flex width-100\">\n    <form class=\"display-flex width-100 margin-top-20px\">\n      <mat-form-field>\n        <input matInput\n               placeholder=\"{{category.name}}\"\n               [value]=\"newCategoryName\"\n               (input)=\"newCategoryName = $event.target.value\">\n      </mat-form-field>\n      <div *ngIf=\"isActionButtons\"\n           class=\"display-flex\">\n        <button mat-button\n                (click)=\"closeEditMode()\"\n                color=\"warn\">\n          Anuluj zmiany\n        </button>\n        <button mat-button\n                [disabled]=\"!newCategoryName || newCategoryName === category.name\"\n                (click)=\"edit()\"\n                color=\"primary\">\n          Zmień kategorię\n        </button>\n      </div>\n    </form>\n  </div>\n</ng-template>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/categories/categories-content-list/categories-content-list.component.scss":
+/*!**************************************************************************************************!*\
+  !*** ./src/app/shared/categories/categories-content-list/categories-content-list.component.scss ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".display-flex {\n  justify-content: space-between; }\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/categories/categories-content-list/categories-content-list.component.ts":
+/*!************************************************************************************************!*\
+  !*** ./src/app/shared/categories/categories-content-list/categories-content-list.component.ts ***!
+  \************************************************************************************************/
+/*! exports provided: CategoriesContentListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoriesContentListComponent", function() { return CategoriesContentListComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _core_categories_categories_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../core/categories/categories.service */ "./src/app/core/categories/categories.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CategoriesContentListComponent = /** @class */ (function () {
+    function CategoriesContentListComponent(categoriesService) {
+        this.categoriesService = categoriesService;
+        this.isActionButtons = false;
+        this.onSelect = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.isLoading = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.isEdit = false;
+        this.newCategoryName = '';
+    }
+    CategoriesContentListComponent.prototype.setIsEdit = function (isEdit) {
+        this.isEdit = isEdit;
+    };
+    CategoriesContentListComponent.prototype.closeEditMode = function () {
+        this.setIsEdit(false);
+        this.newCategoryName = '';
+    };
+    CategoriesContentListComponent.prototype.select = function () {
+        this.onSelect.emit(this.category);
+    };
+    CategoriesContentListComponent.prototype.remove = function () {
+        var _this = this;
+        this.isLoading.emit(true);
+        this.categoriesService.remove(this.category.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["finalize"])(function () { return _this.isLoading.emit(false); })).subscribe();
+    };
+    CategoriesContentListComponent.prototype.edit = function () {
+        var _this = this;
+        this.isLoading.emit(true);
+        this.categoriesService.edit(this.newCategoryName, this.category.id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["finalize"])(function () { return _this.isLoading.emit(false); })).subscribe();
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CategoriesContentListComponent.prototype, "category", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], CategoriesContentListComponent.prototype, "isActionButtons", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], CategoriesContentListComponent.prototype, "activeId", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], CategoriesContentListComponent.prototype, "onSelect", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], CategoriesContentListComponent.prototype, "isLoading", void 0);
+    CategoriesContentListComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'ac-categories-content-list',
+            template: __webpack_require__(/*! ./categories-content-list.component.html */ "./src/app/shared/categories/categories-content-list/categories-content-list.component.html"),
+            styles: [__webpack_require__(/*! ./categories-content-list.component.scss */ "./src/app/shared/categories/categories-content-list/categories-content-list.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_core_categories_categories_service__WEBPACK_IMPORTED_MODULE_2__["CategoriesService"]])
+    ], CategoriesContentListComponent);
+    return CategoriesContentListComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/categories/categories.component.html":
 /*!*************************************************************!*\
   !*** ./src/app/shared/categories/categories.component.html ***!
@@ -3931,7 +4053,7 @@ var UserService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ac-loader *ngIf=\"isLoading; else loadedData\"></ac-loader>\n<ng-template #loadedData>\n  <div class=\"max-height-300\">\n    <mat-list *ngFor=\"let category of categories\">\n      <mat-list-item>\n        <div class=\"display-flex width-100\">\n          <p class=\"pointer\"\n             [class.active]=\"activeId === category.id\"\n             (click)=\"select(category)\">\n            {{category.name}}\n          </p>\n          <div *ngIf=\"isActionButtons\"\n               class=\"display-flex\">\n            <button mat-button\n                    (click)=\"remove(category)\"\n                    color=\"warn\">\n              Usuń kategorię\n            </button>\n            <button mat-button\n                    (click)=\"edit(category)\"\n                    color=\"primary\">\n              Edytuj kategorię\n            </button>\n          </div>\n        </div>\n      </mat-list-item>\n    </mat-list>\n  </div>\n</ng-template>\n<div *ngIf=\"isAddNewCategorySection\">\n  <form class=\"display-flex width-100 margin-top-20px\">\n    <mat-form-field>\n      <input matInput\n             placeholder=\"Nazwa nowej kategorii\"\n             [value]=\"newCategoryName\"\n             (input)=\"newCategoryName = $event.target.value\">\n    </mat-form-field>\n    <button mat-button\n            [disabled]=\"!newCategoryName\"\n            (click)=\"add()\"\n            color=\"primary\">Dodaj kategorię</button>\n  </form>\n</div>\n"
+module.exports = "<ac-loader *ngIf=\"isLoading; else loadedData\"></ac-loader>\n<ng-template #loadedData>\n  <div class=\"max-height-300\">\n    <mat-list *ngFor=\"let category of categories\">\n      <mat-list-item>\n        <ac-categories-content-list class=\"width-100\"\n                                    [category]=\"category\"\n                                    [isActionButtons]=\"isActionButtons\"\n                                    [activeId]=\"activeId\"\n                                    (isLoading)=\"isLoading = $event\"></ac-categories-content-list>\n      </mat-list-item>\n    </mat-list>\n  </div>\n</ng-template>\n<div *ngIf=\"isAddNewCategorySection\">\n  <form class=\"display-flex width-100 margin-top-20px\">\n    <mat-form-field>\n      <input matInput\n             placeholder=\"Nazwa nowej kategorii\"\n             [value]=\"newCategoryName\"\n             (input)=\"newCategoryName = $event.target.value\">\n    </mat-form-field>\n    <button mat-button\n            [disabled]=\"!newCategoryName\"\n            (click)=\"add()\"\n            color=\"primary\">Dodaj kategorię</button>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -3997,14 +4119,6 @@ var CategoriesComponent = /** @class */ (function () {
         this.onDestroy.next();
         this.onDestroy.complete();
         this.onDestroy.unsubscribe();
-    };
-    CategoriesComponent.prototype.remove = function (event) {
-        var _this = this;
-        this.isLoading = true;
-        this.categoriesService.remove(event.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["finalize"])(function () { return _this.isLoading = false; })).subscribe();
-    };
-    CategoriesComponent.prototype.edit = function (category) {
-        console.log(category);
     };
     CategoriesComponent.prototype.add = function () {
         var _this = this;
@@ -4412,12 +4526,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/loader/loader.component */ "./src/app/shared/components/loader/loader.component.ts");
 /* harmony import */ var _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./categories/categories.component */ "./src/app/shared/categories/categories.component.ts");
+/* harmony import */ var _categories_categories_content_list_categories_content_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./categories/categories-content-list/categories-content-list.component */ "./src/app/shared/categories/categories-content-list/categories-content-list.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -4450,7 +4566,7 @@ var SharedModule = /** @class */ (function () {
                 _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"],
                 _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__["CategoriesComponent"],
             ],
-            declarations: [_components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"], _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"], _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__["CategoriesComponent"]]
+            declarations: [_components_modal_modal_component__WEBPACK_IMPORTED_MODULE_3__["ModalComponent"], _components_loader_loader_component__WEBPACK_IMPORTED_MODULE_6__["LoaderComponent"], _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__["CategoriesComponent"], _categories_categories_content_list_categories_content_list_component__WEBPACK_IMPORTED_MODULE_8__["CategoriesContentListComponent"]]
         })
     ], SharedModule);
     return SharedModule;
