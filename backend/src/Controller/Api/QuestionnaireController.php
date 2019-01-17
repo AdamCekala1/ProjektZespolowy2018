@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Answer;
+use App\Entity\Category;
 use App\Entity\EntityBase;
 use App\Entity\Question;
 use App\Entity\Questionnaire as Entity;
@@ -25,6 +26,7 @@ class QuestionnaireController extends BaseController
     {
         try{
             $questionnaire = $this->serial->deserialize($request->getContent(), Questionnaire::class, 'json');
+            $category = $this->entityManager->getRepository(Category::class)->find($questionnaire->getCategory()->getId());
             foreach($questionnaire->getQuestion() as $item)
             {
                 $item->setQuestionnaire($questionnaire);
@@ -35,6 +37,7 @@ class QuestionnaireController extends BaseController
             }
             $questionnaire
                 ->setOwner($this->getUserEntity($request))
+                ->setCategory($category)
                 ->setAccept(false);
             $this->entityManager->persist($questionnaire);
             $this->entityManager->flush();
@@ -80,14 +83,15 @@ class QuestionnaireController extends BaseController
 
     /**
      * @Route("questionnaire/list-all", name="questionnaire_list")
-     * @Method("GET") // TODO na strone głowna - dodano
+     * @Method("GET,POST") // TODO na strone głowna - dodano
      */
     public function listQuestionnaire(Request $request): Response
     {
         if($request->getMethod() == 'POST')
         {
             $data = json_decode($request->getContent(), true);
-            $collection = $this->entityManager->getRepository(Questionnaire::class)->findByDate($data['start'], $data['end']);
+            $category = $this->entityManager->getRepository(Category::class)->find($data['category']);
+            $collection = $this->entityManager->getRepository(Questionnaire::class)->findByDate($data['start'], $data['end'],$category);
             return new Response($this->serial->serialize($collection, 'json'));
         }
         $collection = $this->entityManager->getRepository(Questionnaire::class)->findBy(['accept' => true]);

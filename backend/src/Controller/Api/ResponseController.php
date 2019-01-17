@@ -4,10 +4,12 @@
 namespace App\Controller\Api;
 
 use App\Entity\Answer;
+use App\Entity\Category;
 use App\Entity\Question;
 use App\Entity\Response as Entity;
 use App\Service\Response;
 use App\Service\SendResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +49,63 @@ class ResponseController extends BaseController
     {
        $result = $this->sumResponses($this->getResponses($questionnaire));
        return new \Symfony\Component\HttpFoundation\Response($this->serial->serialize($result,'json'));
+    }
+
+    /**
+     * @Route("api/category/add", name="category_new")
+     * @Method("POST")
+     * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
+     */
+    public function newCategory(Request $request)
+    {
+        try{
+            $category = $this->serial->deserialize($request->getContent(), Category::class, 'json');
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
+        }catch (\Throwable $exception)
+        {
+            return new JsonResponse(['message' => $exception->getMessage()]);
+        }
+
+        return new JsonResponse(['message' =>'Udalo się dodać kategorie']);
+    }
+
+    /**
+     * @Route("api/category/edit/{category}", name="category_edit")
+     * @Method("POST,DELETE")
+     * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
+     */
+    public function editCategory(Request $request, int $category)
+    {
+        try{
+            $categoryNew = $this->serial->deserialize($request->getContent(), Category::class, 'json');
+            $category = $this->entityManager->getRepository(Category::class)->find($category);
+            if($request->getMethod() == "DELETE")
+            {
+                $this->entityManager->remove($category);
+                $this->entityManager->flush();
+                return new JsonResponse(['message' => 'Udało się usunąć kategorie']);
+            }
+            $category->setName($categoryNew->getName());
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
+        }catch (\Throwable $exception)
+        {
+            return new JsonResponse(['message' => $exception->getMessage()]);
+        }
+
+        return new JsonResponse(['message' =>'Udalo się edytować kategorie']);
+    }
+    /**
+     * @Route("api/category/get", name="category_get")
+     * @Method("GET")
+     * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
+     */
+    public function getCategory()
+    {
+       $categories = $this->entityManager->getRepository(Category::class)->findAll();
+
+        return new \Symfony\Component\HttpFoundation\Response($this->serial->serialize($categories, 'json'));
     }
 
     private function getAnswer(int $id): Answer

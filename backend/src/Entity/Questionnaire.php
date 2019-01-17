@@ -65,6 +65,12 @@ class Questionnaire implements EntityBase, Editable
     private $accept;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="questionnaires",cascade={"persist"})
+     *  @Serializer\Type("App\Entity\Category")
+     */
+    private $category;
+
+    /**
      * Sets createdAt.
      *
      * @param  \DateTime $createdAt
@@ -200,6 +206,18 @@ class Questionnaire implements EntityBase, Editable
     public function setAccept($accept): self
     {
         $this->accept = $accept;
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
         return $this;
     }
 }
