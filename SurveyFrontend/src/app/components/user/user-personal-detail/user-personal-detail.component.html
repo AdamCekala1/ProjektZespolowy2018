@@ -3,7 +3,7 @@
      class="cursor-pointer fa fa-pencil padding-right-10"
      aria-hidden="true"></i>
   <div mat-line *ngIf="!isEditMode; else editMode">
-    <p><b>{{title}}</b> {{value}}</p>
+    <p [class.invalid]="isInvalid"><b>{{title}}</b> {{value}}</p>
     <p *ngIf="isChanged()"><b>Przed edycją: </b> {{oryginalValue}}</p>
   </div>
   <ng-template #editMode>

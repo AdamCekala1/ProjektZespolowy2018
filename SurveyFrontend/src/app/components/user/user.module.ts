@@ -8,7 +8,7 @@ import {
   MatDividerModule, MatExpansionModule,
   MatIconModule,
   MatInputModule,
-  MatListModule
+  MatListModule, MatTooltipModule
 } from '@angular/material';
 
 import { UserComponent } from './user.component';
@@ -38,6 +38,7 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     MatExpansionModule,
     MatDividerModule,
+    MatTooltipModule,
     MatInputModule,
     CommonModule,
     SharedModule,

@@ -4394,8 +4394,8 @@ var LoginRegisterConfig = {
                 value: '',
             }
         },
-        title: 'Login',
-        actionButtonTitle: 'Login',
+        title: 'Logowanie',
+        actionButtonTitle: 'Zaloguj',
         redirectSection: {
             goTo: _projects_ac_login_src_lib_shared_enums_view_type_enum__WEBPACK_IMPORTED_MODULE_0__["ViewType"].REGISTER,
             question: 'Nie masz konta?',
@@ -4453,8 +4453,8 @@ var LoginRegisterConfig = {
                 value: '',
             }
         },
-        title: 'Register',
-        actionButtonTitle: 'Register',
+        title: 'Rejectracja',
+        actionButtonTitle: 'Zarejestruj',
         redirectSection: {
             goTo: _projects_ac_login_src_lib_shared_enums_view_type_enum__WEBPACK_IMPORTED_MODULE_0__["ViewType"].LOGIN,
             question: 'Masz już konto?',

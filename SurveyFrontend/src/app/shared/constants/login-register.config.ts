@@ -25,8 +25,8 @@ export const LoginRegisterConfig = {
         value: '',
       }
     },
-    title: 'Login',
-    actionButtonTitle: 'Login',
+    title: 'Logowanie',
+    actionButtonTitle: 'Zaloguj',
     redirectSection: {
       goTo: ViewType.REGISTER,
       question: 'Nie masz konta?',
@@ -84,8 +84,8 @@ export const LoginRegisterConfig = {
         value: '',
       }
     },
-    title: 'Register',
-    actionButtonTitle: 'Register',
+    title: 'Rejectracja',
+    actionButtonTitle: 'Zarejestruj',
     redirectSection: {
       goTo: ViewType.LOGIN,
       question: 'Masz już konto?',

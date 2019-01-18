@@ -16,6 +16,7 @@ import { ControlValueAccessorWrapper } from '../../../../../projects/ac-search-r
 export class UserPersonalDetailComponent extends ControlValueAccessorWrapper implements ControlValueAccessor {
   @Input() title: string;
   @Input() oryginalValue: string;
+  @Input() isInvalid: boolean = false;
   value: string;
   isEditMode: boolean = false;
 

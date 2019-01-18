@@ -483,7 +483,7 @@ var ItemType;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-list [formGroup]=\"form\">\n  <h3 mat-subheader>Dane personalne</h3>\n  <ac-user-personal-detail [formControlName]=\"userFormName.NAME\"\n                           [oryginalValue]=\"clonedUser.name\"\n                           [title]=\"'Imie: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.SURNAME\"\n                           [oryginalValue]=\"clonedUser.surname\"\n                           [title]=\"'Nazwisko: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.EMAIL\"\n                           [oryginalValue]=\"clonedUser.email\"\n                           [title]=\"'Email: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.AGE\"\n                           [oryginalValue]=\"clonedUser.age\"\n                           [title]=\"'Wiek: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.CITY\"\n                           [oryginalValue]=\"clonedUser.city\"\n                           [title]=\"'Miasto: '\"></ac-user-personal-detail>\n</mat-list>\n<button mat-stroked-button\n        class=\"width-100 margin-top-20px\"\n        (click)=\"saveChangedUserData()\"\n        color=\"accent\">\n  Zapisz zmainy\n</button>\n"
+module.exports = "<mat-list [formGroup]=\"form\">\n  <h3 mat-subheader>Dane personalne</h3>\n  <ac-user-personal-detail [formControlName]=\"userFormName.NAME\"\n                           [oryginalValue]=\"clonedUser.name\"\n                           [title]=\"'Imie: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.SURNAME\"\n                           [oryginalValue]=\"clonedUser.surname\"\n                           [title]=\"'Nazwisko: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.EMAIL\"\n                           [oryginalValue]=\"clonedUser.email\"\n                           [isInvalid]=\"form.get(userFormName.EMAIL).invalid\"\n                           [title]=\"'Email: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.AGE\"\n                           [oryginalValue]=\"clonedUser.age\"\n                           [isInvalid]=\"form.get(userFormName.AGE).invalid\"\n                           [title]=\"'Wiek: '\"></ac-user-personal-detail>\n  <ac-user-personal-detail [formControlName]=\"userFormName.CITY\"\n                           [oryginalValue]=\"clonedUser.city\"\n                           [title]=\"'Miasto: '\"></ac-user-personal-detail>\n</mat-list>\n<div  matTooltip=\"{{form.invalid ? 'Niektóre pola są nieprawidłowe' : ''}}\">\n  <button mat-stroked-button\n          [disabled]=\"form.invalid\"\n          class=\"width-100 margin-top-20px\"\n          (click)=\"saveChangedUserData()\"\n          color=\"accent\">\n    Zapisz zmainy\n  </button>\n</div>\n"
 
 /***/ }),
 
@@ -667,7 +667,7 @@ var UserFormName;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-list-item>\r\n  <i (click)=\"toggleEditMode()\"\r\n     class=\"cursor-pointer fa fa-pencil padding-right-10\"\r\n     aria-hidden=\"true\"></i>\r\n  <div mat-line *ngIf=\"!isEditMode; else editMode\">\r\n    <p><b>{{title}}</b> {{value}}</p>\r\n    <p *ngIf=\"isChanged()\"><b>Przed edycją: </b> {{oryginalValue}}</p>\r\n  </div>\r\n  <ng-template #editMode>\r\n    <mat-form-field>\r\n      <input  matInput\r\n              [placeholder]=\"'Przed edycją :' + oryginalValue\"\r\n              (input)=\"saveChanges($event.target.value)\"\r\n              [value]=\"value\"/>\r\n    </mat-form-field>\r\n  </ng-template>\r\n</mat-list-item>\r\n<mat-divider></mat-divider>\r\n"
+module.exports = "<mat-list-item>\r\n  <i (click)=\"toggleEditMode()\"\r\n     class=\"cursor-pointer fa fa-pencil padding-right-10\"\r\n     aria-hidden=\"true\"></i>\r\n  <div mat-line *ngIf=\"!isEditMode; else editMode\">\r\n    <p [class.invalid]=\"isInvalid\"><b>{{title}}</b> {{value}}</p>\r\n    <p *ngIf=\"isChanged()\"><b>Przed edycją: </b> {{oryginalValue}}</p>\r\n  </div>\r\n  <ng-template #editMode>\r\n    <mat-form-field>\r\n      <input  matInput\r\n              [placeholder]=\"'Przed edycją :' + oryginalValue\"\r\n              (input)=\"saveChanges($event.target.value)\"\r\n              [value]=\"value\"/>\r\n    </mat-form-field>\r\n  </ng-template>\r\n</mat-list-item>\r\n<mat-divider></mat-divider>\r\n"
 
 /***/ }),
 
@@ -678,7 +678,7 @@ module.exports = "<mat-list-item>\r\n  <i (click)=\"toggleEditMode()\"\r\n     c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mat-list-item {\n  height: 80px; }\n"
+module.exports = ".mat-list-item {\n  height: 80px; }\n\n.invalid {\n  color: darkred; }\n"
 
 /***/ }),
 
@@ -722,6 +722,7 @@ var UserPersonalDetailComponent = /** @class */ (function (_super) {
     function UserPersonalDetailComponent(changeDetectorRef) {
         var _this = _super.call(this) || this;
         _this.changeDetectorRef = changeDetectorRef;
+        _this.isInvalid = false;
         _this.isEditMode = false;
         return _this;
     }
@@ -748,6 +749,10 @@ var UserPersonalDetailComponent = /** @class */ (function (_super) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", String)
     ], UserPersonalDetailComponent.prototype, "oryginalValue", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], UserPersonalDetailComponent.prototype, "isInvalid", void 0);
     UserPersonalDetailComponent = UserPersonalDetailComponent_1 = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'ac-user-personal-detail',
@@ -1011,6 +1016,7 @@ var UserModule = /** @class */ (function () {
             imports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatExpansionModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDividerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatTooltipModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatInputModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _shared_shared_module__WEBPACK_IMPORTED_MODULE_16__["SharedModule"],

@@ -8,17 +8,22 @@
                            [title]="'Nazwisko: '"></ac-user-personal-detail>
   <ac-user-personal-detail [formControlName]="userFormName.EMAIL"
                            [oryginalValue]="clonedUser.email"
+                           [isInvalid]="form.get(userFormName.EMAIL).invalid"
                            [title]="'Email: '"></ac-user-personal-detail>
   <ac-user-personal-detail [formControlName]="userFormName.AGE"
                            [oryginalValue]="clonedUser.age"
+                           [isInvalid]="form.get(userFormName.AGE).invalid"
                            [title]="'Wiek: '"></ac-user-personal-detail>
   <ac-user-personal-detail [formControlName]="userFormName.CITY"
                            [oryginalValue]="clonedUser.city"
                            [title]="'Miasto: '"></ac-user-personal-detail>
 </mat-list>
-<button mat-stroked-button
-        class="width-100 margin-top-20px"
-        (click)="saveChangedUserData()"
-        color="accent">
-  Zapisz zmainy
-</button>
+<div  matTooltip="{{form.invalid ? 'Niektóre pola są nieprawidłowe' : ''}}">
+  <button mat-stroked-button
+          [disabled]="form.invalid"
+          class="width-100 margin-top-20px"
+          (click)="saveChangedUserData()"
+          color="accent">
+    Zapisz zmainy
+  </button>
+</div>
