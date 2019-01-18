@@ -5,13 +5,13 @@
     max-height: 90vh;
 
     @media (min-width: 900px) {
-      max-width: 70vw;
-      max-height: 70vh;
+      width: 60vw;
+      height: 70vh;
     }
 
     @media (min-width: 1600px) {
       width: 50vw;
-      height: 50vh;
+      height: 70vh;
     }
   }
 

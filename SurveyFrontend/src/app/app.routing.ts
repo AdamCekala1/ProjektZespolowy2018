@@ -3,7 +3,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { ResolveSurveyComponent } from './components/resolve-survey/resolve-survey.component';
 
 export const appRoutes: Routes = [
-  { path: 'profile',
+  {
+    path: 'profile',
     loadChildren: './components/user/user.module#UserModule',
   },
   { path: 'admin',

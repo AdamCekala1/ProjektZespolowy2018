@@ -2350,7 +2350,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var appRoutes = [
-    { path: 'profile',
+    {
+        path: 'profile',
         loadChildren: './components/user/user.module#UserModule',
     },
     { path: 'admin',
@@ -2649,6 +2650,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _create_survey_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create-survey.service */ "./src/app/components/create-survey/create-survey.service.ts");
+/* harmony import */ var _core_categories_categories_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/categories/categories.service */ "./src/app/core/categories/categories.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2662,14 +2664,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var moment = moment__WEBPACK_IMPORTED_MODULE_2__;
 var CreateSurveyComponent = /** @class */ (function () {
-    function CreateSurveyComponent(createSurveyService) {
+    function CreateSurveyComponent(createSurveyService, categoriesService) {
         this.createSurveyService = createSurveyService;
+        this.categoriesService = categoriesService;
         this.questions = [];
         this.title = '';
         this.addQuestionMode = false;
         this.category = {};
+        categoriesService.fetchCategories().subscribe();
     }
     CreateSurveyComponent.prototype.setActiveCategoryId = function (category) {
         this.category = category;
@@ -2699,7 +2704,8 @@ var CreateSurveyComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./create-survey.component.html */ "./src/app/components/create-survey/create-survey.component.html"),
             styles: [__webpack_require__(/*! ./create-survey.component.scss */ "./src/app/components/create-survey/create-survey.component.scss")]
         }),
-        __metadata("design:paramtypes", [_create_survey_service__WEBPACK_IMPORTED_MODULE_3__["CreateSurveyService"]])
+        __metadata("design:paramtypes", [_create_survey_service__WEBPACK_IMPORTED_MODULE_3__["CreateSurveyService"],
+            _core_categories_categories_service__WEBPACK_IMPORTED_MODULE_4__["CategoriesService"]])
     ], CreateSurveyComponent);
     return CreateSurveyComponent;
 }());
@@ -4293,7 +4299,7 @@ module.exports = "<div class=\"modal-background\">\r\n  <mat-card class=\"modal-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".modal-size {\n  min-width: 50vw;\n  max-width: 90vw;\n  max-height: 90vh; }\n  @media (min-width: 900px) {\n    .modal-size {\n      max-width: 70vw;\n      max-height: 70vh; } }\n  @media (min-width: 1600px) {\n    .modal-size {\n      width: 50vw;\n      height: 50vh; } }\n  .modal-background:after {\n  position: fixed;\n  top: 0;\n  left: 0;\n  content: '';\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n  background: rgba(0, 0, 0, 0.7); }\n  .modal-position {\n  overflow-y: auto;\n  position: fixed;\n  z-index: 99999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n"
+module.exports = ".modal-size {\n  min-width: 50vw;\n  max-width: 90vw;\n  max-height: 90vh; }\n  @media (min-width: 900px) {\n    .modal-size {\n      width: 60vw;\n      height: 70vh; } }\n  @media (min-width: 1600px) {\n    .modal-size {\n      width: 50vw;\n      height: 70vh; } }\n  .modal-background:after {\n  position: fixed;\n  top: 0;\n  left: 0;\n  content: '';\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n  background: rgba(0, 0, 0, 0.7); }\n  .modal-position {\n  overflow-y: auto;\n  position: fixed;\n  z-index: 99999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n"
 
 /***/ }),
 

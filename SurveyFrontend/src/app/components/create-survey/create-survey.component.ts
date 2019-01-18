@@ -6,6 +6,7 @@ import { IQuestion } from './create-survey.interface';
 import { CreateSurveyService } from './create-survey.service';
 import { Observable } from 'rxjs';
 import { ICategories } from '../../core/categories/categories.interface';
+import { CategoriesService } from '../../core/categories/categories.service';
 
 const moment = moment_;
 
@@ -20,7 +21,9 @@ export class CreateSurveyComponent {
   addQuestionMode: boolean = false;
   category: ICategories = {} as ICategories;
 
-  constructor(private createSurveyService: CreateSurveyService) {
+  constructor(private createSurveyService: CreateSurveyService,
+              private categoriesService: CategoriesService) {
+    categoriesService.fetchCategories().subscribe();
   }
 
   setActiveCategoryId(category: ICategories) {
