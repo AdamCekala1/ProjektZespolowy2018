@@ -15,6 +15,7 @@ import { SurveyType } from './surveys-type.enum';
 import { IDictionary } from '../../shared/interfaces/utils.interfaces';
 import { SearchFormName } from '../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum';
 import { CategoriesService } from '../categories/categories.service';
+import { CookiesHandlerService } from '../cookies-handler/cookies-handler.service';
 
 const moment = moment_;
 
@@ -30,6 +31,7 @@ export class SurveysService {
 
   constructor(private httpService: HttpService,
               private categoriesService: CategoriesService,
+              private cookiesHandlerService: CookiesHandlerService,
               private alertService: AlertService) {
   }
 
@@ -130,7 +132,7 @@ export class SurveysService {
     });
   }
 
-  resolveSurveys(resolvers: ISurveyResolve[]): Observable<any> {
+  resolveSurveys(resolvers: ISurveyResolve[], id: number): Observable<any> {
     return this.httpService.httpRequest(RequestsContants.SURVEYS.RESPONSE, RequestTypes.POST, {
       queryObj: resolvers,
     }) .pipe(
@@ -140,6 +142,7 @@ export class SurveysService {
         return throwError({});
       }),
     tap((response: HttpResponse<{message: string}>) => {
+      this.cookiesHandlerService.handleCookies(id);
       this.alertService.success(response.body.message);
     })
     );

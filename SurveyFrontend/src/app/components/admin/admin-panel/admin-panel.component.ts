@@ -14,7 +14,7 @@ import { CategoriesService } from '../../../core/categories/categories.service';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent implements OnInit, OnDestroy {
-  backgroundUrl: string = 'assets/mainpage.jpg';
+  backgroundUrl: string = 'assets/admin-page.jpg';
   surveys: {accepted: ISurvey[], notAccepted: ISurvey[]} = {accepted: [], notAccepted: []};
   private onDestroy: Subject<boolean> = new Subject<boolean>();
 

@@ -356,7 +356,7 @@ var EditSurveyComponent = /** @class */ (function () {
         this.surveyService = surveyService;
         this.editQuestionService = editQuestionService;
         this.router = router;
-        this.backgroundUrl = 'assets/mainpage.jpg';
+        this.backgroundUrl = 'assets/edit.jpg';
         this.isLoading = false;
         this.itemType = _item_type_enum__WEBPACK_IMPORTED_MODULE_6__["ItemType"];
         this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_8__["Subject"]();
@@ -385,7 +385,6 @@ var EditSurveyComponent = /** @class */ (function () {
                         Object(lodash__WEBPACK_IMPORTED_MODULE_1__["set"])(mapped, 'answers', mappedAnswers);
                         return mapped;
                     });
-                    console.log(newStatistics);
                     _this.statisticks = newStatistics;
                 });
             }
@@ -518,6 +517,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_user_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../core/user/user.service */ "./src/app/core/user/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _shared_constants_login_register_config__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../shared/constants/login-register.config */ "./src/app/shared/constants/login-register.config.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -527,6 +527,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -568,9 +569,9 @@ var EditUserComponent = /** @class */ (function () {
         this.form = this.formBuilder.group((_a = {},
             _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].NAME] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'name', ''),
             _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].SURNAME] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'surname', ''),
-            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].AGE] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'age', ''),
+            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].AGE] = [Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'age', ''), _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].pattern(_shared_constants_login_register_config__WEBPACK_IMPORTED_MODULE_8__["regexs"].AGE)],
             _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].CITY] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'city', ''),
-            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].EMAIL] = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'email', ''),
+            _a[_user_form_name_enum__WEBPACK_IMPORTED_MODULE_3__["UserFormName"].EMAIL] = [Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(data, 'email', ''), _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].pattern(_shared_constants_login_register_config__WEBPACK_IMPORTED_MODULE_8__["regexs"].EMAIL)],
             _a));
         var _a;
     };
@@ -890,7 +891,7 @@ var UserComponent = /** @class */ (function () {
         this.router = router;
         this.changeDetectorRef = changeDetectorRef;
         this.formBuilder = formBuilder;
-        this.backgroundUrl = 'assets/mainpage.jpg';
+        this.backgroundUrl = 'assets/personal.jpg';
         this.isLoadingUserData = false;
         this.surveys = [];
         this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();

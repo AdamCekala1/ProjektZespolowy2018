@@ -10,6 +10,9 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           Pytania:
+          <b *ngIf="survey && isResolved()">
+            (Ankieta już wcześniej rozwiązana. Nie ma możliwości wysłania ponownie wyników)
+          </b>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div *ngFor="let question of survey?.response.question; let i = index">
@@ -30,13 +33,13 @@
     </mat-expansion-panel>
   </mat-card>
 </div>
-<button *ngIf="isSolved; else submitButton"
+<button *ngIf="isSolved || (survey && isResolved()); else submitButton"
         routerLink="/"
         mat-flat-button
         class="fixed-on-left"
         color="warn">Powrót na stronę głowną</button>
 <ng-template #submitButton>
-  <button [disabled]="!isDone()"
+  <button [disabled]="!isDone() || (survey && isResolved())"
           (click)="resolveSurvey()"
           mat-flat-button
           class="fixed-on-left"

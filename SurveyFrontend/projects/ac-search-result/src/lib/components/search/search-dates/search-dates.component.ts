@@ -44,7 +44,6 @@ export class SearchDatesComponent extends ControlValueAccessorWrapper implements
 
   writeValue(value: string) {
     this.actualDate = value;
-    console.log('write,', value)
   }
 
   setDateFromDatePicker(value: any) {
@@ -52,10 +51,8 @@ export class SearchDatesComponent extends ControlValueAccessorWrapper implements
   }
 
   private setDate(value: string) {
-    console.log('setDate', value)
     this.onChange(value);
     this.writeValue(value);
-    console.log(this.actualDate)
     this.changeDetectorRef.detectChanges();
   }
 }

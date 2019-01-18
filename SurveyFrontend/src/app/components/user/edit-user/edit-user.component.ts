@@ -7,8 +7,9 @@ import { get, isEqual, cloneDeep } from 'lodash';
 import { UserService } from '../../../core/user/user.service';
 import { SurveysService } from '../../../core/surveys/surveys.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IDictionary } from '../../../shared/interfaces/utils.interfaces';
+import { regexs } from '../../../shared/constants/login-register.config';
 
 @Component({
   selector: 'ac-edit-user',
@@ -55,9 +56,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       [UserFormName.NAME]: get(data, 'name', ''),
       [UserFormName.SURNAME]: get(data, 'surname', ''),
-      [UserFormName.AGE]: get(data, 'age', ''),
+      [UserFormName.AGE]: [get(data, 'age', ''), Validators.pattern(regexs.AGE)],
       [UserFormName.CITY]: get(data, 'city', ''),
-      [UserFormName.EMAIL]: get(data, 'email', ''),
+      [UserFormName.EMAIL]: [get(data, 'email', ''), Validators.pattern(regexs.EMAIL)],
     });
   }
 }

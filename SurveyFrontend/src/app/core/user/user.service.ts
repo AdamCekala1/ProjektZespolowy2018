@@ -95,12 +95,7 @@ export class UserService {
         if(data.type === ViewType.LOGIN) {
           return this.fetchUser();
         } else if(data.type === ViewType.REGISTER) {
-          return concat(
-            this.httpService.httpRequest(RequestsContants.Authorization[ViewType.LOGIN], RequestTypes.POST, {
-              queryObj: {login: data.login, password: data.password},
-            }),
-            this.fetchUser()
-          );
+          return this.userRequest({login: data.email, password: data.password, type: ViewType.LOGIN});
         }
       }),
     );

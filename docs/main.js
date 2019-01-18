@@ -479,7 +479,6 @@ var LoginComponent = /** @class */ (function () {
     }
     Object.defineProperty(LoginComponent.prototype, "setConfig", {
         set: function (config) {
-            console.log('config', config);
             this.handleConfigDetails(config);
         },
         enumerable: true,
@@ -498,7 +497,6 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.handleConfigDetails = function (config) {
         // TODO: remove mock and add config
         this.config = config;
-        console.log('x', config);
         this.appService.setCanActivateViewByConfig(this.config);
     };
     __decorate([
@@ -1211,16 +1209,13 @@ var SearchDatesComponent = /** @class */ (function (_super) {
     });
     SearchDatesComponent.prototype.writeValue = function (value) {
         this.actualDate = value;
-        console.log('write,', value);
     };
     SearchDatesComponent.prototype.setDateFromDatePicker = function (value) {
         this.setDate(momentImported(value.value).format(_search_constants__WEBPACK_IMPORTED_MODULE_4__["CONSTANTS"].DATE_FORMAT.DISPLAY));
     };
     SearchDatesComponent.prototype.setDate = function (value) {
-        console.log('setDate', value);
         this.onChange(value);
         this.writeValue(value);
-        console.log(this.actualDate);
         this.changeDetectorRef.detectChanges();
     };
     __decorate([
@@ -3164,7 +3159,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Podgląd ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up profile-detail\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Pytania:\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n        <div class=\"edit-wrapper\">\r\n          <mat-divider></mat-divider>\r\n          <div class=\"padding-bottom-10px padding-top-10px\">\r\n            <p><b>Pytanie: </b>{{question.content}}</p>\r\n          </div>\r\n          <mat-divider></mat-divider>\r\n          <p class=\"padding-top-10px\"><b> Odpowiedzi: </b></p>\r\n          <div *ngFor=\"let answer of question.answers; let i = index\">\r\n            <p [class.active]=\"answer.active\"\r\n               class=\"cursor-pointer\"\r\n               (click)=\"selectAnswer(question.id, answer.id, answer)\"> {{i + 1}}) {{answer.content}}</p>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </mat-expansion-panel>\r\n  </mat-card>\r\n</div>\r\n<button *ngIf=\"isSolved; else submitButton\"\r\n        routerLink=\"/\"\r\n        mat-flat-button\r\n        class=\"fixed-on-left\"\r\n        color=\"warn\">Powrót na stronę głowną</button>\r\n<ng-template #submitButton>\r\n  <button [disabled]=\"!isDone()\"\r\n          (click)=\"resolveSurvey()\"\r\n          mat-flat-button\r\n          class=\"fixed-on-left\"\r\n          color=\"primary\">Wyślij rozwązanie ankiety</button>\r\n</ng-template>\r\n"
+module.exports = "<div class=\"profile-bg\"\r\n     [style.background-image]=\"'url(' + backgroundUrl + ')'\">\r\n  <div class=\"profile-bg-content\">\r\n    <h1>Podgląd ankiety: {{survey?.response.title}}</h1>\r\n  </div>\r\n</div>\r\n<div class=\"profile-details-wrapper\">\r\n  <mat-card class=\"profile-details profile-move-up profile-detail\">\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Pytania:\r\n          <b *ngIf=\"survey && isResolved()\">\r\n            (Ankieta już wcześniej rozwiązana. Nie ma możliwości wysłania ponownie wyników)\r\n          </b>\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <div *ngFor=\"let question of survey?.response.question; let i = index\">\r\n        <div class=\"edit-wrapper\">\r\n          <mat-divider></mat-divider>\r\n          <div class=\"padding-bottom-10px padding-top-10px\">\r\n            <p><b>Pytanie: </b>{{question.content}}</p>\r\n          </div>\r\n          <mat-divider></mat-divider>\r\n          <p class=\"padding-top-10px\"><b> Odpowiedzi: </b></p>\r\n          <div *ngFor=\"let answer of question.answers; let i = index\">\r\n            <p [class.active]=\"answer.active\"\r\n               class=\"cursor-pointer\"\r\n               (click)=\"selectAnswer(question.id, answer.id, answer)\"> {{i + 1}}) {{answer.content}}</p>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </mat-expansion-panel>\r\n  </mat-card>\r\n</div>\r\n<button *ngIf=\"isSolved || (survey && isResolved()); else submitButton\"\r\n        routerLink=\"/\"\r\n        mat-flat-button\r\n        class=\"fixed-on-left\"\r\n        color=\"warn\">Powrót na stronę głowną</button>\r\n<ng-template #submitButton>\r\n  <button [disabled]=\"!isDone() || (survey && isResolved())\"\r\n          (click)=\"resolveSurvey()\"\r\n          mat-flat-button\r\n          class=\"fixed-on-left\"\r\n          color=\"primary\">Wyślij rozwązanie ankiety</button>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -3195,6 +3190,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _core_surveys_surveys_type_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../core/surveys/surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
 /* harmony import */ var _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/surveys/surveys.service */ "./src/app/core/surveys/surveys.service.ts");
+/* harmony import */ var _core_cookies_handler_cookies_handler_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/cookies-handler/cookies-handler.service */ "./src/app/core/cookies-handler/cookies-handler.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3209,12 +3205,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ResolveSurveyComponent = /** @class */ (function () {
-    function ResolveSurveyComponent(activatedRoute, surveysService, router) {
+    function ResolveSurveyComponent(activatedRoute, surveysService, cookiesHandlerService, router) {
         this.activatedRoute = activatedRoute;
         this.surveysService = surveysService;
+        this.cookiesHandlerService = cookiesHandlerService;
         this.router = router;
-        this.backgroundUrl = 'assets/mainpage.jpg';
+        this.backgroundUrl = 'assets/survey.jpg';
         this.resolvers = [];
         this.isSolved = false;
     }
@@ -3229,6 +3227,9 @@ var ResolveSurveyComponent = /** @class */ (function () {
     };
     ResolveSurveyComponent.prototype.isDone = function () {
         return this.resolvers.length === Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(this.survey, 'response.question.length');
+    };
+    ResolveSurveyComponent.prototype.isResolved = function () {
+        return this.cookiesHandlerService.isResolvedSurveyById(this.survey.id);
     };
     ResolveSurveyComponent.prototype.selectAnswer = function (question_id, answer_id, answer) {
         var foundIndexResolver = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["findIndex"])(this.resolvers, { question_id: question_id });
@@ -3248,7 +3249,7 @@ var ResolveSurveyComponent = /** @class */ (function () {
     ResolveSurveyComponent.prototype.resolveSurvey = function () {
         var _this = this;
         if (this.isDone()) {
-            this.surveysService.resolveSurveys(this.resolvers).subscribe(function () {
+            this.surveysService.resolveSurveys(this.resolvers, this.survey.id).subscribe(function () {
                 _this.isSolved = true;
             });
         }
@@ -3261,6 +3262,7 @@ var ResolveSurveyComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             _core_surveys_surveys_service__WEBPACK_IMPORTED_MODULE_4__["SurveysService"],
+            _core_cookies_handler_cookies_handler_service__WEBPACK_IMPORTED_MODULE_5__["CookiesHandlerService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], ResolveSurveyComponent);
     return ResolveSurveyComponent;
@@ -3368,6 +3370,54 @@ var CategoriesService = /** @class */ (function () {
             ngx_alerts__WEBPACK_IMPORTED_MODULE_4__["AlertService"]])
     ], CategoriesService);
     return CategoriesService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/cookies-handler/cookies-handler.service.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/core/cookies-handler/cookies-handler.service.ts ***!
+  \*****************************************************************/
+/*! exports provided: CookiesHandlerService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CookiesHandlerService", function() { return CookiesHandlerService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ng2-cookies/ng2-cookies */ "./node_modules/ng2-cookies/ng2-cookies.js");
+/* harmony import */ var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var CookiesHandlerService = /** @class */ (function () {
+    function CookiesHandlerService() {
+    }
+    CookiesHandlerService.prototype.handleCookies = function (id) {
+        if (!this.isResolvedSurveyById(id)) {
+            ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].set('resolvedSurveys', JSON.stringify(this.getActualCookiesId().concat([id])), 300);
+        }
+    };
+    CookiesHandlerService.prototype.isResolvedSurveyById = function (id) {
+        return this.getActualCookiesId().includes(id);
+    };
+    CookiesHandlerService.prototype.getActualCookiesId = function () {
+        var idsFromCookies = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].get('resolvedSurveys');
+        return idsFromCookies ? JSON.parse(idsFromCookies) : [];
+    };
+    CookiesHandlerService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root',
+        })
+    ], CookiesHandlerService);
+    return CookiesHandlerService;
 }());
 
 
@@ -3588,6 +3638,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _surveys_type_enum__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./surveys-type.enum */ "./src/app/core/surveys/surveys-type.enum.ts");
 /* harmony import */ var _projects_ac_search_result_src_lib_components_search_search_form_names_enum__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../projects/ac-search-result/src/lib/components/search/search-form-names.enum */ "./projects/ac-search-result/src/lib/components/search/search-form-names.enum.ts");
 /* harmony import */ var _categories_categories_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../categories/categories.service */ "./src/app/core/categories/categories.service.ts");
+/* harmony import */ var _cookies_handler_cookies_handler_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../cookies-handler/cookies-handler.service */ "./src/app/core/cookies-handler/cookies-handler.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3610,11 +3661,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var moment = moment__WEBPACK_IMPORTED_MODULE_3__;
 var SurveysService = /** @class */ (function () {
-    function SurveysService(httpService, categoriesService, alertService) {
+    function SurveysService(httpService, categoriesService, cookiesHandlerService, alertService) {
         this.httpService = httpService;
         this.categoriesService = categoriesService;
+        this.cookiesHandlerService = cookiesHandlerService;
         this.alertService = alertService;
         this.surveys = (_a = {},
             _a[_surveys_type_enum__WEBPACK_IMPORTED_MODULE_10__["SurveyType"].USER] = new rxjs__WEBPACK_IMPORTED_MODULE_8__["BehaviorSubject"]([]),
@@ -3700,7 +3753,7 @@ var SurveysService = /** @class */ (function () {
             return _this.mapSurvey(survey);
         });
     };
-    SurveysService.prototype.resolveSurveys = function (resolvers) {
+    SurveysService.prototype.resolveSurveys = function (resolvers, id) {
         var _this = this;
         return this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].SURVEYS.RESPONSE, _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].POST, {
             queryObj: resolvers,
@@ -3708,6 +3761,7 @@ var SurveysService = /** @class */ (function () {
             _this.alertService.danger(err.statusText);
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_8__["throwError"])({});
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function (response) {
+            _this.cookiesHandlerService.handleCookies(id);
             _this.alertService.success(response.body.message);
         }));
     };
@@ -3744,6 +3798,7 @@ var SurveysService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
         __metadata("design:paramtypes", [_http_http_service__WEBPACK_IMPORTED_MODULE_1__["HttpService"],
             _categories_categories_service__WEBPACK_IMPORTED_MODULE_12__["CategoriesService"],
+            _cookies_handler_cookies_handler_service__WEBPACK_IMPORTED_MODULE_13__["CookiesHandlerService"],
             ngx_alerts__WEBPACK_IMPORTED_MODULE_2__["AlertService"]])
     ], SurveysService);
     return SurveysService;
@@ -3901,9 +3956,7 @@ var UserService = /** @class */ (function () {
                 return _this.fetchUser();
             }
             else if (data.type === _projects_ac_login_src_lib_shared_enums_view_type_enum__WEBPACK_IMPORTED_MODULE_7__["ViewType"].REGISTER) {
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["concat"])(_this.httpService.httpRequest(_shared_constants_requests_contants__WEBPACK_IMPORTED_MODULE_5__["RequestsContants"].Authorization[_projects_ac_login_src_lib_shared_enums_view_type_enum__WEBPACK_IMPORTED_MODULE_7__["ViewType"].LOGIN], _http_http_enum__WEBPACK_IMPORTED_MODULE_6__["RequestTypes"].POST, {
-                    queryObj: { login: data.login, password: data.password },
-                }), _this.fetchUser());
+                return _this.userRequest({ login: data.email, password: data.password, type: _projects_ac_login_src_lib_shared_enums_view_type_enum__WEBPACK_IMPORTED_MODULE_7__["ViewType"].LOGIN });
             }
         }));
     };
@@ -4308,14 +4361,19 @@ var alertConfig = {
 /*!***********************************************************!*\
   !*** ./src/app/shared/constants/login-register.config.ts ***!
   \***********************************************************/
-/*! exports provided: LoginRegisterConfig */
+/*! exports provided: regexs, LoginRegisterConfig */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regexs", function() { return regexs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginRegisterConfig", function() { return LoginRegisterConfig; });
 /* harmony import */ var _projects_ac_login_src_lib_shared_enums_view_type_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../projects/ac-login/src/lib/shared/enums/view-type.enum */ "./projects/ac-login/src/lib/shared/enums/view-type.enum.ts");
 
+var regexs = {
+    EMAIL: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+    AGE: /(?:\b|-)([1-9]{2}?|100)\b/,
+};
 var LoginRegisterConfig = {
     login: {
         controls: {
@@ -4324,7 +4382,7 @@ var LoginRegisterConfig = {
                 regex: '',
                 type: 'text',
                 isReguired: true,
-                placeholder: 'Type login',
+                placeholder: 'Login',
                 value: '',
             },
             password: {
@@ -4332,7 +4390,7 @@ var LoginRegisterConfig = {
                 regex: '',
                 type: 'password',
                 isReguired: true,
-                placeholder: 'Type password',
+                placeholder: 'Hasło',
                 value: '',
             }
         },
@@ -4351,7 +4409,7 @@ var LoginRegisterConfig = {
                 regex: '',
                 type: 'text',
                 isReguired: true,
-                placeholder: 'Type name',
+                placeholder: 'Wpisz imię',
                 value: '',
             },
             surname: {
@@ -4359,15 +4417,15 @@ var LoginRegisterConfig = {
                 regex: '',
                 type: 'text',
                 isReguired: true,
-                placeholder: 'Type surname',
+                placeholder: 'Wpisz nazwisko',
                 value: '',
             },
             email: {
                 name: 'email',
-                regex: '',
+                regex: regexs.EMAIL,
                 type: 'email',
                 isReguired: true,
-                placeholder: 'Type email',
+                placeholder: 'Podaj email',
                 value: '',
             },
             password: {
@@ -4375,15 +4433,15 @@ var LoginRegisterConfig = {
                 regex: '',
                 type: 'password',
                 isReguired: true,
-                placeholder: 'Type password',
+                placeholder: 'Wpisz hasło',
                 value: '',
             },
             age: {
                 name: 'age',
-                regex: '',
+                regex: regexs.AGE,
                 type: 'number',
                 isReguired: true,
-                placeholder: 'Type agw',
+                placeholder: 'Wpisz wiek',
                 value: '',
             },
             city: {
@@ -4391,7 +4449,7 @@ var LoginRegisterConfig = {
                 regex: '',
                 type: 'text',
                 isReguired: true,
-                placeholder: 'Type city',
+                placeholder: 'Z jakiego jesteś miasta?',
                 value: '',
             }
         },

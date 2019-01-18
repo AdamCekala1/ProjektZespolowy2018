@@ -101,7 +101,7 @@ var AdminPanelComponent = /** @class */ (function () {
         this.adminService = adminService;
         this.categoriesService = categoriesService;
         this.router = router;
-        this.backgroundUrl = 'assets/mainpage.jpg';
+        this.backgroundUrl = 'assets/admin-page.jpg';
         this.surveys = { accepted: [], notAccepted: [] };
         this.onDestroy = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
     }
@@ -239,7 +239,7 @@ var AdminSurveysComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.adminService = adminService;
         this.router = router;
-        this.backgroundUrl = 'assets/mainpage.jpg';
+        this.backgroundUrl = 'assets/admin-accept.jpg';
         this.isLoading = false;
     }
     AdminSurveysComponent.prototype.ngOnInit = function () {

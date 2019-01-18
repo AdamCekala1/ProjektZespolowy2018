@@ -12,7 +12,7 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./admin-surveys.component.scss']
 })
 export class AdminSurveysComponent implements OnInit {
-  backgroundUrl: string = 'assets/mainpage.jpg';
+  backgroundUrl: string = 'assets/admin-accept.jpg';
   survey: ISurvey;
   isLoading: boolean = false;
 

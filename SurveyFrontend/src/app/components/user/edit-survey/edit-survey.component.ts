@@ -24,7 +24,7 @@ import { Subject } from 'rxjs';
 export class EditSurveyComponent implements OnInit, OnDestroy {
   survey: ISurvey;
   surveyCloned: ISurvey;
-  backgroundUrl: string = 'assets/mainpage.jpg';
+  backgroundUrl: string = 'assets/edit.jpg';
   isLoading: boolean = false;
   statisticks: IStatisticksMapped[];
   readonly itemType = ItemType;
@@ -63,8 +63,6 @@ export class EditSurveyComponent implements OnInit, OnDestroy {
 
               return mapped;
             });
-
-            console.log(newStatistics);
 
             this.statisticks = newStatistics;
           });

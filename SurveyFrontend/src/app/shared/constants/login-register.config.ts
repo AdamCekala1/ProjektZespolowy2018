@@ -1,5 +1,10 @@
 import { ViewType } from '../../../../projects/ac-login/src/lib/shared/enums/view-type.enum';
 
+export const regexs = {
+  EMAIL: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+  AGE: /(?:\b|-)([1-9]{2}?|100)\b/,
+};
+
 export const LoginRegisterConfig = {
   login: {
     controls: {
@@ -8,7 +13,7 @@ export const LoginRegisterConfig = {
         regex: '',
         type: 'text',
         isReguired: true,
-        placeholder: 'Type login',
+        placeholder: 'Login',
         value: '',
       },
       password: {
@@ -16,7 +21,7 @@ export const LoginRegisterConfig = {
         regex: '',
         type: 'password',
         isReguired: true,
-        placeholder: 'Type password',
+        placeholder: 'Hasło',
         value: '',
       }
     },
@@ -35,7 +40,7 @@ export const LoginRegisterConfig = {
         regex: '',
         type: 'text',
         isReguired: true,
-        placeholder: 'Type name',
+        placeholder: 'Wpisz imię',
         value: '',
       },
       surname: {
@@ -43,15 +48,15 @@ export const LoginRegisterConfig = {
         regex: '',
         type: 'text',
         isReguired: true,
-        placeholder: 'Type surname',
+        placeholder: 'Wpisz nazwisko',
         value: '',
       },
       email: {
         name: 'email',
-        regex: '',
+        regex: regexs.EMAIL,
         type: 'email',
         isReguired: true,
-        placeholder: 'Type email',
+        placeholder: 'Podaj email',
         value: '',
       },
       password: {
@@ -59,15 +64,15 @@ export const LoginRegisterConfig = {
         regex: '',
         type: 'password',
         isReguired: true,
-        placeholder: 'Type password',
+        placeholder: 'Wpisz hasło',
         value: '',
       },
       age: {
         name: 'age',
-        regex: '',
+        regex: regexs.AGE,
         type: 'number',
         isReguired: true,
-        placeholder: 'Type agw',
+        placeholder: 'Wpisz wiek',
         value: '',
       },
       city: {
@@ -75,7 +80,7 @@ export const LoginRegisterConfig = {
         regex: '',
         type: 'text',
         isReguired: true,
-        placeholder: 'Type city',
+        placeholder: 'Z jakiego jesteś miasta?',
         value: '',
       }
     },
@@ -87,4 +92,4 @@ export const LoginRegisterConfig = {
       actionText: 'Zaloguj się!',
     }
   }
-}
+};

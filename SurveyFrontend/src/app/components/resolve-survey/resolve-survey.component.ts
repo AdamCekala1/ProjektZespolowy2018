@@ -5,6 +5,7 @@ import { isNil, find, get, findIndex, toNumber } from 'lodash';
 import { SurveyType } from '../../core/surveys/surveys-type.enum';
 import { SurveysService } from '../../core/surveys/surveys.service';
 import { IAnswer } from '../create-survey/create-survey.interface';
+import { CookiesHandlerService } from '../../core/cookies-handler/cookies-handler.service';
 
 @Component({
   selector: 'ac-resolve-survey',
@@ -12,13 +13,14 @@ import { IAnswer } from '../create-survey/create-survey.interface';
   styleUrls: ['./resolve-survey.component.scss']
 })
 export class ResolveSurveyComponent implements OnInit {
-  backgroundUrl: string = 'assets/mainpage.jpg';
+  backgroundUrl: string = 'assets/survey.jpg';
   survey: ISurvey;
   resolvers: ISurveyResolve[] = [];
   isSolved: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private surveysService: SurveysService,
+              private cookiesHandlerService: CookiesHandlerService,
               private router: Router) { }
 
   ngOnInit() {
@@ -33,6 +35,10 @@ export class ResolveSurveyComponent implements OnInit {
 
   isDone(): boolean {
     return this.resolvers.length === get(this.survey, 'response.question.length');
+  }
+
+  isResolved(): boolean {
+      return this.cookiesHandlerService.isResolvedSurveyById(this.survey.id as number);
   }
 
   selectAnswer(question_id: number, answer_id: number, answer: IAnswer) {
@@ -59,7 +65,7 @@ export class ResolveSurveyComponent implements OnInit {
 
   resolveSurvey() {
     if(this.isDone()) {
-      this.surveysService.resolveSurveys(this.resolvers).subscribe(() => {
+      this.surveysService.resolveSurveys(this.resolvers, this.survey.id as number).subscribe(() => {
         this.isSolved = true;
       });
     }

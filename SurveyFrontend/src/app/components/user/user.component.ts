@@ -3,11 +3,8 @@ import { UserService } from '../../core/user/user.service';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { get, isEqual, cloneDeep } from 'lodash';
-import { IUser } from '../../shared/interfaces/user.interface';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserFormName } from './user-form-name.enum';
+import { FormBuilder } from '@angular/forms';
 import { ISurvey } from '../../shared/interfaces/result.interface';
-import { searchResultMocks } from '../../mocks/search/search-results.mocks';
 import { SurveysService } from '../../core/surveys/surveys.service';
 import { SurveyType } from '../../core/surveys/surveys-type.enum';
 import { Router } from '@angular/router';
@@ -20,7 +17,7 @@ import { IDictionary } from '../../shared/interfaces/utils.interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit, OnDestroy {
-  backgroundUrl: string = 'assets/mainpage.jpg';
+  backgroundUrl: string = 'assets/personal.jpg';
   isLoadingUserData: boolean = false;
   surveys: ISurvey[] = [];
   private onDestroy: Subject<boolean> = new Subject<boolean>();

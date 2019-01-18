@@ -37,7 +37,6 @@ import { animate, group, query, stagger, style, transition, trigger } from '@ang
 export class LoginComponent {
   @Input() isDisplayed: boolean = true;
   @Input('config') set setConfig(config: IConfigGlobal) {
-    console.log('config', config)
     this.handleConfigDetails(config);
   };
   @Input() errors: IErrorGlobal = {};
@@ -65,7 +64,6 @@ export class LoginComponent {
     // TODO: remove mock and add config
     this.config = config;
 
-    console.log('x', config)
     this.appService.setCanActivateViewByConfig(this.config);
   }
 }

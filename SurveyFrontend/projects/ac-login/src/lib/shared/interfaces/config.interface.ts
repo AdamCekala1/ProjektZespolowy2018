@@ -15,7 +15,7 @@ export interface IConfig {
 
 export interface IConfigControl {
   name: string;
-  regex: string;
+  regex: RegExp | string;
   type: string;
   isReguired: boolean;
   placeholder: string;
