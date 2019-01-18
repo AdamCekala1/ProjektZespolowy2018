@@ -29,6 +29,7 @@
   }
 
   &-position {
+    overflow-y: auto;
     position: fixed;
     z-index: 99999;
     top: 50%;

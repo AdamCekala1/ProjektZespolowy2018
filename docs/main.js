@@ -4005,7 +4005,7 @@ module.exports = "<div *ngIf=\"!isEdit;else editMode\"\n     class=\"display-fle
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".display-flex {\n  justify-content: space-between; }\n"
+module.exports = ".display-flex {\n  justify-content: space-between; }\n\n.active {\n  font-weight: 900;\n  color: green; }\n"
 
 /***/ }),
 
@@ -4117,7 +4117,7 @@ module.exports = "<ac-loader *ngIf=\"isLoading; else loadedData\"></ac-loader>\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".display-flex {\n  justify-content: space-between; }\n\n.active {\n  font-weight: 900;\n  color: green; }\n\n.max-height-300 {\n  max-height: 300px;\n  overflow-y: auto; }\n"
+module.exports = ".display-flex {\n  justify-content: space-between; }\n\n.max-height-300 {\n  max-height: 300px;\n  overflow-y: auto; }\n"
 
 /***/ }),
 
@@ -4293,7 +4293,7 @@ module.exports = "<div class=\"modal-background\">\r\n  <mat-card class=\"modal-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".modal-size {\n  min-width: 50vw;\n  max-width: 90vw;\n  max-height: 90vh; }\n  @media (min-width: 900px) {\n    .modal-size {\n      max-width: 70vw;\n      max-height: 70vh; } }\n  @media (min-width: 1600px) {\n    .modal-size {\n      width: 50vw;\n      height: 50vh; } }\n  .modal-background:after {\n  position: fixed;\n  top: 0;\n  left: 0;\n  content: '';\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n  background: rgba(0, 0, 0, 0.7); }\n  .modal-position {\n  position: fixed;\n  z-index: 99999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n"
+module.exports = ".modal-size {\n  min-width: 50vw;\n  max-width: 90vw;\n  max-height: 90vh; }\n  @media (min-width: 900px) {\n    .modal-size {\n      max-width: 70vw;\n      max-height: 70vh; } }\n  @media (min-width: 1600px) {\n    .modal-size {\n      width: 50vw;\n      height: 50vh; } }\n  .modal-background:after {\n  position: fixed;\n  top: 0;\n  left: 0;\n  content: '';\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n  background: rgba(0, 0, 0, 0.7); }\n  .modal-position {\n  overflow-y: auto;\n  position: fixed;\n  z-index: 99999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n"
 
 /***/ }),
 
