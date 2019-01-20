@@ -71,21 +71,21 @@ class ResponseController extends BaseController
     }
 
     /**
-     * @Route("api/category/edit/{category}", name="category_edit")
+     * @Route("api/category/edit/{cat}", name="category_edit")
      * @Method("POST,DELETE")
      * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
      */
-    public function editCategory(Request $request, int $category)
+    public function editCategory(Request $request, int $cat)
     {
         try{
-            $categoryNew = $this->serial->deserialize($request->getContent(), Category::class, 'json');
-            $category = $this->entityManager->getRepository(Category::class)->find($category);
+            $category = $this->entityManager->getRepository(Category::class)->find($cat);
             if($request->getMethod() == "DELETE")
             {
                 $this->entityManager->remove($category);
                 $this->entityManager->flush();
                 return new JsonResponse(['message' => 'Udało się usunąć kategorie']);
             }
+            $categoryNew = $this->serial->deserialize($request->getContent(), Category::class, 'json');
             $category->setName($categoryNew->getName());
             $this->entityManager->persist($category);
             $this->entityManager->flush();
@@ -97,9 +97,9 @@ class ResponseController extends BaseController
         return new JsonResponse(['message' =>'Udalo się edytować kategorie']);
     }
     /**
-     * @Route("api/category/get", name="category_get")
+     * @Route("category/get", name="category_get")
      * @Method("GET")
-     * @IsGranted("ROLE_ADMIN", message="Musisz być adminem" , statusCode=401)
+     *
      */
     public function getCategory()
     {

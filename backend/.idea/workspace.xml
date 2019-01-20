@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54f5735a-9ffa-426d-851e-19836d568d41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20190114181528.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/CategoryRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="54f5735a-9ffa-426d-851e-19836d568d41" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +86,7 @@
           <entry key="env" value="26" />
           <entry key="gitignore" value="21" />
           <entry key="json" value="1" />
-          <entry key="php" value="10511" />
+          <entry key="php" value="10537" />
           <entry key="txt" value="70" />
           <entry key="yaml" value="204" />
         </counts>
@@ -100,7 +95,7 @@
         <counts>
           <entry key=".env file" value="18" />
           <entry key="JSON" value="1" />
-          <entry key="PHP" value="10512" />
+          <entry key="PHP" value="10538" />
           <entry key="PLAIN_TEXT" value="130" />
           <entry key="YAML" value="204" />
         </counts>
@@ -158,11 +153,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Api/ResponseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="981">
-              <caret line="92" column="9" lean-forward="true" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
+            <state relative-caret-position="175">
+              <caret line="86" column="13" lean-forward="true" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
               <folding>
                 <element signature="e#64#86#0#PHP" expanded="true" />
               </folding>
@@ -182,11 +177,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Category.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+            <state relative-caret-position="45">
+              <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
               <folding>
                 <element signature="e#30#78#0#PHP" expanded="true" />
               </folding>
@@ -241,6 +236,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="dummy://restClient/response11.html" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -291,10 +289,10 @@
         <option value="$PROJECT_DIR$/src/Controller/Api/AccountController.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20190114181528.php" />
         <option value="$PROJECT_DIR$/src/Entity/Category.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Api/ResponseController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Questionnaire.php" />
         <option value="$PROJECT_DIR$/src/Controller/Api/QuestionnaireController.php" />
         <option value="$PROJECT_DIR$/src/Repository/QuestionnaireRepository.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Api/ResponseController.php" />
       </list>
     </option>
   </component>
@@ -473,6 +471,204 @@
   <component name="RestClientSettings">
     <option name="REQUEST_HISTORY">
       <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://pdrab.nazwa.pl" />
+          <option name="urlPath" value="/projekt2018/Backend/public/category/get" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;login&quot;:&quot;wp@wp.pl&quot;,&quot;password&quot;:&quot;dupa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://pdrab.nazwa.pl" />
+          <option name="urlPath" value="/projekt2018/Backend/public/category/get" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDc3NTg2NDUsImV4cCI6MTU0Nzc5NDY0NSwidXNlcm5hbWUiOiJ3cEB3cC5wbCJ9.TPWUaJF6J0Ohs0GQyudb82OehO6QUioq9V1xzwRZ43xoc3JhEXvO5o__zdvLoXbZDu5su_n6bbCLYRfu4wqo7pSNOd9orfMPSkg8QKlh3OG78l0oRelQUrx5p-RGWAMDkwFOUi7kzdhDLZazBA3PKbWawczM1jZkBoIaPzegbBFx44twPyw9MLfi0qIDlzBZk9QWfiyNg4WAi_eyY5u4cegHA_89jH5Kf8ikpHwebtysVKFBsf2S08R5Noqd-vxHUNj_ZBfyiXQdh_LxBLyL4ef8_Z773epBzMLOs26QknidWFFPEqsa1k5T_VpgB0duhSotpk-w-cc_zADJplPJsv9n18DJ7ZETSr4i1Q8Rv_IBsKnwkczKNwW68i2l2Hw0c0A2X-3Ct1OW4l2BEofMImtqbxy0LMJ6AxK_SvtRLIqHo58Auw8Yq1bT26gtZuWXn5bJmFiZcKzZ9CTGaOGrF7OxJasPh1MI-s1_MmolEuOPexkyuNqlpksLVN17KfHJQ9WKigf0Ooj4O0gXcsToRF8FQlXW-__4ggwtACInfipuRAmT10Cc2Hrd9TfT0HkRqv6iPkUgPXjJ-GRokqxxtLQ8w9CoSm_J8laGYknjElJXGxnqZfij7R4jOK4S7whRUOvgCFMS4bO5ffmdpmN29uUuO_cTTpkNGAZFCzrORJ4" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;login&quot;:&quot;wp@wp.pl&quot;,&quot;password&quot;:&quot;dupa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://pdrab.nazwa.pl" />
+          <option name="urlPath" value="/projekt2018/Backend/public/api/category/get" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDc3NTg2NDUsImV4cCI6MTU0Nzc5NDY0NSwidXNlcm5hbWUiOiJ3cEB3cC5wbCJ9.TPWUaJF6J0Ohs0GQyudb82OehO6QUioq9V1xzwRZ43xoc3JhEXvO5o__zdvLoXbZDu5su_n6bbCLYRfu4wqo7pSNOd9orfMPSkg8QKlh3OG78l0oRelQUrx5p-RGWAMDkwFOUi7kzdhDLZazBA3PKbWawczM1jZkBoIaPzegbBFx44twPyw9MLfi0qIDlzBZk9QWfiyNg4WAi_eyY5u4cegHA_89jH5Kf8ikpHwebtysVKFBsf2S08R5Noqd-vxHUNj_ZBfyiXQdh_LxBLyL4ef8_Z773epBzMLOs26QknidWFFPEqsa1k5T_VpgB0duhSotpk-w-cc_zADJplPJsv9n18DJ7ZETSr4i1Q8Rv_IBsKnwkczKNwW68i2l2Hw0c0A2X-3Ct1OW4l2BEofMImtqbxy0LMJ6AxK_SvtRLIqHo58Auw8Yq1bT26gtZuWXn5bJmFiZcKzZ9CTGaOGrF7OxJasPh1MI-s1_MmolEuOPexkyuNqlpksLVN17KfHJQ9WKigf0Ooj4O0gXcsToRF8FQlXW-__4ggwtACInfipuRAmT10Cc2Hrd9TfT0HkRqv6iPkUgPXjJ-GRokqxxtLQ8w9CoSm_J8laGYknjElJXGxnqZfij7R4jOK4S7whRUOvgCFMS4bO5ffmdpmN29uUuO_cTTpkNGAZFCzrORJ4" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;login&quot;:&quot;wp@wp.pl&quot;,&quot;password&quot;:&quot;dupa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://pdrab.nazwa.pl" />
+          <option name="urlPath" value="/projekt2018/Backend/public/account/security/token" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Basic aGhAd3AucGw6ZHVwYQ==" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;login&quot;:&quot;wp@wp.pl&quot;,&quot;password&quot;:&quot;dupa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://pdrab.nazwa.pl" />
+          <option name="urlPath" value="/projekt2018/Backend/public/api/category/get" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Basic aGhAd3AucGw6ZHVwYQ==" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;login&quot;:&quot;hh@wp.pl&quot;,&quot;password&quot;:&quot;dupa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://pdrab.nazwa.pl" />
+          <option name="urlPath" value="/projekt2018/Backend/public/api/category/get" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Basic aGhAd3AucGw6ZHVwYQ==" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="auth" />
+                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;login&quot;:&quot;hh@wp.pl&quot;,&quot;password&quot;:&quot;dupa&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
         <RestClientRequest>
           <option name="httpMethod" value="POST" />
           <option name="urlBase" value="http://127.0.0.1:8000" />
@@ -1958,204 +2154,6 @@
           <option name="textToSend" value="{&quot;name&quot; : &quot;jurek&quot; , &quot;surname&quot; : &quot;ogorek&quot;,&quot;email&quot; : &quot;smerf@wp.pl&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;21&quot;,&quot;city&quot;:&quot;soot&quot;}" />
           <option name="filesToSend" value="" />
         </RestClientRequest>
-        <RestClientRequest>
-          <option name="httpMethod" value="POST" />
-          <option name="urlBase" value="http://127.0.0.1:8000" />
-          <option name="urlPath" value="questionnaire/9/get" />
-          <option name="headers">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="Accept" />
-                <option name="value" value="*/*" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Cache-Control" />
-                <option name="value" value="no-cache" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Authorization" />
-                <option name="value" value="Basic aGhAd3AucGw6ZHVwYQ==" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parameters">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="auth" />
-                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parametersEnabled" value="true" />
-          <option name="haveTextToSend" value="true" />
-          <option name="textToSend" value="{&quot;name&quot; : &quot;jurek&quot; , &quot;surname&quot; : &quot;ogorek&quot;,&quot;email&quot; : &quot;smerf@wp.pl&quot;,&quot;password&quot; : &quot;dupa&quot;, &quot;age&quot;:&quot;21&quot;,&quot;city&quot;:&quot;soot&quot;}" />
-          <option name="filesToSend" value="" />
-        </RestClientRequest>
-        <RestClientRequest>
-          <option name="httpMethod" value="POST" />
-          <option name="urlBase" value="http://127.0.0.1:8000" />
-          <option name="urlPath" value="api/questionnaire/add" />
-          <option name="headers">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="Accept" />
-                <option name="value" value="*/*" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Cache-Control" />
-                <option name="value" value="no-cache" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Authorization" />
-                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDcyMjc0ODksImV4cCI6MTU0NzI2MzQ4OSwidXNlcm5hbWUiOiJoaEB3cC5wbCJ9.bLs9dCjMlkLpJhYj3_Ny2MpDwhhxFfBK15myFGNQx1JKVvH_I0UNxcsnUfCfFRUCZGiluk3HhtxjDsHQFw1OtMPcnix7-RIS3spEiO46-aTBQO1HZ0HTil51-Zu2N_OhA3h-0Sw1OiPt8mmXhu_HjiNY1gQE7QPuioizPJODO9YIEVjhQLd59g3SisYDtfSHJgIiTrSSmglIQEX2fTVGWOdjQXCnEy3mdpNrmSv6pinbSVy24KlGoYi3zmXV4Cr92k36O5T_J_nmEopcDArwcvdqVbVo2Jv14E2r8w4NQfPQJ3-WZMXNiAMAnXAksRScem1ZsGmeVgs5QuyIRGyRyFB25ucpaErG4gTjOh8uUNnkPB2gCiZ8DSewiBWXs8mWzOLdbAIfvtMuGEUbeOg1vbF7FVxe2DqbSD30maMNCfOiKHAXgVQ8CtxBb44ycWW4GNhW2rQVDJgVDpY1OGiCFGQPEmj3oxgtivfitxzrO-wrTvNkElyxVz0k8pM1iUhFGypRVC3CRLOIFuuDLELr9ldyvXHwsh1QogumcNd0HOYZbhzIMCHb7repW_crlHfsWv-7iburPR_spFzZM2bNXIQw5Rarpss5HSUTuwf5s5MqFuOBYFjldk3qk6RW9DoYz6j2HOAnCVtiJeqpA8HVKfKR3F1X06uDRwt8IT8PHA8" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parameters">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="auth" />
-                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parametersEnabled" value="true" />
-          <option name="haveTextToSend" value="true" />
-          <option name="textToSend" value="{&quot;title&quot;:&quot;11Najbardziej popularne owoce w Polsce&quot;,&quot;question&quot;:[{&quot;content&quot;:&quot;Gdzie kupujesz owoce&quot;,&quot;answers&quot;:[{&quot;content&quot;:&quot;wole slodycze&quot;},{&quot;content&quot;:&quot;wcale&quot;},{&quot;content&quot;:&quot;biedronce&quot;},{&quot;content&quot;:&quot;w osiedlowym sklepie&quot;}]},{&quot;content&quot;:&quot;Jak czesto jesz owocce&quot;,&quot;answers&quot;:[{&quot;content&quot;:&quot;wole slodycze&quot;},{&quot;content&quot;:&quot;wcale&quot;},{&quot;content&quot;:&quot;rzadko&quot;},{&quot;content&quot;:&quot;czesto&quot;}]},{&quot;content&quot;:&quot;Jakie owoce lubisz najbardziej&quot;,&quot;answers&quot;:[{&quot;content&quot;:&quot;Pomidory&quot;},{&quot;content&quot;:&quot;Pomarańcze&quot;},{&quot;content&quot;:&quot;truskawki&quot;}]}],&quot;created_at&quot;:&quot;2018-11-30T21:29:43+01:00&quot;,&quot;updated_at&quot;:&quot;2018-11-30T21:29:43+01:00&quot;} " />
-          <option name="filesToSend" value="" />
-        </RestClientRequest>
-        <RestClientRequest>
-          <option name="httpMethod" value="GET" />
-          <option name="urlBase" value="http://127.0.0.1:8000" />
-          <option name="urlPath" value="questionnaire/list-all" />
-          <option name="headers">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="Accept" />
-                <option name="value" value="*/*" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Cache-Control" />
-                <option name="value" value="no-cache" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Authorization" />
-                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDcyMjc0ODksImV4cCI6MTU0NzI2MzQ4OSwidXNlcm5hbWUiOiJoaEB3cC5wbCJ9.bLs9dCjMlkLpJhYj3_Ny2MpDwhhxFfBK15myFGNQx1JKVvH_I0UNxcsnUfCfFRUCZGiluk3HhtxjDsHQFw1OtMPcnix7-RIS3spEiO46-aTBQO1HZ0HTil51-Zu2N_OhA3h-0Sw1OiPt8mmXhu_HjiNY1gQE7QPuioizPJODO9YIEVjhQLd59g3SisYDtfSHJgIiTrSSmglIQEX2fTVGWOdjQXCnEy3mdpNrmSv6pinbSVy24KlGoYi3zmXV4Cr92k36O5T_J_nmEopcDArwcvdqVbVo2Jv14E2r8w4NQfPQJ3-WZMXNiAMAnXAksRScem1ZsGmeVgs5QuyIRGyRyFB25ucpaErG4gTjOh8uUNnkPB2gCiZ8DSewiBWXs8mWzOLdbAIfvtMuGEUbeOg1vbF7FVxe2DqbSD30maMNCfOiKHAXgVQ8CtxBb44ycWW4GNhW2rQVDJgVDpY1OGiCFGQPEmj3oxgtivfitxzrO-wrTvNkElyxVz0k8pM1iUhFGypRVC3CRLOIFuuDLELr9ldyvXHwsh1QogumcNd0HOYZbhzIMCHb7repW_crlHfsWv-7iburPR_spFzZM2bNXIQw5Rarpss5HSUTuwf5s5MqFuOBYFjldk3qk6RW9DoYz6j2HOAnCVtiJeqpA8HVKfKR3F1X06uDRwt8IT8PHA8" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parameters">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="auth" />
-                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parametersEnabled" value="true" />
-          <option name="haveTextToSend" value="true" />
-          <option name="textToSend" value="{ created_at: &quot;2019-01-10T22:15:39+01:00&quot; title: &quot;asdasdasd&quot; questions: [{ answers: [{content: &quot;sdfsdf&quot;}, {content: &quot;sdfsdf&quot;}] content: &quot;dsfdsf&quot; }] }" />
-          <option name="filesToSend" value="" />
-        </RestClientRequest>
-        <RestClientRequest>
-          <option name="httpMethod" value="POST" />
-          <option name="urlBase" value="http://127.0.0.1:8000" />
-          <option name="urlPath" value="questionnaire/list-all" />
-          <option name="headers">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="Accept" />
-                <option name="value" value="*/*" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Cache-Control" />
-                <option name="value" value="no-cache" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Authorization" />
-                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDcyMjc0ODksImV4cCI6MTU0NzI2MzQ4OSwidXNlcm5hbWUiOiJoaEB3cC5wbCJ9.bLs9dCjMlkLpJhYj3_Ny2MpDwhhxFfBK15myFGNQx1JKVvH_I0UNxcsnUfCfFRUCZGiluk3HhtxjDsHQFw1OtMPcnix7-RIS3spEiO46-aTBQO1HZ0HTil51-Zu2N_OhA3h-0Sw1OiPt8mmXhu_HjiNY1gQE7QPuioizPJODO9YIEVjhQLd59g3SisYDtfSHJgIiTrSSmglIQEX2fTVGWOdjQXCnEy3mdpNrmSv6pinbSVy24KlGoYi3zmXV4Cr92k36O5T_J_nmEopcDArwcvdqVbVo2Jv14E2r8w4NQfPQJ3-WZMXNiAMAnXAksRScem1ZsGmeVgs5QuyIRGyRyFB25ucpaErG4gTjOh8uUNnkPB2gCiZ8DSewiBWXs8mWzOLdbAIfvtMuGEUbeOg1vbF7FVxe2DqbSD30maMNCfOiKHAXgVQ8CtxBb44ycWW4GNhW2rQVDJgVDpY1OGiCFGQPEmj3oxgtivfitxzrO-wrTvNkElyxVz0k8pM1iUhFGypRVC3CRLOIFuuDLELr9ldyvXHwsh1QogumcNd0HOYZbhzIMCHb7repW_crlHfsWv-7iburPR_spFzZM2bNXIQw5Rarpss5HSUTuwf5s5MqFuOBYFjldk3qk6RW9DoYz6j2HOAnCVtiJeqpA8HVKfKR3F1X06uDRwt8IT8PHA8" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parameters">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="auth" />
-                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parametersEnabled" value="true" />
-          <option name="haveTextToSend" value="true" />
-          <option name="textToSend" value="{ created_at: &quot;2019-01-10T22:15:39+01:00&quot; title: &quot;asdasdasd&quot; questions: [{ answers: [{content: &quot;sdfsdf&quot;}, {content: &quot;sdfsdf&quot;}] content: &quot;dsfdsf&quot; }] }" />
-          <option name="filesToSend" value="" />
-        </RestClientRequest>
-        <RestClientRequest>
-          <option name="httpMethod" value="POST" />
-          <option name="urlBase" value="http://127.0.0.1:8000" />
-          <option name="urlPath" value="api/questionnaire/add" />
-          <option name="headers">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="Accept" />
-                <option name="value" value="*/*" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Cache-Control" />
-                <option name="value" value="no-cache" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Authorization" />
-                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDcyMjc0ODksImV4cCI6MTU0NzI2MzQ4OSwidXNlcm5hbWUiOiJoaEB3cC5wbCJ9.bLs9dCjMlkLpJhYj3_Ny2MpDwhhxFfBK15myFGNQx1JKVvH_I0UNxcsnUfCfFRUCZGiluk3HhtxjDsHQFw1OtMPcnix7-RIS3spEiO46-aTBQO1HZ0HTil51-Zu2N_OhA3h-0Sw1OiPt8mmXhu_HjiNY1gQE7QPuioizPJODO9YIEVjhQLd59g3SisYDtfSHJgIiTrSSmglIQEX2fTVGWOdjQXCnEy3mdpNrmSv6pinbSVy24KlGoYi3zmXV4Cr92k36O5T_J_nmEopcDArwcvdqVbVo2Jv14E2r8w4NQfPQJ3-WZMXNiAMAnXAksRScem1ZsGmeVgs5QuyIRGyRyFB25ucpaErG4gTjOh8uUNnkPB2gCiZ8DSewiBWXs8mWzOLdbAIfvtMuGEUbeOg1vbF7FVxe2DqbSD30maMNCfOiKHAXgVQ8CtxBb44ycWW4GNhW2rQVDJgVDpY1OGiCFGQPEmj3oxgtivfitxzrO-wrTvNkElyxVz0k8pM1iUhFGypRVC3CRLOIFuuDLELr9ldyvXHwsh1QogumcNd0HOYZbhzIMCHb7repW_crlHfsWv-7iburPR_spFzZM2bNXIQw5Rarpss5HSUTuwf5s5MqFuOBYFjldk3qk6RW9DoYz6j2HOAnCVtiJeqpA8HVKfKR3F1X06uDRwt8IT8PHA8" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parameters">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="auth" />
-                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parametersEnabled" value="true" />
-          <option name="haveTextToSend" value="true" />
-          <option name="textToSend" value="{ created_at: &quot;2019-01-10T22:15:39+01:00&quot; title: &quot;asdasdasd&quot; questions: [{ answers: [{content: &quot;sdfsdf&quot;}, {content: &quot;sdfsdf&quot;}] content: &quot;dsfdsf&quot; }] }" />
-          <option name="filesToSend" value="" />
-        </RestClientRequest>
-        <RestClientRequest>
-          <option name="httpMethod" value="GET" />
-          <option name="urlBase" value="http://127.0.0.1:8000" />
-          <option name="urlPath" value="questionnaire/list-all" />
-          <option name="headers">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="Accept" />
-                <option name="value" value="*/*" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Cache-Control" />
-                <option name="value" value="no-cache" />
-              </KeyValuePair>
-              <KeyValuePair>
-                <option name="key" value="Authorization" />
-                <option name="value" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDcxNTI5ODgsImV4cCI6MTU0NzE4ODk4OCwidXNlcm5hbWUiOiJoaEB3cC5wbCJ9.r-hKodcpnCqfGk3Sn3HQm5N59EuZ4Gdkn5c_-GeO1nrFpJ6zRq4R_sfjYo58QpZLzh53pj-lKnG03zSHlj4C-1IqXN4jCoWm-MibL-UawEUi-pY1nLSUk6XmnaJ1VzavDAWzUuxle9sSflzmfScbGg8FtA8scy264zMEHoRWIooLaMIGHDDr5IHQ5S_TThmdgii6YDi_IP72tOBkAnuEVNrpZRpWKs49i88qMFiK4ano0psaqIpmgnhVofJzIR8wJx-x6bTbmGhQJQLqUv0WDitDYLYyD1pU4_OtbcsKGrSbRvXnYt_d2ruZTfjB6p23GUqzzoGJG0D12W1-ga3q3dFkdnM2525ZTghMVWH9mLNkSEAALXrVmJLS7SuC81pk74QXwJa7F3lhvIrW03qNPmcj-9Yn7UGOyaw1u7tE9MOtRRx2i2bzG0Tfd4sL5ds8RueKq3YqVcFJHZuRAJfbYgPjI4U2e1yddT5VGDjRlNJ1bxpWyNO7v2WPoSo2FWZlWiygysnS-_fdUEWySNuffUYXQ6x9oWpU_SAxK92bl93EuVczB0sE_DKalWw79WLz5Df7qgw7GKEbg3HtNC1mVBMNs3XMkDdPrVNLP4-57MJ0OPJb0fhl-zW83udqQlx_ExbHguTC7nL4U56E2fXsy_ufpaajw2c5-CB1zOYjeVo" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parameters">
-            <list>
-              <KeyValuePair>
-                <option name="key" value="auth" />
-                <option name="value" value="{ &quot;dupa@wp.pl&quot; , &quot;foo&quot;}" />
-              </KeyValuePair>
-            </list>
-          </option>
-          <option name="parametersEnabled" value="true" />
-          <option name="haveTextToSend" value="true" />
-          <option name="textToSend" value="{&quot;login&quot;:&quot;hh@wp.pl&quot;,&quot;password&quot;:&quot;dupa&quot;}" />
-          <option name="filesToSend" value="" />
-        </RestClientRequest>
       </list>
     </option>
   </component>
@@ -2206,12 +2204,12 @@
       <workItem from="1546977109388" duration="254000" />
       <workItem from="1546977602481" duration="26558000" />
       <workItem from="1547225187541" duration="20337000" />
-      <workItem from="1547757855281" duration="573000" />
+      <workItem from="1547757855281" duration="2248000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114173000" />
+    <option name="totallyTimeSpent" value="115848000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2224,6 +2222,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21628092" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -2237,10 +2236,10 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.5275339" visible="true" weight="0.32952693" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.5275339" weight="0.32952693" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32952693" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.47246608" side_tool="true" weight="0.32952693" />
-      <window_info anchor="bottom" id="REST Client" order="12" sideWeight="0.59856343" weight="0.50734097" />
+      <window_info active="true" anchor="bottom" id="REST Client" order="12" sideWeight="0.59856343" visible="true" weight="0.50734097" />
       <window_info anchor="bottom" id="File Transfer" order="13" weight="0.32952693" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -2369,7 +2368,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Controller/Api/ResponseController.php</url>
-          <line>80</line>
+          <line>87</line>
           <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -2706,16 +2705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Api/ResponseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="981">
-          <caret line="92" column="9" lean-forward="true" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
-          <folding>
-            <element signature="e#64#86#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Api/QuestionnaireController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
@@ -2728,10 +2717,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Category.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+        <state relative-caret-position="45">
+          <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
           <folding>
             <element signature="e#30#78#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Api/ResponseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="86" column="13" lean-forward="true" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+          <folding>
+            <element signature="e#64#86#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
